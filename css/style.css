@@ -34,6 +34,22 @@ body {
   color: var(--text-main);
   overflow-x: hidden;
   line-height: 1.7;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Container fixes */
+.container {
+  max-width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Text overflow prevention */
+p, h1, h2, h3, h4, h5, h6, .lead {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 /* Utils */
@@ -382,6 +398,11 @@ footer {
     padding: 5rem 0 3rem;
   }
   
+  /* Hide decorative blobs on small screens */
+  .hero-blob {
+    display: none;
+  }
+  
   .hero-img { 
     width: 150px; 
     height: 150px; 
@@ -394,6 +415,7 @@ footer {
   
   .lead {
     font-size: 1rem !important;
+    line-height: 1.5;
   }
   
   .freelance-badge {
@@ -410,12 +432,34 @@ footer {
     scroll-margin-top: 80px;
   }
   
+  /* About section specific fixes */
+  #about {
+    padding: 3rem 0 !important;
+  }
+  
+  #about .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  #about p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: left;
+  }
+  
+  #about .btn {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
   .navbar-brand {
     font-size: 1.2rem;
   }
   
   .skill-card {
     padding: 1rem;
+    margin-bottom: 1rem;
   }
   
   .timeline {
