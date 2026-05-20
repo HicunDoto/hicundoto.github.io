@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pernikahan - Syaichul & Afidah</title>
-    
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    
+
     <!-- AOS CSS untuk Animasi Scroll -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+
     <style>
         :root {
             --primary: #b78d65;
@@ -23,7 +26,7 @@
             --text-color: #444;
             --text-light: #777;
         }
-        
+
         * {
             box-sizing: border-box;
         }
@@ -32,7 +35,8 @@
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #e8e8e8; /* Warna latar belakang luar wrapper */
+            background-color: #e8e8e8;
+            /* Warna latar belakang luar wrapper */
             color: var(--text-color);
             overflow-x: hidden;
             font-size: 14px;
@@ -44,15 +48,34 @@
         .font-cursive {
             font-family: 'Great Vibes', cursive;
         }
+
         .font-serif {
             font-family: 'Playfair Display', serif;
         }
-        .text-primary { color: var(--primary) !important; }
-        .bg-primary { background-color: var(--primary) !important; }
-        .text-light-gray { color: var(--text-light); }
-        
-        h1, h2, h3 { margin: 0; font-weight: normal; }
-        p { line-height: 1.7; margin-bottom: 1rem; }
+
+        .text-primary {
+            color: var(--primary) !important;
+        }
+
+        .bg-primary {
+            background-color: var(--primary) !important;
+        }
+
+        .text-light-gray {
+            color: var(--text-light);
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
 
         /* Layout Utama (Kertas Undangan) */
         .wrapper {
@@ -61,7 +84,7 @@
             background: white;
             min-height: 100vh;
             position: relative;
-            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
 
@@ -75,9 +98,21 @@
             pointer-events: none;
             background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
         }
-        .dec-tl { top: -100px; left: -100px; }
-        .dec-br { bottom: -100px; right: -100px; }
-        .dec-bl { bottom: -100px; left: -100px; }
+
+        .dec-tl {
+            top: -100px;
+            left: -100px;
+        }
+
+        .dec-br {
+            bottom: -100px;
+            right: -100px;
+        }
+
+        .dec-bl {
+            bottom: -100px;
+            left: -100px;
+        }
 
         section {
             padding: 70px 30px;
@@ -94,6 +129,7 @@
             margin: 0 auto 30px;
             animation: float 6s ease-in-out infinite;
         }
+
         .cover-photo-frame {
             width: 100%;
             height: 100%;
@@ -102,6 +138,7 @@
             background: linear-gradient(135deg, var(--primary-light), var(--primary));
             box-shadow: 0 15px 30px rgba(183, 141, 101, 0.2);
         }
+
         .cover-photo-inner {
             width: 100%;
             height: 100%;
@@ -109,6 +146,7 @@
             overflow: hidden;
             position: relative;
         }
+
         .cover-photo-inner img {
             width: 100%;
             height: 100%;
@@ -116,9 +154,17 @@
         }
 
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
 
         .title-cursive {
@@ -126,7 +172,7 @@
             color: var(--primary);
             margin: 15px 0 25px;
             line-height: 1.1;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
         }
 
         .date-box {
@@ -144,6 +190,7 @@
         .profile-card {
             margin: 40px 0;
         }
+
         .profile-img {
             width: 140px;
             height: 140px;
@@ -153,12 +200,14 @@
             background: linear-gradient(135deg, var(--primary-light), var(--primary));
             box-shadow: 0 10px 20px rgba(183, 141, 101, 0.2);
         }
+
         .profile-img img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
         }
+
         .profile-name {
             font-size: 2.5rem;
             color: var(--primary);
@@ -179,14 +228,16 @@
             border-radius: 20px;
             margin-bottom: 25px;
             border: 1px solid var(--primary-light);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
             position: relative;
         }
+
         .event-title {
             font-size: 1.8rem;
             color: var(--primary);
             margin-bottom: 15px;
         }
+
         .event-time {
             font-size: 1rem;
             color: var(--text-color);
@@ -197,7 +248,11 @@
             justify-content: center;
             gap: 10px;
         }
-        .event-time i { color: var(--primary); }
+
+        .event-time i {
+            color: var(--primary);
+        }
+
         .event-location {
             font-size: 0.95rem;
             color: var(--text-light);
@@ -224,6 +279,7 @@
             margin-top: 20px;
             gap: 8px;
         }
+
         .btn:hover {
             background-color: var(--primary-dark);
             transform: translateY(-3px);
@@ -237,27 +293,61 @@
             height: 380px;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
+
         .carousel-wrapper img {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             opacity: 0;
             animation: crossfade 16s infinite;
         }
-        .carousel-wrapper img:nth-child(1) { animation-delay: 0s; }
-        .carousel-wrapper img:nth-child(2) { animation-delay: 4s; }
-        .carousel-wrapper img:nth-child(3) { animation-delay: 8s; }
-        .carousel-wrapper img:nth-child(4) { animation-delay: 12s; }
+
+        .carousel-wrapper img:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .carousel-wrapper img:nth-child(2) {
+            animation-delay: 4s;
+        }
+
+        .carousel-wrapper img:nth-child(3) {
+            animation-delay: 8s;
+        }
+
+        .carousel-wrapper img:nth-child(4) {
+            animation-delay: 12s;
+        }
 
         @keyframes crossfade {
-            0% { opacity: 0; transform: scale(1); }
-            10% { opacity: 1; transform: scale(1.02); }
-            25% { opacity: 1; transform: scale(1.05); }
-            35% { opacity: 0; transform: scale(1.08); }
-            100% { opacity: 0; transform: scale(1); }
+            0% {
+                opacity: 0;
+                transform: scale(1);
+            }
+
+            10% {
+                opacity: 1;
+                transform: scale(1.02);
+            }
+
+            25% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+
+            35% {
+                opacity: 0;
+                transform: scale(1.08);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1);
+            }
         }
 
         /* ================== GIFT SECTION ================== */
@@ -265,165 +355,223 @@
             background: white;
             padding: 25px;
             border-radius: 16px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
             border: 1px solid #f0f0f0;
             margin-bottom: 20px;
         }
 
+        /* Lock scroll before opening */
+        body.locked {
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        #cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #main-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
     </style>
 </head>
-<body>
 
-<div class="wrapper">
-    <!-- Dekorasi Sudut -->
-    <div class="dec-corner dec-tl"></div>
+<body class="locked">
 
-    <!-- 1. COVER SECTION -->
-    <section id="cover">
-        <div data-aos="fade-up" data-aos-duration="1000">
-            <div class="text-light-gray" style="letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase;">Undangan Pernikahan</div>
-            <h1 class="title-cursive">Syaichul & Afidah</h1>
-            
-            <div class="cover-photo-wrapper">
-                <div class="cover-photo-frame">
-                    <div class="cover-photo-inner">
-                        <!-- Menggunakan foto pertama sebagai cover -->
-                        <img src="../image/undangan/1.jpg" alt="Syaichul & Afidah">
+    <div class="wrapper">
+        <!-- Dekorasi Sudut -->
+        <div class="dec-corner dec-tl"></div>
+
+        <!-- 1. COVER SECTION -->
+        <section id="cover">
+            <div data-aos="fade-up" data-aos-duration="1000">
+                <div class="text-light-gray" style="letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase;">
+                    Undangan Pernikahan</div>
+                <h2 class="font-cursive text-primary mt-2" style="font-size: 3rem;">Syaichul & Afidah</h2>
+
+                <div class="cover-photo-wrapper">
+                    <div class="cover-photo-frame">
+                        <div class="cover-photo-inner">
+                            <!-- Menggunakan foto pertama sebagai cover -->
+                            <img src="../image/undangan/1.jpg" alt="Syaichul & Afidah">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="date-box">
-                SABTU, 12 DES 2026
-            </div>
-            
-            <div class="mt-5">
-                <div class="text-light-gray mb-1" style="font-size: 0.85rem;">Kepada Yth.</div>
-                <div class="font-serif fw-bold" style="font-size: 1.3rem; color: var(--primary);">Tamu Undangan</div>
-                <button class="btn mt-4" onclick="document.getElementById('quote').scrollIntoView({behavior: 'smooth'})">
-                    <i class="bi bi-envelope-open"></i> Buka Undangan
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- 2. QUOTE SECTION -->
-    <section id="quote" style="background-color: var(--bg-color);">
-        <div data-aos="fade-up" data-aos-duration="1000">
-            <div class="font-serif text-primary" style="font-size: 1.15rem; font-style: italic; line-height: 1.8;">
-                "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu merasa tenang dan tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir."
-            </div>
-            <div class="mt-4 fw-bold text-primary" style="letter-spacing: 1px;">QS. Ar-Rum: 21</div>
-        </div>
-    </section>
-
-    <!-- 3. MEMPELAI SECTION -->
-    <section id="couple">
-        <div data-aos="fade-up">
-            <h2 class="font-serif text-primary mb-4" style="font-size: 2rem;">Mempelai</h2>
-            <p class="text-light-gray">Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami:</p>
-        </div>
-
-        <div class="profile-card" data-aos="fade-up" data-aos-delay="100">
-            <div class="profile-img">
-                <img src="../image/undangan/2.jpg" alt="Syaichul">
-            </div>
-            <h3 class="font-cursive profile-name">Syaichul</h3>
-            <p class="text-light-gray mb-0" style="font-size: 0.95rem;">Putra dari<br>Bpk. Fulan & Ibu Fulanah</p>
-        </div>
-
-        <div class="font-cursive ampersand" data-aos="zoom-in" data-aos-delay="200">&</div>
-
-        <div class="profile-card" data-aos="fade-up" data-aos-delay="300">
-            <div class="profile-img">
-                <img src="../image/undangan/3.jpg" alt="Afidah">
-            </div>
-            <h3 class="font-cursive profile-name">Afidah</h3>
-            <p class="text-light-gray mb-0" style="font-size: 0.95rem;">Putri dari<br>Bpk. Fulan & Ibu Fulanah</p>
-        </div>
-    </section>
-
-    <!-- 4. EVENT SCHEDULE -->
-    <section id="event" style="background-color: var(--bg-color);">
-        <div class="dec-corner dec-bl" style="top: 0; left: 0;"></div>
-        <div data-aos="fade-up">
-            <h2 class="font-serif text-primary mb-5" style="font-size: 2rem;">Agenda Acara</h2>
-            
-            <div class="event-card">
-                <h3 class="font-serif event-title">Akad Nikah</h3>
-                <div class="event-time"><i class="bi bi-calendar-event"></i> Sabtu, 12 Desember 2026</div>
-                <div class="event-time"><i class="bi bi-clock-history"></i> 09:00 WIB - Selesai</div>
-                <div class="event-location">
-                    <strong style="color: var(--text-color);">Gedung Pernikahan Impian</strong><br>
-                    Jl. Cinta Kasih No. 1, Jakarta
+                <div class="date-box">
+                    SABTU, 12 DES 2026
                 </div>
-                <a href="#" class="btn"><i class="bi bi-geo-alt-fill"></i> Peta Lokasi</a>
-            </div>
 
-            <div class="event-card" data-aos="fade-up" data-aos-delay="100">
-                <h3 class="font-serif event-title">Resepsi</h3>
-                <div class="event-time"><i class="bi bi-calendar-event"></i> Sabtu, 12 Desember 2026</div>
-                <div class="event-time"><i class="bi bi-clock-history"></i> 11:00 WIB - 14:00 WIB</div>
-                <div class="event-location">
-                    <strong style="color: var(--text-color);">Gedung Pernikahan Impian</strong><br>
-                    Jl. Cinta Kasih No. 1, Jakarta
+                <div class="mt-5">
+                    <div class="text-light-gray mb-1" style="font-size: 0.85rem;">Kepada Yth.</div>
+                    <div class="font-serif fw-bold" style="font-size: 1.3rem; color: var(--primary);">Tamu Undangan
+                    </div>
+                    <button id="btn-buka" class="btn mt-4" onclick="bukaUndangan()">
+                        <i class="bi bi-envelope-open"></i> Buka Undangan
+                    </button>
                 </div>
-                <a href="#" class="btn"><i class="bi bi-geo-alt-fill"></i> Peta Lokasi</a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 5. GALLERY -->
-    <section id="gallery">
-        <div data-aos="fade-up">
-            <h2 class="font-serif text-primary mb-5" style="font-size: 2rem;">Galeri Kami</h2>
-            <div class="carousel-wrapper">
-                <img src="../image/undangan/1.jpg" alt="Gallery 1">
-                <img src="../image/undangan/2.jpg" alt="Gallery 2">
-                <img src="../image/undangan/3.jpg" alt="Gallery 3">
-                <img src="../image/undangan/4.jpg" alt="Gallery 4">
+        <!-- KONTEN UTAMA (Sembunyikan sebelum tombol diklik) -->
+        <div id="main-content">
+
+        <!-- 2. QUOTE SECTION -->
+        <section id="quote" style="background-color: var(--bg-color);">
+            <div data-aos="fade-up" data-aos-duration="1000">
+                <div class="font-serif text-primary" style="font-size: 1.15rem; font-style: italic; line-height: 1.8;">
+                    "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu
+                    sendiri, supaya kamu merasa tenang dan tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih
+                    dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang
+                    berfikir."
+                </div>
+                <div class="mt-4 fw-bold text-primary" style="letter-spacing: 1px;">QS. Ar-Rum: 21</div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 6. GIFT SECTION -->
-    <section id="gift" style="background-color: var(--bg-color);">
-        <div data-aos="fade-up">
-            <h2 class="font-serif text-primary mb-3" style="font-size: 2rem;">Kirim Hadiah</h2>
-            <p class="text-light-gray mb-5">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih Anda, Anda dapat menggunakan fitur berikut:</p>
+        <!-- 3. MEMPELAI SECTION -->
+        <section id="couple">
+            <div data-aos="fade-up">
+                <h2 class="font-serif text-primary mb-4" style="font-size: 2rem;">Mempelai</h2>
+                <p class="text-light-gray">Dengan memohon rahmat dan ridho Allah SWT, kami mengundang
+                    Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami:</p>
+            </div>
+
+            <div class="profile-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="profile-img">
+                    <img src="../image/undangan/2.jpg" alt="Syaichul">
+                </div>
+                <h3 class="font-cursive profile-name">Syaichul</h3>
+                <p class="text-light-gray mb-0" style="font-size: 0.95rem;">Putra dari<br>Bpk. Fulan & Ibu Fulanah</p>
+            </div>
+
+            <div class="font-cursive ampersand" data-aos="zoom-in" data-aos-delay="200">&</div>
+
+            <div class="profile-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="profile-img">
+                    <img src="../image/undangan/3.jpg" alt="Afidah">
+                </div>
+                <h3 class="font-cursive profile-name">Afidah</h3>
+                <p class="text-light-gray mb-0" style="font-size: 0.95rem;">Putri dari<br>Bpk. Fulan & Ibu Fulanah</p>
+            </div>
+        </section>
+
+        <!-- 4. EVENT SCHEDULE -->
+        <section id="event" style="background-color: var(--bg-color);">
+            <div class="dec-corner dec-bl" style="top: 0; left: 0;"></div>
+            <div data-aos="fade-up">
+                <h2 class="font-serif text-primary mb-5" style="font-size: 2rem;">Agenda Acara</h2>
+
+                <div class="event-card">
+                    <h3 class="font-serif event-title">Akad Nikah</h3>
+                    <div class="event-time"><i class="bi bi-calendar-event"></i> Sabtu, 12 Desember 2026</div>
+                    <div class="event-time"><i class="bi bi-clock-history"></i> 09:00 WIB - Selesai</div>
+                    <div class="event-location">
+                        <strong style="color: var(--text-color);">Gedung Pernikahan Impian</strong><br>
+                        Jl. Cinta Kasih No. 1, Jakarta
+                    </div>
+                    <a href="#" class="btn"><i class="bi bi-geo-alt-fill"></i> Peta Lokasi</a>
+                </div>
+
+                <div class="event-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="font-serif event-title">Resepsi</h3>
+                    <div class="event-time"><i class="bi bi-calendar-event"></i> Sabtu, 12 Desember 2026</div>
+                    <div class="event-time"><i class="bi bi-clock-history"></i> 11:00 WIB - 14:00 WIB</div>
+                    <div class="event-location">
+                        <strong style="color: var(--text-color);">Gedung Pernikahan Impian</strong><br>
+                        Jl. Cinta Kasih No. 1, Jakarta
+                    </div>
+                    <a href="#" class="btn"><i class="bi bi-geo-alt-fill"></i> Peta Lokasi</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. GALLERY -->
+        <section id="gallery">
+            <div data-aos="fade-up">
+                <h2 class="font-serif text-primary mb-5" style="font-size: 2rem;">Galeri Kami</h2>
+                <div class="carousel-wrapper">
+                    <img src="../image/undangan/1.jpg" alt="Gallery 1">
+                    <img src="../image/undangan/2.jpg" alt="Gallery 2">
+                    <img src="../image/undangan/3.jpg" alt="Gallery 3">
+                    <img src="../image/undangan/4.jpg" alt="Gallery 4">
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. GIFT SECTION -->
+        <section id="gift" style="background-color: var(--bg-color);">
+            <div data-aos="fade-up">
+                <h2 class="font-serif text-primary mb-3" style="font-size: 2rem;">Kirim Hadiah</h2>
+                <p class="text-light-gray mb-5">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun
+                    jika memberi adalah ungkapan tanda kasih Anda, Anda dapat menggunakan fitur berikut:</p>
+
+                <div class="bank-card">
+                    <div class="fw-bold text-primary mb-1" style="font-size: 1.2rem;">Bank BCA</div>
+                    <div class="text-light-gray" style="font-size: 0.95rem;">a.n. Afidah</div>
+                    <div class="fw-bold mt-2" style="font-size: 1.5rem; letter-spacing: 1px; color: var(--text-color);">
+                        1234567890</div>
+                    <button class="btn btn-sm" style="padding: 10px 20px; font-size: 0.85rem;"
+                        onclick="alert('Nomor rekening berhasil disalin!')">
+                        <i class="bi bi-copy"></i> Salin Rekening
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. CLOSING -->
+        <section id="closing">
+            <div class="dec-corner dec-br"></div>
+            <div data-aos="zoom-in">
+                <p class="text-light-gray">Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, kami mengucapkan terima
+                    kasih.</p>
+                <div class="mt-5 text-primary" style="font-size: 1.2rem;">Hormat Kami,</div>
+                <h2 class="font-cursive text-primary mt-2" style="font-size: 3rem;">Syaichul & Afidah</h2>
+            </div>
+        </section>
+        </div> <!-- End of main-content -->
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inisialisasi animasi scroll
+        AOS.init({
+            once: true,
+            offset: 80,
+            duration: 800
+        });
+
+        // Fungsi Buka Undangan
+        function bukaUndangan() {
+            // Sembunyikan tombol
+            const btn = document.getElementById('btn-buka');
+            btn.style.display = 'none';
+
+            // Buka scroll
+            document.body.classList.remove('locked');
+
+            // Tampilkan konten utama dengan efek fade in
+            const mainContent = document.getElementById('main-content');
+            mainContent.style.display = 'block';
             
-            <div class="bank-card">
-                <div class="fw-bold text-primary mb-1" style="font-size: 1.2rem;">Bank BCA</div>
-                <div class="text-light-gray" style="font-size: 0.95rem;">a.n. Afidah</div>
-                <div class="fw-bold mt-2" style="font-size: 1.5rem; letter-spacing: 1px; color: var(--text-color);">1234567890</div>
-                <button class="btn btn-sm" style="padding: 10px 20px; font-size: 0.85rem;" onclick="alert('Nomor rekening berhasil disalin!')">
-                    <i class="bi bi-copy"></i> Salin Rekening
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- 7. CLOSING -->
-    <section id="closing">
-        <div class="dec-corner dec-br"></div>
-        <div data-aos="zoom-in">
-            <p class="text-light-gray">Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, kami mengucapkan terima kasih.</p>
-            <div class="mt-5 text-primary" style="font-size: 1.2rem;">Hormat Kami,</div>
-            <h2 class="font-cursive text-primary mt-2" style="font-size: 3rem;">Syaichul & Afidah</h2>
-        </div>
-    </section>
-
-</div>
-
-<!-- Scripts -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    // Inisialisasi animasi scroll
-    AOS.init({
-        once: true, // Animasi hanya berjalan sekali saat di-scroll
-        offset: 80, // Offset sebelum animasi dimulai
-        duration: 800 // Durasi animasi
-    });
-</script>
+            // Beri sedikit delay agar transisi CSS jalan
+            setTimeout(() => {
+                mainContent.style.opacity = '1';
+                // Refresh AOS agar animasi pada elemen baru terdeteksi
+                AOS.refresh();
+                
+                // Scroll ke bagian quote dengan mulus
+                document.getElementById('quote').scrollIntoView({ behavior: 'smooth' });
+            }, 50);
+        }
+    </script>
 </body>
+
 </html>
