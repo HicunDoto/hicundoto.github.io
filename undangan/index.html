@@ -427,6 +427,47 @@
         #closing {
             padding-bottom: 90px;
         }
+
+        /* ================== MUSIC BUTTON ================== */
+        .music-btn {
+            position: fixed;
+            bottom: 85px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .music-btn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .music-btn i {
+            animation: spin 3s linear infinite;
+        }
+
+        .music-btn.paused i {
+            animation-play-state: paused;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
@@ -602,6 +643,16 @@
             <a href="#closing"><i class="bi bi-chat-dots"></i></a>
         </div>
 
+        <!-- MUSIC & BUTTON -->
+        <audio id="bg-music" loop>
+            <!-- Pastikan menaruh file musik Anda (misal song.mp3) ke dalam folder music -->
+            <source src="../music/1.mp3" type="audio/mpeg">
+        </audio>
+
+        <div id="music-btn" class="music-btn" onclick="toggleMusic()">
+            <i class="bi bi-disc"></i>
+        </div>
+
     </div>
 
     <!-- Scripts -->
@@ -636,9 +687,29 @@
                 // Tampilkan bottom navigation
                 document.getElementById('bottom-nav').classList.add('show');
 
+                // Tampilkan tombol musik dan mulai putar
+                const musicBtn = document.getElementById('music-btn');
+                const music = document.getElementById('bg-music');
+                musicBtn.classList.add('show');
+                music.play().catch(e => console.log("Auto-play diblokir browser:", e));
+
                 // Scroll ke bagian quote dengan mulus
                 document.getElementById('quote').scrollIntoView({ behavior: 'smooth' });
             }, 50);
+        }
+
+        // Fungsi Toggle Musik
+        function toggleMusic() {
+            const music = document.getElementById('bg-music');
+            const musicBtn = document.getElementById('music-btn');
+
+            if (music.paused) {
+                music.play();
+                musicBtn.classList.remove('paused');
+            } else {
+                music.pause();
+                musicBtn.classList.add('paused');
+            }
         }
     </script>
 </body>
