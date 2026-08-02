@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
     <title>Undangan Pernikahan - Afidah & Syaichul</title>
 
     <!-- Google Fonts -->
@@ -617,6 +618,59 @@
 
         .lightbox-close:hover {
             color: var(--primary);
+        }
+
+        /* Lightbox Navigation Buttons */
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10010;
+            backdrop-filter: blur(4px);
+            outline: none;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.35);
+            color: var(--primary);
+        }
+
+        .lightbox-nav:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+        
+        @media (max-width: 576px) {
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+            .lightbox-prev {
+                left: 10px;
+            }
+            .lightbox-next {
+                right: 10px;
+            }
         }
 
         /* ================== GIFT SECTION ================== */
@@ -1557,8 +1611,10 @@
 
         <!-- LIGHTBOX / ZOOM PHOTO -->
         <div id="gallery-lightbox" class="gallery-lightbox" onclick="closeLightbox()">
-            <span class="lightbox-close">&times;</span>
-            <img id="lightbox-img" src="" alt="Zoomed Momen">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <button class="lightbox-nav lightbox-prev" onclick="prevImage(event)" aria-label="Previous image">&#10094;</button>
+            <img id="lightbox-img" src="" alt="Zoomed Momen" onclick="event.stopPropagation()">
+            <button class="lightbox-nav lightbox-next" onclick="nextImage(event)" aria-label="Next image">&#10095;</button>
         </div>
 
     </div>
@@ -1861,10 +1917,23 @@
         loadWishes();
 
         // 8. Gallery Lightbox Functions
+        const GALLERY_IMAGES = [
+            '../../image/undangan/4.jpeg',
+            '../../image/undangan/5.jpeg',
+            '../../image/undangan/6.jpeg',
+            '../../image/undangan/7.jpeg',
+            '../../image/undangan/8.jpeg',
+            '../../image/undangan/9.jpeg',
+            '../../image/undangan/10.jpeg'
+        ];
+        let currentImageIndex = 0;
+
         function openLightbox(imgSrc) {
             const lightbox = document.getElementById('gallery-lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
-            lightboxImg.src = imgSrc;
+            currentImageIndex = GALLERY_IMAGES.indexOf(imgSrc);
+            if (currentImageIndex === -1) currentImageIndex = 0;
+            lightboxImg.src = GALLERY_IMAGES[currentImageIndex];
             lightbox.classList.add('show');
             document.body.style.overflow = 'hidden';
         }
@@ -1876,6 +1945,32 @@
                 document.body.style.overflow = '';
             }
         }
+
+        function prevImage(e) {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+            document.getElementById('lightbox-img').src = GALLERY_IMAGES[currentImageIndex];
+        }
+
+        function nextImage(e) {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex + 1) % GALLERY_IMAGES.length;
+            document.getElementById('lightbox-img').src = GALLERY_IMAGES[currentImageIndex];
+        }
+
+        // Key listener for lightbox navigation
+        window.addEventListener('keydown', function(e) {
+            const lightbox = document.getElementById('gallery-lightbox');
+            if (lightbox && lightbox.classList.contains('show')) {
+                if (e.key === 'ArrowLeft') {
+                    prevImage(e);
+                } else if (e.key === 'ArrowRight') {
+                    nextImage(e);
+                } else if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+            }
+        });
     </script>
 </body>
 
