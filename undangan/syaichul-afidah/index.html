@@ -15,6 +15,9 @@
     <!-- AOS CSS untuk Animasi Scroll -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+    <!-- Supabase JS Client SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <style>
         :root {
             --primary: #b8935c;
@@ -505,7 +508,7 @@
         }
 
         .wish-list {
-            max-height: 320px;
+            max-height: 340px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
@@ -519,6 +522,7 @@
             border-radius: 14px;
             border-left: 4px solid var(--primary);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            animation: fadeIn 0.4s ease-in-out;
         }
 
         .wish-header {
@@ -1016,20 +1020,13 @@
 
                     <!-- List of Wishes -->
                     <div id="wish-list" class="wish-list">
-                        <!-- Default Initial Wishes -->
+                        <!-- Initial placeholder item if empty -->
                         <div class="wish-card">
                             <div class="wish-header">
                                 <span class="wish-name">Kel. Budi Santoso</span>
                                 <span class="wish-badge">Hadir</span>
                             </div>
                             <p class="wish-text">Selamat untuk Syaichul & Afidah! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Aamiin.</p>
-                        </div>
-                        <div class="wish-card">
-                            <div class="wish-header">
-                                <span class="wish-name">Rian & Maya</span>
-                                <span class="wish-badge">Hadir</span>
-                            </div>
-                            <p class="wish-text">Barakallahu lakuma wa baraka 'alaikuma wa jama'a bainakuma fii khair. Lancar sampai hari H ya!</p>
                         </div>
                     </div>
                 </div>
@@ -1084,6 +1081,17 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // ================= Supabase Config =================
+        // Ganti kredensial di bawah ini dengan Project URL & Anon Key dari Dashboard Supabase Anda:
+        const SUPABASE_URL = 'https://dfrnrtnpeqqcislyxpbs.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmcm5ydG5wZXFxY2lzbHl4cGJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU2Mzk5MzIsImV4cCI6MjEwMTIxNTkzMn0.jdjakrw7nGbUaYhgEe-UXhA_Us8ErHqYb33bxxqMjDA';
+        const INVITATION_SLUG = 'syaichul-afidah';
+
+        let supabaseClient = null;
+        if (typeof supabase !== 'undefined' && SUPABASE_URL !== 'https://dfrnrtnpeqqcislyxpbs.supabase.co') {
+            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+
         // 1. Floating Petals Generator
         function createPetals() {
             const container = document.getElementById('petals-container');
@@ -1197,7 +1205,6 @@
             navigator.clipboard.writeText(accountNo).then(() => {
                 showToast("Nomor rekening berhasil disalin!");
             }).catch(err => {
-                // Fallback for older browsers
                 const textArea = document.createElement("textarea");
                 textArea.value = accountNo;
                 document.body.appendChild(textArea);
@@ -1217,28 +1224,54 @@
             }, 3000);
         }
 
-        // 7. Handle Wish Submission (Local Storage Persistent)
-        const STORAGE_KEY = 'wedding_wishes_syaichul_afidah';
+        // 7. Load & Handle Wishes (Supabase + LocalStorage Fallback)
+        const LOCAL_STORAGE_KEY = 'wedding_wishes_' + INVITATION_SLUG;
 
-        function loadWishes() {
-            const wishes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        async function loadWishes() {
             const wishListEl = document.getElementById('wish-list');
+            let wishes = [];
 
-            wishes.forEach(w => {
-                const card = document.createElement('div');
-                card.className = 'wish-card';
-                card.innerHTML = `
-                    <div class="wish-header">
-                        <span class="wish-name">${escapeHtml(w.name)}</span>
-                        <span class="wish-badge">${escapeHtml(w.status)}</span>
-                    </div>
-                    <p class="wish-text">${escapeHtml(w.message)}</p>
-                `;
-                wishListEl.prepend(card);
-            });
+            if (supabaseClient) {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('wishes')
+                        .select('*')
+                        .order('created_at', { ascending: false });
+
+                    if (!error && data) {
+                        wishes = data;
+                    }
+                } catch (e) {
+                    console.log("Menggunakan fallback local storage:", e);
+                }
+            }
+
+            // Fallback to local storage if empty or Supabase not connected yet
+            if (wishes.length === 0) {
+                wishes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
+            }
+
+            if (wishes.length > 0) {
+                wishListEl.innerHTML = '';
+                wishes.forEach(w => renderWishCard(w));
+            }
         }
 
-        function handleWishSubmit(e) {
+        function renderWishCard(w) {
+            const wishListEl = document.getElementById('wish-list');
+            const card = document.createElement('div');
+            card.className = 'wish-card';
+            card.innerHTML = `
+                <div class="wish-header">
+                    <span class="wish-name">${escapeHtml(w.name)}</span>
+                    <span class="wish-badge">${escapeHtml(w.status)}</span>
+                </div>
+                <p class="wish-text">${escapeHtml(w.message)}</p>
+            `;
+            wishListEl.appendChild(card);
+        }
+
+        async function handleWishSubmit(e) {
             e.preventDefault();
             const name = document.getElementById('wish-name').value.trim();
             const status = document.getElementById('wish-status').value;
@@ -1246,16 +1279,28 @@
 
             if (!name || !message) return;
 
-            const newWish = { name, status, message, timestamp: new Date().toISOString() };
-            const wishes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-            wishes.push(newWish);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(wishes));
+            const newWish = { name, status, message, invitation_slug: INVITATION_SLUG, created_at: new Date().toISOString() };
 
-            // Append to DOM
+            // Save to Local Storage
+            const localWishes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
+            localWishes.unshift(newWish);
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(localWishes));
+
+            // Save to Supabase DB if client active
+            if (supabaseClient) {
+                try {
+                    await supabaseClient.from('wishes').insert([
+                        { name: name, status: status, message: message, invitation_slug: INVITATION_SLUG }
+                    ]);
+                } catch (err) {
+                    console.log("Supabase insert error:", err);
+                }
+            }
+
+            // Render to DOM
             const wishListEl = document.getElementById('wish-list');
             const card = document.createElement('div');
             card.className = 'wish-card';
-            card.style.animation = 'fadeIn 0.5s ease-in-out';
             card.innerHTML = `
                 <div class="wish-header">
                     <span class="wish-name">${escapeHtml(name)}</span>
@@ -1265,7 +1310,6 @@
             `;
             wishListEl.prepend(card);
 
-            // Reset form & notify
             document.getElementById('rsvp-form').reset();
             showToast("Terima kasih atas ucapan & doa restu Anda!");
         }
