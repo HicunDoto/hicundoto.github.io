@@ -1088,7 +1088,7 @@
         const INVITATION_SLUG = 'afidah-syaichul';
 
         let supabaseClient = null;
-        if (typeof supabase !== 'undefined' && SUPABASE_URL !== 'https://dfrnrtnpeqqcislyxpbs.supabase.co') {
+        if (typeof supabase !== 'undefined' && SUPABASE_URL && SUPABASE_ANON_KEY && !SUPABASE_URL.includes('YOUR_SUPABASE')) {
             supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         }
 
