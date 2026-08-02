@@ -225,56 +225,68 @@
 
         #couple {
             background-color: #fdfaf5;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 0l40 40-40 40L0 40z' fill='none' stroke='%23b8935c' stroke-width='0.5' stroke-opacity='0.08'/%3E%3Ccircle cx='40' cy='40' r='3' fill='%23b8935c' fill-opacity='0.15'/%3E%3Cpath d='M40 10c-5 10-15 10-20 20 10-5 10-15 20-20zm0 60c-5-10-15-10-20-20 10 5 10 15 20 20zm0-30c5-5 15-5 20-10-10 5-10 15-20 10zm0 0c-5-5-15-5-20-10 10 5 10 15 20 10z' fill='%23b8935c' fill-opacity='0.06'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='120'%20height='120'%20viewBox='0%200%20120%20120'%3E%3Cg%20fill='none'%20stroke='%23b8935c'%20stroke-width='0.6'%20stroke-opacity='0.08'%3E%3Cpath%20d='M20,10%20C35,-5%2050,15%2060,5%20C70,-5%2085,15%20100,10'/%3E%3Cpath%20d='M10,20%20C-5,35%2015,50%205,60%20C-5,70%2015,85%2010,100'/%3E%3Cpath%20d='M110,20%20C125,35%20105,50%20115,60%20C125,70%20105,85%20110,100'/%3E%3Cpath%20d='M20,110%20C35,125%2050,105%2060,115%20C70,125%2085,105%20100,110'/%3E%3Cpath%20d='M60,60%20C55,50%2045,55%2040,60%20C35,65%2045,75%2055,70%20C65,65%2075,75%2080,70%20C85,65%2075,55%2065,60%20Z'/%3E%3Cpath%20d='M60,60%20C65,50%2075,55%2080,60%20C85,65%2075,75%2065,70%20C55,65%2045,75%2040,70%20C35,65%2045,55%2055,60%20Z'/%3E%3Ccircle%20cx='60'%20cy='60'%20r='6'/%3E%3Ccircle%20cx='60'%20cy='60'%20r='3'/%3E%3Cpath%20d='M45,45%20Q30,35%2040,25%20Q50,35%2045,45%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3Cpath%20d='M75,45%20Q90,35%2080,25%20Q70,35%2075,45%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3Cpath%20d='M45,75%20Q30,85%2040,95%20Q50,85%2045,75%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3Cpath%20d='M75,75%20Q90,85%2080,95%20Q70,85%2075,75%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 140px 140px;
             position: relative;
             overflow: hidden;
         }
 
-        #couple::before {
-            content: '';
+        .couple-flower-ornament {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            right: 15px;
-            bottom: 15px;
-            border: 1px dashed rgba(184, 147, 92, 0.25);
-            border-radius: 12px;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .couple-bg-flower {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .flower-left {
-            bottom: -20px;
-            left: -40px;
-            transform: rotate(25deg);
-        }
-
-        .flower-right {
-            top: -20px;
-            right: -40px;
-            transform: rotate(-155deg) scaleX(-1);
-        }
-
-        .couple-frame-corner {
-            position: absolute;
-            width: 30px;
-            height: 30px;
+            width: 220px;
+            height: 220px;
             pointer-events: none;
             z-index: 3;
+            opacity: 0.95;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.05));
+            transition: transform 0.8s ease;
         }
 
-        .couple-corner-tl { top: 20px; left: 20px; }
-        .couple-corner-tr { top: 20px; right: 20px; }
-        .couple-corner-bl { bottom: 20px; left: 20px; }
-        .couple-corner-br { bottom: 20px; right: 20px; }
+        .couple-flower-tl {
+            top: -20px;
+            left: -20px;
+            animation: floralSwayTL 9s ease-in-out infinite;
+        }
+
+        .couple-flower-tr {
+            top: -20px;
+            right: -20px;
+            animation: floralSwayTR 10s ease-in-out infinite;
+        }
+
+        .couple-flower-bl {
+            bottom: -20px;
+            left: -20px;
+            animation: floralSwayBL 10s ease-in-out infinite;
+        }
+
+        .couple-flower-br {
+            bottom: -20px;
+            right: -20px;
+            animation: floralSwayBR 9s ease-in-out infinite;
+        }
+
+        @keyframes floralSwayTL {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(3deg) scale(1.03); }
+        }
+
+        @keyframes floralSwayTR {
+            0%, 100% { transform: scaleX(-1) rotate(0deg) scale(1); }
+            50% { transform: scaleX(-1) rotate(3deg) scale(1.03); }
+        }
+
+        @keyframes floralSwayBL {
+            0%, 100% { transform: scaleY(-1) rotate(0deg) scale(1); }
+            50% { transform: scaleY(-1) rotate(3deg) scale(1.03); }
+        }
+
+        @keyframes floralSwayBR {
+            0%, 100% { transform: scale(-1) rotate(0deg) scale(1); }
+            50% { transform: scale(-1) rotate(3deg) scale(1.03); }
+        }
 
         /* Watermark Background Ornaments */
         .watermark-bg {
@@ -435,38 +447,130 @@
         }
 
         /* ================== MEMPELAI SECTION ================== */
-        .profile-card {
-            margin: 35px 0;
+        .couple-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 35px;
             position: relative;
+            z-index: 5;
+            gap: 10px;
         }
 
-        .profile-img-frame {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 20px;
+        .couple-card {
+            width: 85%;
+            max-width: 340px;
+            background: rgba(255, 255, 255, 0.75);
+            border: 2px solid var(--border-gold);
+            border-radius: 24px;
+            padding: 25px 15px;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.35s ease;
         }
 
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            padding: 6px;
+        .couple-card:hover {
+            transform: translateY(-12px) rotate(0deg) !important;
+            box-shadow: 0 15px 32px rgba(184, 147, 92, 0.22);
+            border-color: var(--primary);
+            animation-play-state: paused;
+        }
+
+        .couple-card:first-of-type {
+            transform: rotate(0deg);
+            animation: cardFloat1 7s ease-in-out infinite;
+        }
+
+        .couple-card:last-of-type {
+            transform: rotate(0deg);
+            animation: cardFloat2 7s ease-in-out infinite;
+        }
+
+        @keyframes cardFloat1 {
+            0%, 100% { transform: rotate(0deg) translateY(0); }
+            50% { transform: rotate(0deg) translateY(-8px); }
+        }
+
+        @keyframes cardFloat2 {
+            0%, 100% { transform: rotate(0deg) translateY(0); }
+            50% { transform: rotate(0deg) translateY(-8px); }
+        }
+
+        .couple-card .couple-img-frame {
+            width: 120px;
+            height: 165px;
+            border-radius: 60px 60px 12px 12px; /* Arch frame */
+            padding: 4px;
             background: linear-gradient(135deg, var(--accent-gold), var(--primary-light), var(--primary));
-            box-shadow: 0 12px 25px rgba(184, 147, 92, 0.2);
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(184, 147, 92, 0.15);
         }
 
-        .profile-img img {
+        .couple-card .couple-img-frame img {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
             object-fit: cover;
+            border-radius: 56px 56px 8px 8px;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .profile-name {
+        .couple-card:hover .couple-img-frame img {
+            transform: scale(1.08);
+        }
+
+        .couple-name-text {
+            font-size: 1.8rem !important;
+            color: var(--primary);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .couple-parents-text {
+            font-size: 0.85rem !important;
+            line-height: 1.6;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .couple-parents-text strong {
+            color: var(--text-color);
+        }
+
+        /* Center divider */
+        .couple-divider {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 70%;
+            margin: 15px 0;
+        }
+
+        .couple-divider .divider-line {
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+            opacity: 0.4;
+        }
+
+        .couple-divider .divider-amp {
+            font-family: 'Great Vibes', cursive;
             font-size: 2.5rem;
             color: var(--primary);
-            margin-bottom: 6px;
+            margin: 0 20px;
+            opacity: 0.8;
+            line-height: 1;
+            animation: ampersandPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes ampersandPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
         }
 
         /* ================== EVENT SCHEDULE ================== */
@@ -1311,32 +1415,314 @@
                     <circle cx="100" cy="12" r="2" fill="#b8935c"/>
                     <circle cx="88" cy="12" r="2.5" fill="#b8935c" opacity="0.7"/>
                     <circle cx="112" cy="12" r="2.5" fill="#b8935c" opacity="0.7"/>
-                </svg>
+        </svg>
             </div>
 
             <!-- 3. MEMPELAI SECTION -->
             <section id="couple">
-                <!-- Background dashed frame corner flourishes -->
-                <div class="couple-frame-corner couple-corner-tl">
-                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2,2 L15,2 M2,2 L2,15 M2,2 Q10,10 12,12" stroke="#b8935c" stroke-width="1.2" opacity="0.4"/>
+                <!-- Premium Watercolor Flower Bouquet Ornaments -->
+                <!-- Premium Watercolor Flower Bouquet Ornaments (All 4 Corners) -->
+                <div class="couple-flower-ornament couple-flower-tl">
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Sage Leaves Long Branch 1 -->
+                        <path d="M10 50 C40 40 80 45 130 35 C110 50 80 50 10 50 Z" fill="#c3d1be" opacity="0.75"/>
+                        <path d="M40 42 C50 30 65 30 70 42 C60 45 45 45 40 42 Z" fill="#b2c4ab" opacity="0.85"/>
+                        <path d="M80 43 C90 28 105 28 110 43 C100 45 85 45 80 43 Z" fill="#a0b599" opacity="0.8"/>
+                        
+                        <!-- Sage Leaves Long Branch 2 -->
+                        <path d="M50 10 C40 40 45 80 35 130 C50 110 50 80 50 10 Z" fill="#c3d1be" opacity="0.75"/>
+                        <path d="M42 40 C30 50 30 65 42 70 C45 60 45 45 42 40 Z" fill="#b2c4ab" opacity="0.85"/>
+                        <path d="M43 80 C28 90 28 105 43 110 C45 100 45 85 43 80 Z" fill="#a0b599" opacity="0.8"/>
+                        
+                        <!-- Eucalyptus Branches -->
+                        <path d="M15 15 Q80 30 110 80" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
+                        <circle cx="45" cy="22" r="14" fill="#a8bbb0" opacity="0.65"/>
+                        <circle cx="75" cy="35" r="13" fill="#bac8be" opacity="0.65"/>
+                        <circle cx="95" cy="55" r="11" fill="#c3d2c8" opacity="0.65"/>
+                        
+                        <path d="M15 15 Q30 80 80 110" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
+                        <circle cx="22" cy="45" r="14" fill="#a8bbb0" opacity="0.65"/>
+                        <circle cx="35" cy="75" r="13" fill="#bac8be" opacity="0.65"/>
+                        <circle cx="55" cy="95" r="11" fill="#c3d2c8" opacity="0.65"/>
+                        
+                        <!-- Flower 1 (Rose Pink - Big Corner) -->
+                        <g transform="translate(45, 45)">
+                            <circle cx="0" cy="0" r="22" fill="#e8b4bc"/>
+                            <path d="M-12,-6 Q-25,12 0,18 Q25,12 12,-6 Q0,-18 -12,-6 Z" fill="#df9da7"/>
+                            <path d="M-10,-10 Q0,-22 10,-10 Q22,0 10,10 Q-6,22 -10,-10 Z" fill="#d48a95" opacity="0.9"/>
+                            <circle cx="0" cy="0" r="10" fill="#c27380"/>
+                            <circle cx="0" cy="0" r="5" fill="#b05c6a"/>
+                            <circle cx="0" cy="0" r="2" fill="#d4af37"/>
+                        </g>
+                        
+                        <!-- Flower 2 (Peach Rose - Mid Horizontal) -->
+                        <g transform="translate(95, 38)">
+                            <circle cx="0" cy="0" r="16" fill="#f8d6c7"/>
+                            <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#eebeaa"/>
+                            <circle cx="0" cy="0" r="7" fill="#dfa28a"/>
+                            <circle cx="0" cy="0" r="3" fill="#cf866c"/>
+                        </g>
+
+                        <!-- Flower 3 (Peach Rose - Mid Vertical) -->
+                        <g transform="translate(38, 95)">
+                            <circle cx="0" cy="0" r="16" fill="#f8d6c7"/>
+                            <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#eebeaa"/>
+                            <circle cx="0" cy="0" r="7" fill="#dfa28a"/>
+                            <circle cx="0" cy="0" r="3" fill="#cf866c"/>
+                        </g>
+
+                        <!-- Flower 4 (White Blossom - Small Horizontal) -->
+                        <g transform="translate(135, 32)">
+                            <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
+                            <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
+                            <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+                        </g>
+
+                        <!-- Flower 5 (White Blossom - Small Vertical) -->
+                        <g transform="translate(32, 135)">
+                            <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
+                            <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
+                            <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+                        </g>
+                        
+                        <!-- Long Gold Vine Sprigs -->
+                        <path d="M15 15 C60 20 120 15 160 20" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
+                        <circle cx="160" cy="20" r="2.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="120" cy="18" r="1.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="85" cy="16" r="2" fill="#d4af37" opacity="0.85"/>
+
+                        <path d="M15 15 C20 60 15 120 20 160" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
+                        <circle cx="20" cy="160" r="2.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="18" cy="120" r="1.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="16" cy="85" r="2" fill="#d4af37" opacity="0.85"/>
                     </svg>
                 </div>
-                <div class="couple-frame-corner couple-corner-tr">
-                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M38,2 L25,2 M38,2 L38,15 M38,2 Q30,10 28,12" stroke="#b8935c" stroke-width="1.2" opacity="0.4"/>
+                <div class="couple-flower-ornament couple-flower-tr">
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Sage Leaves Long Branch 1 -->
+                        <path d="M10 50 C40 40 80 45 130 35 C110 50 80 50 10 50 Z" fill="#c3d1be" opacity="0.75"/>
+                        <path d="M40 42 C50 30 65 30 70 42 C60 45 45 45 40 42 Z" fill="#b2c4ab" opacity="0.85"/>
+                        <path d="M80 43 C90 28 105 28 110 43 C100 45 85 45 80 43 Z" fill="#a0b599" opacity="0.8"/>
+                        
+                        <!-- Sage Leaves Long Branch 2 -->
+                        <path d="M50 10 C40 40 45 80 35 130 C50 110 50 80 50 10 Z" fill="#c3d1be" opacity="0.75"/>
+                        <path d="M42 40 C30 50 30 65 42 70 C45 60 45 45 42 40 Z" fill="#b2c4ab" opacity="0.85"/>
+                        <path d="M43 80 C28 90 28 105 43 110 C45 100 45 85 43 80 Z" fill="#a0b599" opacity="0.8"/>
+                        
+                        <!-- Eucalyptus Branches -->
+                        <path d="M15 15 Q80 30 110 80" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
+                        <circle cx="45" cy="22" r="14" fill="#a8bbb0" opacity="0.65"/>
+                        <circle cx="75" cy="35" r="13" fill="#bac8be" opacity="0.65"/>
+                        <circle cx="95" cy="55" r="11" fill="#c3d2c8" opacity="0.65"/>
+                        
+                        <path d="M15 15 Q30 80 80 110" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
+                        <circle cx="22" cy="45" r="14" fill="#a8bbb0" opacity="0.65"/>
+                        <circle cx="35" cy="75" r="13" fill="#bac8be" opacity="0.65"/>
+                        <circle cx="55" cy="95" r="11" fill="#c3d2c8" opacity="0.65"/>
+                        
+                        <!-- Flower 1 (Rose Pink - Big Corner) -->
+                        <g transform="translate(45, 45)">
+                            <circle cx="0" cy="0" r="22" fill="#e8b4bc"/>
+                            <path d="M-12,-6 Q-25,12 0,18 Q25,12 12,-6 Q0,-18 -12,-6 Z" fill="#df9da7"/>
+                            <path d="M-10,-10 Q0,-22 10,-10 Q22,0 10,10 Q-6,22 -10,-10 Z" fill="#d48a95" opacity="0.9"/>
+                            <circle cx="0" cy="0" r="10" fill="#c27380"/>
+                            <circle cx="0" cy="0" r="5" fill="#b05c6a"/>
+                            <circle cx="0" cy="0" r="2" fill="#d4af37"/>
+                        </g>
+                        
+                        <!-- Flower 2 (Peach Rose - Mid Horizontal) -->
+                        <g transform="translate(95, 38)">
+                            <circle cx="0" cy="0" r="16" fill="#f8d6c7"/>
+                            <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#eebeaa"/>
+                            <circle cx="0" cy="0" r="7" fill="#dfa28a"/>
+                            <circle cx="0" cy="0" r="3" fill="#cf866c"/>
+                        </g>
+
+                        <!-- Flower 3 (Peach Rose - Mid Vertical) -->
+                        <g transform="translate(38, 95)">
+                            <circle cx="0" cy="0" r="16" fill="#f8d6c7"/>
+                            <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#eebeaa"/>
+                            <circle cx="0" cy="0" r="7" fill="#dfa28a"/>
+                            <circle cx="0" cy="0" r="3" fill="#cf866c"/>
+                        </g>
+
+                        <!-- Flower 4 (White Blossom - Small Horizontal) -->
+                        <g transform="translate(135, 32)">
+                            <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
+                            <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
+                            <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+                        </g>
+
+                        <!-- Flower 5 (White Blossom - Small Vertical) -->
+                        <g transform="translate(32, 135)">
+                            <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
+                            <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
+                            <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+                        </g>
+                        
+                        <!-- Long Gold Vine Sprigs -->
+                        <path d="M15 15 C60 20 120 15 160 20" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
+                        <circle cx="160" cy="20" r="2.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="120" cy="18" r="1.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="85" cy="16" r="2" fill="#d4af37" opacity="0.85"/>
+
+                        <path d="M15 15 C20 60 15 120 20 160" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
+                        <circle cx="20" cy="160" r="2.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="18" cy="120" r="1.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="16" cy="85" r="2" fill="#d4af37" opacity="0.85"/>
                     </svg>
                 </div>
-                <div class="couple-frame-corner couple-corner-bl">
-                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2,38 L15,38 M2,38 L2,25 M2,38 Q10,30 12,28" stroke="#b8935c" stroke-width="1.2" opacity="0.4"/>
+                <div class="couple-flower-ornament couple-flower-bl">
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Sage Leaves Long Branch 1 -->
+                        <path d="M10 50 C40 40 80 45 130 35 C110 50 80 50 10 50 Z" fill="#c3d1be" opacity="0.75"/>
+                        <path d="M40 42 C50 30 65 30 70 42 C60 45 45 45 40 42 Z" fill="#b2c4ab" opacity="0.85"/>
+                        <path d="M80 43 C90 28 105 28 110 43 C100 45 85 45 80 43 Z" fill="#a0b599" opacity="0.8"/>
+                        
+                        <!-- Sage Leaves Long Branch 2 -->
+                        <path d="M50 10 C40 40 45 80 35 130 C50 110 50 80 50 10 Z" fill="#c3d1be" opacity="0.75"/>
+                        <path d="M42 40 C30 50 30 65 42 70 C45 60 45 45 42 40 Z" fill="#b2c4ab" opacity="0.85"/>
+                        <path d="M43 80 C28 90 28 105 43 110 C45 100 45 85 43 80 Z" fill="#a0b599" opacity="0.8"/>
+                        
+                        <!-- Eucalyptus Branches -->
+                        <path d="M15 15 Q80 30 110 80" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
+                        <circle cx="45" cy="22" r="14" fill="#a8bbb0" opacity="0.65"/>
+                        <circle cx="75" cy="35" r="13" fill="#bac8be" opacity="0.65"/>
+                        <circle cx="95" cy="55" r="11" fill="#c3d2c8" opacity="0.65"/>
+                        
+                        <path d="M15 15 Q30 80 80 110" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
+                        <circle cx="22" cy="45" r="14" fill="#a8bbb0" opacity="0.65"/>
+                        <circle cx="35" cy="75" r="13" fill="#bac8be" opacity="0.65"/>
+                        <circle cx="55" cy="95" r="11" fill="#c3d2c8" opacity="0.65"/>
+                        
+                        <!-- Flower 1 (Rose Pink - Big Corner) -->
+                        <g transform="translate(45, 45)">
+                            <circle cx="0" cy="0" r="22" fill="#e8b4bc"/>
+                            <path d="M-12,-6 Q-25,12 0,18 Q25,12 12,-6 Q0,-18 -12,-6 Z" fill="#df9da7"/>
+                            <path d="M-10,-10 Q0,-22 10,-10 Q22,0 10,10 Q-6,22 -10,-10 Z" fill="#d48a95" opacity="0.9"/>
+                            <circle cx="0" cy="0" r="10" fill="#c27380"/>
+                            <circle cx="0" cy="0" r="5" fill="#b05c6a"/>
+                            <circle cx="0" cy="0" r="2" fill="#d4af37"/>
+                        </g>
+                        
+                        <!-- Flower 2 (Peach Rose - Mid Horizontal) -->
+                        <g transform="translate(95, 38)">
+                            <circle cx="0" cy="0" r="16" fill="#f8d6c7"/>
+                            <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#eebeaa"/>
+                            <circle cx="0" cy="0" r="7" fill="#dfa28a"/>
+                            <circle cx="0" cy="0" r="3" fill="#cf866c"/>
+                        </g>
+
+                        <!-- Flower 3 (Peach Rose - Mid Vertical) -->
+                        <g transform="translate(38, 95)">
+                            <circle cx="0" cy="0" r="16" fill="#f8d6c7"/>
+                            <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#eebeaa"/>
+                            <circle cx="0" cy="0" r="7" fill="#dfa28a"/>
+                            <circle cx="0" cy="0" r="3" fill="#cf866c"/>
+                        </g>
+
+                        <!-- Flower 4 (White Blossom - Small Horizontal) -->
+                        <g transform="translate(135, 32)">
+                            <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
+                            <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
+                            <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+                        </g>
+
+                        <!-- Flower 5 (White Blossom - Small Vertical) -->
+                        <g transform="translate(32, 135)">
+                            <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
+                            <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
+                            <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+                        </g>
+                        
+                        <!-- Long Gold Vine Sprigs -->
+                        <path d="M15 15 C60 20 120 15 160 20" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
+                        <circle cx="160" cy="20" r="2.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="120" cy="18" r="1.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="85" cy="16" r="2" fill="#d4af37" opacity="0.85"/>
+
+                        <path d="M15 15 C20 60 15 120 20 160" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
+                        <circle cx="20" cy="160" r="2.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="18" cy="120" r="1.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="16" cy="85" r="2" fill="#d4af37" opacity="0.85"/>
                     </svg>
                 </div>
-                <div class="couple-frame-corner couple-corner-br">
-                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M38,38 L25,38 M38,38 L38,25 M38,38 Q30,30 28,28" stroke="#b8935c" stroke-width="1.2" opacity="0.4"/>
+                <div class="couple-flower-ornament couple-flower-br">
+                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Sage Leaves Long Branch 1 -->
+                        <path d="M10 50 C40 40 80 45 130 35 C110 50 80 50 10 50 Z" fill="#c3d1be" opacity="0.75"/>
+                        <path d="M40 42 C50 30 65 30 70 42 C60 45 45 45 40 42 Z" fill="#b2c4ab" opacity="0.85"/>
+                        <path d="M80 43 C90 28 105 28 110 43 C100 45 85 45 80 43 Z" fill="#a0b599" opacity="0.8"/>
+                        
+                        <!-- Sage Leaves Long Branch 2 -->
+                        <path d="M50 10 C40 40 45 80 35 130 C50 110 50 80 50 10 Z" fill="#c3d1be" opacity="0.75"/>
+                        <path d="M42 40 C30 50 30 65 42 70 C45 60 45 45 42 40 Z" fill="#b2c4ab" opacity="0.85"/>
+                        <path d="M43 80 C28 90 28 105 43 110 C45 100 45 85 43 80 Z" fill="#a0b599" opacity="0.8"/>
+                        
+                        <!-- Eucalyptus Branches -->
+                        <path d="M15 15 Q80 30 110 80" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
+                        <circle cx="45" cy="22" r="14" fill="#a8bbb0" opacity="0.65"/>
+                        <circle cx="75" cy="35" r="13" fill="#bac8be" opacity="0.65"/>
+                        <circle cx="95" cy="55" r="11" fill="#c3d2c8" opacity="0.65"/>
+                        
+                        <path d="M15 15 Q30 80 80 110" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
+                        <circle cx="22" cy="45" r="14" fill="#a8bbb0" opacity="0.65"/>
+                        <circle cx="35" cy="75" r="13" fill="#bac8be" opacity="0.65"/>
+                        <circle cx="55" cy="95" r="11" fill="#c3d2c8" opacity="0.65"/>
+                        
+                        <!-- Flower 1 (Rose Pink - Big Corner) -->
+                        <g transform="translate(45, 45)">
+                            <circle cx="0" cy="0" r="22" fill="#e8b4bc"/>
+                            <path d="M-12,-6 Q-25,12 0,18 Q25,12 12,-6 Q0,-18 -12,-6 Z" fill="#df9da7"/>
+                            <path d="M-10,-10 Q0,-22 10,-10 Q22,0 10,10 Q-6,22 -10,-10 Z" fill="#d48a95" opacity="0.9"/>
+                            <circle cx="0" cy="0" r="10" fill="#c27380"/>
+                            <circle cx="0" cy="0" r="5" fill="#b05c6a"/>
+                            <circle cx="0" cy="0" r="2" fill="#d4af37"/>
+                        </g>
+                        
+                        <!-- Flower 2 (Peach Rose - Mid Horizontal) -->
+                        <g transform="translate(95, 38)">
+                            <circle cx="0" cy="0" r="16" fill="#f8d6c7"/>
+                            <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#eebeaa"/>
+                            <circle cx="0" cy="0" r="7" fill="#dfa28a"/>
+                            <circle cx="0" cy="0" r="3" fill="#cf866c"/>
+                        </g>
+
+                        <!-- Flower 3 (Peach Rose - Mid Vertical) -->
+                        <g transform="translate(38, 95)">
+                            <circle cx="0" cy="0" r="16" fill="#f8d6c7"/>
+                            <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#eebeaa"/>
+                            <circle cx="0" cy="0" r="7" fill="#dfa28a"/>
+                            <circle cx="0" cy="0" r="3" fill="#cf866c"/>
+                        </g>
+
+                        <!-- Flower 4 (White Blossom - Small Horizontal) -->
+                        <g transform="translate(135, 32)">
+                            <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
+                            <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
+                            <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+                        </g>
+
+                        <!-- Flower 5 (White Blossom - Small Vertical) -->
+                        <g transform="translate(32, 135)">
+                            <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
+                            <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
+                            <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+                        </g>
+                        
+                        <!-- Long Gold Vine Sprigs -->
+                        <path d="M15 15 C60 20 120 15 160 20" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
+                        <circle cx="160" cy="20" r="2.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="120" cy="18" r="1.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="85" cy="16" r="2" fill="#d4af37" opacity="0.85"/>
+
+                        <path d="M15 15 C20 60 15 120 20 160" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
+                        <circle cx="20" cy="160" r="2.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="18" cy="120" r="1.5" fill="#d4af37" opacity="0.85"/>
+                        <circle cx="16" cy="85" r="2" fill="#d4af37" opacity="0.85"/>
                     </svg>
                 </div>
+
                 <div data-aos="fade-up">
                     <h2 class="font-serif text-gold-gradient mb-2" style="font-size: 2.2rem; font-weight: 600;">Mempelai</h2>
                     <p class="text-light-gray" style="font-size: 0.9rem;">
@@ -1344,39 +1730,41 @@
                     </p>
                 </div>
 
-                <!-- Bride -->
-                <div class="profile-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="profile-img-frame">
-                        <div class="profile-img">
+                <div class="couple-container">
+                    <!-- Bride -->
+                    <div class="couple-card" data-aos="fade-right" data-aos-delay="100">
+                        <div class="couple-img-frame">
                             <img src="../../image/undangan/2.jpeg" alt="Afidah">
                         </div>
+                        <h3 class="font-cursive couple-name-text">Nurillah Afidah</h3>
+                        <p class="couple-parents-text">
+                            Putri dari<br>
+                            <strong>Bpk. (Alm) Agus Murtadho</strong><br>
+                            &<br>
+                            <strong>Ibu Sri Kusmawati</strong>
+                        </p>
                     </div>
-                    <h3 class="font-cursive profile-name">Nurillah Afidah</h3>
-                    <p class="text-light-gray mb-0" style="font-size: 0.92rem;">
-                        Putri dari<br><strong style="color: var(--text-color);">Bpk. (Alm) Agus Murtadho</strong> & <strong style="color: var(--text-color);">Ibu Sri Kusmawati</strong>
-                    </p>
-                </div>
 
-                <!-- Ampersand with Botanical Wreath Ring -->
-                <div class="ampersand-wrapper" data-aos="zoom-in" data-aos-delay="200">
-                    <svg class="wreath-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="44" stroke="#b8935c" stroke-width="1" stroke-dasharray="3 3" opacity="0.45"/>
-                        <path d="M20,50 Q30,25 50,20 Q70,25 80,50 Q70,75 50,80 Q30,75 20,50 Z" stroke="#b8935c" stroke-width="0.8" fill="none" opacity="0.35"/>
-                    </svg>
-                    <div class="font-cursive ampersand">&</div>
-                </div>
+                    <!-- Divider -->
+                    <div class="couple-divider" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="divider-line"></div>
+                        <div class="divider-amp">&</div>
+                        <div class="divider-line"></div>
+                    </div>
 
-                <!-- Groom -->
-                <div class="profile-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="profile-img-frame">
-                        <div class="profile-img">
+                    <!-- Groom -->
+                    <div class="couple-card" data-aos="fade-left" data-aos-delay="300">
+                        <div class="couple-img-frame">
                             <img src="../../image/undangan/3.jpeg" alt="Syaichul">
                         </div>
+                        <h3 class="font-cursive couple-name-text">Achmad Syaichul Hadi</h3>
+                        <p class="couple-parents-text">
+                            Putra dari<br>
+                            <strong>Bpk. Nur Cholis</strong><br>
+                            &<br>
+                            <strong>Ibu Sri Atmini</strong>
+                        </p>
                     </div>
-                    <h3 class="font-cursive profile-name">Achmad Syaichul Hadi</h3>
-                    <p class="text-light-gray mb-0" style="font-size: 0.92rem;">
-                        Putra dari<br><strong style="color: var(--text-color);">Bpk. Nur Cholis</strong> & <strong style="color: var(--text-color);">Ibu Sri Atmini</strong>
-                    </p>
                 </div>
             </section>
 
