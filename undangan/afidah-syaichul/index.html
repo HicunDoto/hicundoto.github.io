@@ -636,9 +636,8 @@
 
         /* Lock scroll before opening */
         body.locked {
-            overflow: hidden;
-            height: 100vh;
-            height: 100svh;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         #cover {
@@ -920,6 +919,44 @@
             50% { opacity: 0.7; }
             80% { opacity: 0.65; }
             100% { opacity: 0; transform: scale(1.3); }
+        }
+
+        /* Optimize layout for smaller screen heights (e.g., iPhone 7, iPhone SE, etc.) */
+        @media (max-height: 740px) {
+            #cover {
+                padding: 15px 20px !important;
+            }
+            #cover h2.font-cursive {
+                font-size: 2.8rem !important;
+            }
+            .cover-photo-wrapper {
+                width: 170px !important;
+                height: 220px !important;
+                margin: 10px auto 12px !important;
+            }
+            .cover-photo-frame {
+                border-radius: 95px 95px 12px 12px !important;
+                padding: 5px !important;
+            }
+            .cover-photo-inner {
+                border-radius: 90px 90px 8px 8px !important;
+            }
+            .date-box {
+                margin: 10px 0 !important;
+                padding: 8px 14px !important;
+                font-size: 0.85rem !important;
+            }
+            #cover .mt-2 {
+                margin-top: 0.5rem !important;
+            }
+            #guest-name {
+                font-size: 1.15rem !important;
+            }
+            #cover .btn {
+                margin-top: 10px !important;
+                padding: 10px 24px !important;
+                font-size: 0.9rem !important;
+            }
         }
     </style>
 </head>
