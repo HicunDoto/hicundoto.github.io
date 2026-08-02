@@ -435,38 +435,115 @@
         }
 
         /* ================== MEMPELAI SECTION ================== */
-        .profile-card {
-            margin: 35px 0;
+        .couple-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            margin-top: 35px;
             position: relative;
+            z-index: 5;
         }
 
-        .profile-img-frame {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 20px;
+        .couple-card {
+            width: 45%;
+            background: rgba(255, 255, 255, 0.75);
+            border: 2px solid var(--border-gold);
+            border-radius: 20px;
+            padding: 20px 10px;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.35s ease;
         }
 
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            padding: 6px;
+        .couple-card:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 12px 28px rgba(184, 147, 92, 0.18);
+            border-color: var(--primary);
+        }
+
+        .couple-card:first-of-type {
+            transform: rotate(-2deg);
+        }
+
+        .couple-card:last-of-type {
+            transform: rotate(2deg);
+        }
+
+        .couple-card .couple-img-frame {
+            width: 100px;
+            height: 140px;
+            border-radius: 50px 50px 10px 10px; /* Arch frame */
+            padding: 4px;
             background: linear-gradient(135deg, var(--accent-gold), var(--primary-light), var(--primary));
-            box-shadow: 0 12px 25px rgba(184, 147, 92, 0.2);
+            margin-bottom: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(184, 147, 92, 0.15);
         }
 
-        .profile-img img {
+        .couple-card .couple-img-frame img {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
             object-fit: cover;
+            border-radius: 46px 46px 6px 6px;
         }
 
-        .profile-name {
-            font-size: 2.5rem;
+        .couple-name-text {
+            font-size: 1.5rem !important;
             color: var(--primary);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .couple-parents-text {
+            font-size: 0.75rem !important;
+            line-height: 1.5;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .couple-parents-text strong {
+            color: var(--text-color);
+        }
+
+        /* Center divider */
+        .couple-divider {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 10%;
+        }
+
+        .couple-divider .divider-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+            opacity: 0.5;
+        }
+
+        .couple-divider .divider-amp {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin: 10px 0;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 380px) {
+            .couple-name-text {
+                font-size: 1.25rem !important;
+            }
+            .couple-parents-text {
+                font-size: 0.7rem !important;
+            }
+            .couple-card .couple-img-frame {
+                width: 85px;
+                height: 120px;
+            }
         }
 
         /* ================== EVENT SCHEDULE ================== */
@@ -1337,18 +1414,6 @@
                         <path d="M38,38 L25,38 M38,38 L38,25 M38,38 Q30,30 28,28" stroke="#b8935c" stroke-width="1.2" opacity="0.4"/>
                     </svg>
                 </div>
-
-                <!-- Background Botanical Elements -->
-                <div class="couple-bg-flower flower-left">
-                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10,90 Q40,60 20,30 Q40,40 50,10 Q60,40 80,30 Q60,60 90,90" stroke="#b8935c" stroke-width="0.8" opacity="0.22"/>
-                    </svg>
-                </div>
-                <div class="couple-bg-flower flower-right">
-                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10,90 Q40,60 20,30 Q40,40 50,10 Q60,40 80,30 Q60,60 90,90" stroke="#b8935c" stroke-width="0.8" opacity="0.22"/>
-                    </svg>
-                </div>
                 <div data-aos="fade-up">
                     <h2 class="font-serif text-gold-gradient mb-2" style="font-size: 2.2rem; font-weight: 600;">Mempelai</h2>
                     <p class="text-light-gray" style="font-size: 0.9rem;">
@@ -1356,39 +1421,41 @@
                     </p>
                 </div>
 
-                <!-- Groom -->
-                <div class="profile-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="profile-img-frame">
-                        <div class="profile-img">
+                <div class="couple-container">
+                    <!-- Groom -->
+                    <div class="couple-card" data-aos="fade-right" data-aos-delay="100">
+                        <div class="couple-img-frame">
                             <img src="../../image/undangan/3.jpeg" alt="Syaichul">
                         </div>
+                        <h3 class="font-cursive couple-name-text">Achmad Syaichul Hadi</h3>
+                        <p class="couple-parents-text">
+                            Putra dari<br>
+                            <strong>Bpk. Nur Cholis</strong><br>
+                            &<br>
+                            <strong>Ibu Sri Atmini</strong>
+                        </p>
                     </div>
-                    <h3 class="font-cursive profile-name">Achmad Syaichul Hadi</h3>
-                    <p class="text-light-gray mb-0" style="font-size: 0.92rem;">
-                        Putra dari<br><strong style="color: var(--text-color);">Bpk. Nur Cholis</strong> & <strong style="color: var(--text-color);">Ibu Sri Atmini</strong>
-                    </p>
-                </div>
 
-                <!-- Ampersand with Botanical Wreath Ring -->
-                <div class="ampersand-wrapper" data-aos="zoom-in" data-aos-delay="200">
-                    <svg class="wreath-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="44" stroke="#b8935c" stroke-width="1" stroke-dasharray="3 3" opacity="0.45"/>
-                        <path d="M20,50 Q30,25 50,20 Q70,25 80,50 Q70,75 50,80 Q30,75 20,50 Z" stroke="#b8935c" stroke-width="0.8" fill="none" opacity="0.35"/>
-                    </svg>
-                    <div class="font-cursive ampersand">&</div>
-                </div>
+                    <!-- Divider -->
+                    <div class="couple-divider" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="divider-line"></div>
+                        <div class="divider-amp">&</div>
+                        <div class="divider-line"></div>
+                    </div>
 
-                <!-- Bride -->
-                <div class="profile-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="profile-img-frame">
-                        <div class="profile-img">
+                    <!-- Bride -->
+                    <div class="couple-card" data-aos="fade-left" data-aos-delay="300">
+                        <div class="couple-img-frame">
                             <img src="../../image/undangan/2.jpeg" alt="Afidah">
                         </div>
+                        <h3 class="font-cursive couple-name-text">Nurillah Afidah</h3>
+                        <p class="couple-parents-text">
+                            Putri dari<br>
+                            <strong>Bpk. (Alm) Agus Murtadho</strong><br>
+                            &<br>
+                            <strong>Ibu Sri Kusmawati</strong>
+                        </p>
                     </div>
-                    <h3 class="font-cursive profile-name">Nurillah Afidah</h3>
-                    <p class="text-light-gray mb-0" style="font-size: 0.92rem;">
-                        Putri dari<br><strong style="color: var(--text-color);">Bpk. (Alm) Agus Murtadho</strong> & <strong style="color: var(--text-color);">Ibu Sri Kusmawati</strong>
-                    </p>
                 </div>
             </section>
 
