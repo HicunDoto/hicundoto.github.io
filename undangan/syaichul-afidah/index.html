@@ -493,42 +493,130 @@
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
         }
 
-        /* ================== GALLERY CAROUSEL ================== */
-        .carousel-wrapper {
-            position: relative;
-            width: 100%;
-            height: 390px;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-            border: 4px solid white;
+        /* ================== GALLERY GRID COLLAGE ================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            padding: 10px 2px;
         }
 
-        .carousel-wrapper img {
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            padding: 8px; /* Bingkai space */
+            border: 3px double var(--primary); /* Bingkai double gold */
+            box-shadow: var(--shadow-card);
+            border-radius: 4px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 28px rgba(184, 147, 92, 0.28);
+        }
+
+        /* Border garis halus bagian dalam bingkai */
+        .gallery-item::after {
+            content: '';
             position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
+            border: 1px solid rgba(184, 147, 92, 0.35);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 2px;
+        }
+
+        /* Vintage corner ornaments inside the frame */
+        .gallery-item .frame-corner {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border: 1.2px solid var(--primary);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .gallery-item .corner-tl { top: 5px; left: 5px; border-right: none; border-bottom: none; }
+        .gallery-item .corner-tr { top: 5px; right: 5px; border-left: none; border-bottom: none; }
+        .gallery-item .corner-bl { bottom: 5px; left: 5px; border-right: none; border-top: none; }
+        .gallery-item .corner-br { bottom: 5px; right: 5px; border-left: none; border-top: none; }
+
+        /* Grid sizes */
+        .gallery-item.tall {
+            grid-row: span 2;
+            height: 270px;
+        }
+
+        .gallery-item.wide {
+            grid-column: span 2;
+            height: 160px;
+        }
+
+        .gallery-item.square {
+            height: 128px;
+        }
+
+        /* ================== GALLERY LIGHTBOX ================== */
+        .gallery-lightbox {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
-            animation: crossfade 28s infinite;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
 
-        .carousel-wrapper img:nth-child(1) { animation-delay: 0s; }
-        .carousel-wrapper img:nth-child(2) { animation-delay: 4s; }
-        .carousel-wrapper img:nth-child(3) { animation-delay: 8s; }
-        .carousel-wrapper img:nth-child(4) { animation-delay: 12s; }
-        .carousel-wrapper img:nth-child(5) { animation-delay: 16s; }
-        .carousel-wrapper img:nth-child(6) { animation-delay: 20s; }
-        .carousel-wrapper img:nth-child(7) { animation-delay: 24s; }
+        .gallery-lightbox.show {
+            opacity: 1;
+            visibility: visible;
+        }
 
-        @keyframes crossfade {
-            0% { opacity: 0; transform: scale(1); }
-            5.7% { opacity: 1; transform: scale(1.03); }
-            14.3% { opacity: 1; transform: scale(1.05); }
-            20% { opacity: 0; transform: scale(1.08); }
-            100% { opacity: 0; transform: scale(1); }
+        .gallery-lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 8px;
+            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-lightbox.show img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .lightbox-close:hover {
+            color: var(--primary);
         }
 
         /* ================== GIFT SECTION ================== */
@@ -1262,14 +1350,63 @@
             <section id="gallery">
                 <div data-aos="fade-up">
                     <h2 class="font-serif text-gold-gradient mb-4" style="font-size: 2.2rem; font-weight: 600;">Galeri Momen</h2>
-                    <div class="carousel-wrapper">
-                        <img src="../../image/undangan/4.jpeg" alt="Gallery 1">
-                        <img src="../../image/undangan/5.jpeg" alt="Gallery 2">
-                        <img src="../../image/undangan/6.jpeg" alt="Gallery 3">
-                        <img src="../../image/undangan/7.jpeg" alt="Gallery 4">
-                        <img src="../../image/undangan/8.jpeg" alt="Gallery 5">
-                        <img src="../../image/undangan/9.jpeg" alt="Gallery 6">
-                        <img src="../../image/undangan/10.jpeg" alt="Gallery 7">
+                    <div class="gallery-grid">
+                        <!-- Item 1: Tall -->
+                        <div class="gallery-item tall" onclick="openLightbox('../../image/undangan/4.jpeg')">
+                            <span class="frame-corner corner-tl"></span>
+                            <span class="frame-corner corner-tr"></span>
+                            <span class="frame-corner corner-bl"></span>
+                            <span class="frame-corner corner-br"></span>
+                            <img src="../../image/undangan/4.jpeg" alt="Gallery 1">
+                        </div>
+                        <!-- Item 2: Square -->
+                        <div class="gallery-item square" onclick="openLightbox('../../image/undangan/5.jpeg')">
+                            <span class="frame-corner corner-tl"></span>
+                            <span class="frame-corner corner-tr"></span>
+                            <span class="frame-corner corner-bl"></span>
+                            <span class="frame-corner corner-br"></span>
+                            <img src="../../image/undangan/5.jpeg" alt="Gallery 2">
+                        </div>
+                        <!-- Item 3: Square -->
+                        <div class="gallery-item square" onclick="openLightbox('../../image/undangan/6.jpeg')">
+                            <span class="frame-corner corner-tl"></span>
+                            <span class="frame-corner corner-tr"></span>
+                            <span class="frame-corner corner-bl"></span>
+                            <span class="frame-corner corner-br"></span>
+                            <img src="../../image/undangan/6.jpeg" alt="Gallery 3">
+                        </div>
+                        <!-- Item 4: Wide -->
+                        <div class="gallery-item wide" onclick="openLightbox('../../image/undangan/7.jpeg')">
+                            <span class="frame-corner corner-tl"></span>
+                            <span class="frame-corner corner-tr"></span>
+                            <span class="frame-corner corner-bl"></span>
+                            <span class="frame-corner corner-br"></span>
+                            <img src="../../image/undangan/7.jpeg" alt="Gallery 4">
+                        </div>
+                        <!-- Item 5: Square -->
+                        <div class="gallery-item square" onclick="openLightbox('../../image/undangan/8.jpeg')">
+                            <span class="frame-corner corner-tl"></span>
+                            <span class="frame-corner corner-tr"></span>
+                            <span class="frame-corner corner-bl"></span>
+                            <span class="frame-corner corner-br"></span>
+                            <img src="../../image/undangan/8.jpeg" alt="Gallery 5">
+                        </div>
+                        <!-- Item 6: Tall -->
+                        <div class="gallery-item tall" onclick="openLightbox('../../image/undangan/9.jpeg')">
+                            <span class="frame-corner corner-tl"></span>
+                            <span class="frame-corner corner-tr"></span>
+                            <span class="frame-corner corner-bl"></span>
+                            <span class="frame-corner corner-br"></span>
+                            <img src="../../image/undangan/9.jpeg" alt="Gallery 6">
+                        </div>
+                        <!-- Item 7: Square -->
+                        <div class="gallery-item square" onclick="openLightbox('../../image/undangan/10.jpeg')">
+                            <span class="frame-corner corner-tl"></span>
+                            <span class="frame-corner corner-tr"></span>
+                            <span class="frame-corner corner-bl"></span>
+                            <span class="frame-corner corner-br"></span>
+                            <img src="../../image/undangan/10.jpeg" alt="Gallery 7">
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1416,6 +1553,12 @@
         <!-- TOAST NOTIFICATION -->
         <div id="toast-notification" class="toast-notification">
             <i class="bi bi-check-circle-fill text-primary me-2"></i> Nomor rekening berhasil disalin!
+        </div>
+
+        <!-- LIGHTBOX / ZOOM PHOTO -->
+        <div id="gallery-lightbox" class="gallery-lightbox" onclick="closeLightbox()">
+            <span class="lightbox-close">&times;</span>
+            <img id="lightbox-img" src="" alt="Zoomed Momen">
         </div>
 
     </div>
@@ -1716,6 +1859,23 @@
         }
 
         loadWishes();
+
+        // 8. Gallery Lightbox Functions
+        function openLightbox(imgSrc) {
+            const lightbox = document.getElementById('gallery-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imgSrc;
+            lightbox.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('gallery-lightbox');
+            lightbox.classList.remove('show');
+            if (!document.body.classList.contains('locked')) {
+                document.body.style.overflow = '';
+            }
+        }
     </script>
 </body>
 
