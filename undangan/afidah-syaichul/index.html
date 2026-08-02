@@ -400,19 +400,26 @@
             padding: 6px;
             background: linear-gradient(135deg, var(--accent-gold), var(--primary-light), var(--primary));
             box-shadow: 0 12px 25px rgba(184, 147, 92, 0.2);
-            overflow: hidden;
+            position: relative;
         }
 
-        .profile-img img {
+        .profile-img-inner {
             width: 100%;
             height: 100%;
             border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .profile-img-inner img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
         }
 
-        .profile-img img.groom-img {
-            transform: scale(1.3) translate(8%, 3%);
+        .profile-img-inner img.groom-img {
+            transform: scale(1.3) translate(8%, 15%);
         }
 
         .profile-name {
@@ -1101,7 +1108,9 @@
                 <div class="profile-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="profile-img-frame">
                         <div class="profile-img">
-                            <img src="../../image/undangan/2.jpeg" alt="Afidah">
+                            <div class="profile-img-inner">
+                                <img src="../../image/undangan/2.jpeg" alt="Afidah">
+                            </div>
                         </div>
                     </div>
                     <h3 class="font-cursive profile-name">Nurillah Afidah</h3>
@@ -1123,7 +1132,9 @@
                 <div class="profile-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="profile-img-frame">
                         <div class="profile-img">
-                            <img src="../../image/undangan/3.jpg" alt="Syaichul" class="groom-img">
+                            <div class="profile-img-inner">
+                                <img src="../../image/undangan/3.jpg" alt="Syaichul" class="groom-img">
+                            </div>
                         </div>
                     </div>
                     <h3 class="font-cursive profile-name">Achmad Syaichul Hadi</h3>
