@@ -25,7 +25,7 @@
             --primary-dark: #8a6736;
             --accent-gold: #d4af37;
             --bg-color: #faf7f2;
-            --card-bg: rgba(255, 255, 255, 0.88);
+            --card-bg: rgba(255, 255, 255, 0.9);
             --text-color: #3d352e;
             --text-light: #7c7267;
             --border-gold: rgba(184, 147, 92, 0.28);
@@ -123,7 +123,7 @@
 
         .petal {
             position: absolute;
-            background: linear-gradient(135deg, rgba(235, 210, 185, 0.6), rgba(245, 230, 215, 0.3));
+            background: linear-gradient(135deg, rgba(235, 210, 185, 0.65), rgba(245, 230, 215, 0.35));
             border-radius: 15px 0 15px 0;
             pointer-events: none;
             animation: floatPetal 12s linear infinite;
@@ -135,10 +135,10 @@
                 opacity: 0;
             }
             10% {
-                opacity: 0.7;
+                opacity: 0.75;
             }
             90% {
-                opacity: 0.7;
+                opacity: 0.75;
             }
             100% {
                 transform: translateY(105vh) rotate(360deg) scale(1.2);
@@ -179,6 +179,27 @@
             transform: scale(-1);
         }
 
+        /* Card Corner Ornament */
+        .card-ornament {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.55;
+        }
+
+        .card-ornament-tl {
+            top: 10px;
+            left: 10px;
+        }
+
+        .card-ornament-br {
+            bottom: 10px;
+            right: 10px;
+            transform: scale(-1);
+        }
+
         /* Section Divider SVG */
         .section-divider {
             display: flex;
@@ -199,6 +220,70 @@
             position: relative;
             z-index: 10;
             text-align: center;
+        }
+
+        /* Watermark Background Ornaments */
+        .watermark-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 260px;
+            height: 260px;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Quote Section Styling */
+        .quote-wrapper {
+            position: relative;
+            background: rgba(255, 255, 255, 0.75);
+            padding: 30px 22px;
+            border-radius: 20px;
+            border: 1px solid var(--border-gold);
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .quote-icon {
+            font-size: 2.2rem;
+            color: var(--primary);
+            opacity: 0.3;
+            margin-bottom: 5px;
+        }
+
+        /* Ampersand Wreath Ornament */
+        .ampersand-wrapper {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wreath-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            animation: slowRotate 30s linear infinite;
+        }
+
+        @keyframes slowRotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .ampersand {
+            font-size: 3.8rem;
+            color: var(--primary);
+            opacity: 0.85;
+            line-height: 1;
+            z-index: 2;
         }
 
         /* ================== COVER SECTION ================== */
@@ -276,6 +361,7 @@
             min-width: 68px;
             box-shadow: var(--shadow-card);
             backdrop-filter: blur(8px);
+            position: relative;
         }
 
         .countdown-number {
@@ -327,14 +413,6 @@
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 6px;
-        }
-
-        .ampersand {
-            font-size: 3.8rem;
-            color: var(--primary);
-            opacity: 0.6;
-            margin: 15px 0;
-            line-height: 1;
         }
 
         /* ================== EVENT SCHEDULE ================== */
@@ -475,6 +553,7 @@
             backdrop-filter: blur(10px);
             text-align: left;
             margin-bottom: 30px;
+            position: relative;
         }
 
         .form-group {
@@ -523,6 +602,7 @@
             border-left: 4px solid var(--primary);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
             animation: fadeIn 0.4s ease-in-out;
+            position: relative;
         }
 
         .wish-header {
@@ -714,10 +794,187 @@
             visibility: visible;
             transform: translateX(-50%) translateY(0);
         }
+
+        /* ================== BUKA UNDANGAN FLORAL BURST OVERLAY ================== */
+        #floral-burst-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #floral-burst-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Ripple rings radiating outward */
+        .burst-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(184, 147, 92, 0.5);
+            animation: burstRingExpand 1.4s ease-out forwards;
+        }
+
+        .burst-ring:nth-child(1) { animation-delay: 0s; }
+        .burst-ring:nth-child(2) { animation-delay: 0.15s; }
+        .burst-ring:nth-child(3) { animation-delay: 0.3s; }
+        .burst-ring:nth-child(4) { animation-delay: 0.45s; }
+
+        @keyframes burstRingExpand {
+            0% {
+                width: 10px;
+                height: 10px;
+                opacity: 0.9;
+                border-color: rgba(212, 175, 55, 0.85);
+                box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            }
+            100% {
+                width: 500px;
+                height: 500px;
+                opacity: 0;
+                border-color: rgba(184, 147, 92, 0.05);
+            }
+        }
+
+        /* Rotating botanical SVG ornament at center */
+        .burst-center-ornament {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            animation: burstOrnamentAppear 1.8s ease-out forwards;
+            transform-origin: center;
+        }
+
+        @keyframes burstOrnamentAppear {
+            0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+            30% { transform: scale(1.15) rotate(8deg); opacity: 1; }
+            60% { transform: scale(1) rotate(0deg); opacity: 1; }
+            85% { transform: scale(1.05) rotate(3deg); opacity: 1; }
+            100% { transform: scale(0) rotate(20deg); opacity: 0; }
+        }
+
+        /* Scattered micro floral particles */
+        .burst-particle {
+            position: absolute;
+            pointer-events: none;
+            animation: burstParticleFloat 1.6s ease-out forwards;
+            font-size: 1.2rem;
+            opacity: 0;
+        }
+
+        @keyframes burstParticleFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc));
+                opacity: 0;
+            }
+        }
+
+        /* Full-screen soft shimmer flash */
+        .burst-flash {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.18) 0%, rgba(255, 255, 255, 0) 70%);
+            animation: burstFlashFade 0.9s ease-out forwards;
+        }
+
+        @keyframes burstFlashFade {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Corner ornaments that fly in when overlay is shown */
+        .burst-corner {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            opacity: 0;
+            animation: burstCornerReveal 1.5s ease-out forwards;
+        }
+
+        .burst-corner-tl { top: 0; left: 0; transform-origin: top left; }
+        .burst-corner-tr { top: 0; right: 0; transform: scaleX(-1); transform-origin: top right; }
+        .burst-corner-bl { bottom: 0; left: 0; transform: scaleY(-1); transform-origin: bottom left; }
+        .burst-corner-br { bottom: 0; right: 0; transform: scale(-1); transform-origin: bottom right; }
+
+        @keyframes burstCornerReveal {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 0.7; }
+            80% { opacity: 0.65; }
+            100% { opacity: 0; transform: scale(1.3); }
+        }
     </style>
 </head>
 
 <body class="locked">
+
+    <!-- FLORAL BURST OVERLAY (shown on click) -->
+    <div id="floral-burst-overlay">
+        <!-- Full screen shimmer flash -->
+        <div class="burst-flash"></div>
+
+        <!-- Expanding ripple rings -->
+        <div class="burst-ring"></div>
+        <div class="burst-ring"></div>
+        <div class="burst-ring"></div>
+        <div class="burst-ring"></div>
+
+        <!-- Botanical center ornament -->
+        <svg class="burst-center-ornament" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="70" stroke="#d4af37" stroke-width="0.8" stroke-dasharray="4 6" opacity="0.6"/>
+            <circle cx="100" cy="100" r="50" stroke="#b8935c" stroke-width="0.6" opacity="0.5"/>
+            <path d="M100,30 Q115,55 100,70 Q85,55 100,30Z" fill="#b8935c" opacity="0.5"/>
+            <path d="M100,170 Q115,145 100,130 Q85,145 100,170Z" fill="#b8935c" opacity="0.5"/>
+            <path d="M30,100 Q55,115 70,100 Q55,85 30,100Z" fill="#b8935c" opacity="0.5"/>
+            <path d="M170,100 Q145,115 130,100 Q145,85 170,100Z" fill="#b8935c" opacity="0.5"/>
+            <path d="M50,50 Q68,72 62,85 Q49,75 50,50Z" fill="#d4af37" opacity="0.45"/>
+            <path d="M150,50 Q132,72 138,85 Q151,75 150,50Z" fill="#d4af37" opacity="0.45"/>
+            <path d="M50,150 Q68,128 62,115 Q49,125 50,150Z" fill="#d4af37" opacity="0.45"/>
+            <path d="M150,150 Q132,128 138,115 Q151,125 150,150Z" fill="#d4af37" opacity="0.45"/>
+            <circle cx="100" cy="100" r="12" stroke="#b8935c" stroke-width="1.5" fill="rgba(212,175,55,0.15)"/>
+            <circle cx="100" cy="100" r="5" fill="#b8935c" opacity="0.7"/>
+        </svg>
+
+        <!-- Corner ornaments -->
+        <svg class="burst-corner burst-corner-tl" viewBox="0 0 100 100" fill="none">
+            <path d="M5,5 Q40,15 25,50 Q15,75 5,95 M5,5 Q15,40 50,25 Q75,15 95,5" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+            <circle cx="25" cy="50" r="3" fill="#d4af37" opacity="0.8"/>
+            <circle cx="50" cy="25" r="3" fill="#d4af37" opacity="0.8"/>
+        </svg>
+        <svg class="burst-corner burst-corner-tr" viewBox="0 0 100 100" fill="none">
+            <path d="M5,5 Q40,15 25,50 Q15,75 5,95 M5,5 Q15,40 50,25 Q75,15 95,5" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+            <circle cx="25" cy="50" r="3" fill="#d4af37" opacity="0.8"/>
+            <circle cx="50" cy="25" r="3" fill="#d4af37" opacity="0.8"/>
+        </svg>
+        <svg class="burst-corner burst-corner-bl" viewBox="0 0 100 100" fill="none">
+            <path d="M5,5 Q40,15 25,50 Q15,75 5,95 M5,5 Q15,40 50,25 Q75,15 95,5" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+            <circle cx="25" cy="50" r="3" fill="#d4af37" opacity="0.8"/>
+            <circle cx="50" cy="25" r="3" fill="#d4af37" opacity="0.8"/>
+        </svg>
+        <svg class="burst-corner burst-corner-br" viewBox="0 0 100 100" fill="none">
+            <path d="M5,5 Q40,15 25,50 Q15,75 5,95 M5,5 Q15,40 50,25 Q75,15 95,5" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+            <circle cx="25" cy="50" r="3" fill="#d4af37" opacity="0.8"/>
+            <circle cx="50" cy="25" r="3" fill="#d4af37" opacity="0.8"/>
+        </svg>
+    </div>
 
     <div class="wrapper">
 
@@ -793,15 +1050,23 @@
 
             <!-- 2. QUOTE SECTION -->
             <section id="quote">
+                <!-- Background Botanical Watermark -->
+                <svg class="watermark-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50,10 Q60,30 50,50 Q40,70 50,90 M30,30 Q50,40 70,30 M25,70 Q50,60 75,70" stroke="#b8935c" stroke-width="1.5"/>
+                </svg>
+
                 <div data-aos="fade-up" data-aos-duration="1000">
-                    <div class="font-garamond text-primary" style="font-size: 1.25rem; font-style: italic; line-height: 1.8;">
-                        "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari
-                        jenismu sendiri, supaya kamu merasa tenang dan tenteram kepadanya, dan dijadikan-Nya diantaramu rasa
-                        kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang
-                        berfikir."
-                    </div>
-                    <div class="mt-3 fw-bold text-primary" style="letter-spacing: 2px; font-size: 0.88rem;">
-                        QS. AR-RUM: 21
+                    <div class="quote-wrapper">
+                        <i class="bi bi-quote quote-icon"></i>
+                        <div class="font-garamond text-primary" style="font-size: 1.25rem; font-style: italic; line-height: 1.8;">
+                            "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari
+                            jenismu sendiri, supaya kamu merasa tenang dan tenteram kepadanya, dan dijadikan-Nya diantaramu rasa
+                            kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang
+                            berfikir."
+                        </div>
+                        <div class="mt-3 fw-bold text-primary" style="letter-spacing: 2px; font-size: 0.88rem;">
+                            QS. AR-RUM: 21
+                        </div>
                     </div>
                 </div>
             </section>
@@ -839,7 +1104,14 @@
                     </p>
                 </div>
 
-                <div class="font-cursive ampersand" data-aos="zoom-in" data-aos-delay="200">&</div>
+                <!-- Ampersand with Botanical Wreath Ring -->
+                <div class="ampersand-wrapper" data-aos="zoom-in" data-aos-delay="200">
+                    <svg class="wreath-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="44" stroke="#b8935c" stroke-width="1" stroke-dasharray="3 3" opacity="0.45"/>
+                        <path d="M20,50 Q30,25 50,20 Q70,25 80,50 Q70,75 50,80 Q30,75 20,50 Z" stroke="#b8935c" stroke-width="0.8" fill="none" opacity="0.35"/>
+                    </svg>
+                    <div class="font-cursive ampersand">&</div>
+                </div>
 
                 <!-- Bride -->
                 <div class="profile-card" data-aos="fade-up" data-aos-delay="300">
@@ -894,6 +1166,16 @@
 
                     <!-- Event Akad -->
                     <div class="event-card mt-4" data-aos="fade-up" data-aos-delay="100">
+                        <!-- Card Corner Flourishes -->
+                        <svg class="card-ornament card-ornament-tl" viewBox="0 0 50 50" fill="none">
+                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
+                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
+                        </svg>
+                        <svg class="card-ornament card-ornament-br" viewBox="0 0 50 50" fill="none">
+                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
+                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
+                        </svg>
+
                         <h3 class="font-serif event-title">Akad Nikah</h3>
                         <div class="event-time"><i class="bi bi-calendar-event"></i> Sabtu, 05 September 2026</div>
                         <div class="event-time"><i class="bi bi-clock"></i> 09:00 WIB</div>
@@ -901,11 +1183,21 @@
                             <strong style="color: var(--text-color);">Masjid Nurul Huda</strong><br>
                             Jl. Ngampelsari No. 3, Ngampelsari, Kec. Candi, Kab. Sidoarjo
                         </div>
-                        <a href="https://maps.google.com" target="_blank" class="btn"><i class="bi bi-geo-alt-fill"></i> Peta Lokasi</a>
+                        <a href="https://maps.app.goo.gl/xnVfWpPQTEFfb2V16" target="_blank" class="btn"><i class="bi bi-geo-alt-fill"></i> Peta Lokasi</a>
                     </div>
 
                     <!-- Event Resepsi -->
                     <div class="event-card" data-aos="fade-up" data-aos-delay="200">
+                        <!-- Card Corner Flourishes -->
+                        <svg class="card-ornament card-ornament-tl" viewBox="0 0 50 50" fill="none">
+                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
+                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
+                        </svg>
+                        <svg class="card-ornament card-ornament-br" viewBox="0 0 50 50" fill="none">
+                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
+                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
+                        </svg>
+
                         <h3 class="font-serif event-title">Resepsi</h3>
                         <div class="event-time"><i class="bi bi-calendar-event"></i> Minggu, 06 September 2026</div>
                         <div class="event-time"><i class="bi bi-clock"></i> Bebas / Selesai</div>
@@ -965,6 +1257,16 @@
                     </p>
 
                     <div class="bank-card">
+                        <!-- Card Corner Flourishes -->
+                        <svg class="card-ornament card-ornament-tl" viewBox="0 0 50 50" fill="none">
+                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
+                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
+                        </svg>
+                        <svg class="card-ornament card-ornament-br" viewBox="0 0 50 50" fill="none">
+                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
+                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
+                        </svg>
+
                         <div class="fw-bold text-primary mb-1" style="font-size: 1.25rem;">Bank BCA</div>
                         <div class="text-light-gray" style="font-size: 0.9rem;">a.n. Achmad Syaichul Hadi</div>
                         <div class="fw-bold my-2" style="font-size: 1.55rem; letter-spacing: 1px; color: var(--text-color);">
@@ -995,6 +1297,16 @@
                     <p class="text-light-gray mb-4" style="font-size: 0.9rem;">Berikan doa restu dan konfirmasi kehadiran Anda:</p>
 
                     <div class="wish-form">
+                        <!-- Card Corner Flourishes -->
+                        <svg class="card-ornament card-ornament-tl" viewBox="0 0 50 50" fill="none">
+                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
+                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
+                        </svg>
+                        <svg class="card-ornament card-ornament-br" viewBox="0 0 50 50" fill="none">
+                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
+                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
+                        </svg>
+
                         <form id="rsvp-form" onsubmit="handleWishSubmit(event)">
                             <div class="form-group">
                                 <label for="wish-name">Nama Anda</label>
@@ -1082,7 +1394,6 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // ================= Supabase Config =================
-        // Ganti kredensial di bawah ini dengan Project URL & Anon Key dari Dashboard Supabase Anda:
         const SUPABASE_URL = 'https://dfrnrtnpeqqcislyxpbs.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmcm5ydG5wZXFxY2lzbHl4cGJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU2Mzk5MzIsImV4cCI6MjEwMTIxNTkzMn0.jdjakrw7nGbUaYhgEe-UXhA_Us8ErHqYb33bxxqMjDA';
         const INVITATION_SLUG = 'syaichul-afidah';
@@ -1093,9 +1404,9 @@
         }
 
         // 1. Floating Petals Generator
-        function createPetals() {
+        function createPetals(extra = 0) {
             const container = document.getElementById('petals-container');
-            const petalCount = 12;
+            const petalCount = 12 + extra;
             for (let i = 0; i < petalCount; i++) {
                 const petal = document.createElement('div');
                 petal.className = 'petal';
@@ -1103,8 +1414,8 @@
                 petal.style.width = size + 'px';
                 petal.style.height = (size * 1.3) + 'px';
                 petal.style.left = Math.random() * 100 + '%';
-                petal.style.animationDelay = (Math.random() * 10) + 's';
-                petal.style.animationDuration = (Math.random() * 6 + 10) + 's';
+                petal.style.animationDelay = (Math.random() * 8) + 's';
+                petal.style.animationDuration = (Math.random() * 6 + 9) + 's';
                 container.appendChild(petal);
             }
         }
@@ -1130,29 +1441,76 @@
             duration: 850
         });
 
-        // 3. Open Invitation Function
+        // 3. Open Invitation Function with Floral Burst
+        function triggerFloralBurst(callback) {
+            const overlay = document.getElementById('floral-burst-overlay');
+            overlay.classList.add('active');
+
+            // Generate scattered floral particles
+            const particles = ['✿', '❀', '✾', '❁', '✽', '⚘', '❃', '✦', '✧', '❋'];
+            const colors = ['#d4af37', '#b8935c', '#e8d3b4', '#c5a059', '#f0e6d3'];
+            const particleContainer = overlay;
+
+            for (let i = 0; i < 24; i++) {
+                const p = document.createElement('div');
+                p.className = 'burst-particle';
+                const angle = (i / 24) * 360;
+                const radius = 80 + Math.random() * 140;
+                const tx = Math.cos(angle * Math.PI / 180) * radius + 'px';
+                const ty = Math.sin(angle * Math.PI / 180) * radius + 'px';
+                const rot = (Math.random() - 0.5) * 720 + 'deg';
+                const sc = (0.6 + Math.random() * 1.2).toFixed(2);
+                p.style.cssText = `
+                    --tx: ${tx}; --ty: ${ty}; --rot: ${rot}; --sc: ${sc};
+                    left: calc(50% - 10px); top: calc(50% - 10px);
+                    color: ${colors[i % colors.length]};
+                    animation-delay: ${(Math.random() * 0.2).toFixed(2)}s;
+                    font-size: ${0.9 + Math.random() * 1.2}rem;
+                `;
+                p.textContent = particles[i % particles.length];
+                particleContainer.appendChild(p);
+            }
+
+            // After animation ends, clean up & call callback
+            setTimeout(() => {
+                overlay.classList.remove('active');
+                // Remove dynamically created particles
+                overlay.querySelectorAll('.burst-particle').forEach(el => el.remove());
+                if (callback) callback();
+            }, 1800);
+        }
+
         function bukaUndangan() {
             const btn = document.getElementById('btn-buka');
-            btn.style.display = 'none';
+            btn.disabled = true;
+            btn.innerHTML = '<i class="bi bi-stars"></i> Membuka...';
+            btn.style.opacity = '0.7';
 
-            document.body.classList.remove('locked');
+            // Trigger floral burst overlay first!
+            triggerFloralBurst(() => {
+                btn.style.display = 'none';
+                document.body.classList.remove('locked');
 
-            const mainContent = document.getElementById('main-content');
-            mainContent.style.display = 'block';
+                const mainContent = document.getElementById('main-content');
+                mainContent.style.display = 'block';
 
-            setTimeout(() => {
-                mainContent.style.opacity = '1';
-                AOS.refresh();
+                // Extra soft petal burst on open!
+                createPetals(16);
 
-                document.getElementById('bottom-nav').classList.add('show');
+                setTimeout(() => {
+                    mainContent.style.opacity = '1';
+                    AOS.refresh();
 
-                const musicBtnWrapper = document.getElementById('music-btn-wrapper');
-                const music = document.getElementById('bg-music');
-                musicBtnWrapper.classList.add('show');
-                music.play().catch(e => console.log("Auto-play blocked by browser:", e));
+                    document.getElementById('bottom-nav').classList.add('show');
 
-                document.getElementById('quote').scrollIntoView({ behavior: 'smooth' });
-            }, 50);
+                    const musicBtnWrapper = document.getElementById('music-btn-wrapper');
+                    const music = document.getElementById('bg-music');
+                    musicBtnWrapper.classList.add('show');
+                    music.play().catch(e => console.log("Auto-play blocked by browser:", e));
+
+                    document.getElementById('quote').scrollIntoView({ behavior: 'smooth' });
+                }, 80);
+            });
         }
 
         // 4. Toggle Music Function
