@@ -156,15 +156,15 @@
         }
 
         @keyframes waveFlowTop {
-            0% { transform: translateX(0) scaleY(1); }
-            50% { transform: translateX(-25%) scaleY(1.25); }
-            100% { transform: translateX(-50%) scaleY(0.9); }
+            0% { transform: translate3d(0, 0, 0) scaleY(1); }
+            50% { transform: translate3d(-25%, 0, 0) scaleY(1.12); }
+            100% { transform: translate3d(-50%, 0, 0) scaleY(0.95); }
         }
 
         @keyframes waveFlowBottom {
-            0% { transform: translateX(-50%) scaleY(1.1); }
-            50% { transform: translateX(-25%) scaleY(0.85); }
-            100% { transform: translateX(0) scaleY(1.3); }
+            0% { transform: translate3d(-50%, 0, 0) scaleY(1.08); }
+            50% { transform: translate3d(-25%, 0, 0) scaleY(0.9); }
+            100% { transform: translate3d(0, 0, 0) scaleY(1.15); }
         }
 
 
@@ -505,19 +505,21 @@
             transition: all 0.35s ease;
         }
 
-        .couple-card:hover {
-            transform: translateY(-12px) rotate(0deg) !important;
-            box-shadow: none;
-            border-color: transparent;
-            animation-play-state: paused;
+        @media (hover: hover) {
+            .couple-card:hover {
+                transform: translateY(-8px) rotate(0deg) !important;
+                box-shadow: none;
+                border-color: transparent;
+                animation-play-state: paused;
+            }
         }
 
-        .couple-card:first-of-type {
+        .couple-card.aos-animate:first-of-type {
             transform: rotate(0deg);
             animation: cardFloat1 7s ease-in-out infinite;
         }
 
-        .couple-card:last-of-type {
+        .couple-card.aos-animate:last-of-type {
             transform: rotate(0deg);
             animation: cardFloat2 7s ease-in-out infinite;
         }
@@ -677,10 +679,12 @@
             box-shadow: 0 6px 18px rgba(184, 147, 92, 0.25);
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 22px rgba(184, 147, 92, 0.35);
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+        @media (hover: hover) {
+            .btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 22px rgba(184, 147, 92, 0.35);
+                background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            }
         }
 
         /* ================== GALLERY GRID COLLAGE ================== */
@@ -703,9 +707,11 @@
             cursor: pointer;
         }
 
-        .gallery-item:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 12px 28px rgba(184, 147, 92, 0.28);
+        @media (hover: hover) {
+            .gallery-item:hover {
+                transform: translateY(-4px) scale(1.02);
+                box-shadow: 0 12px 28px rgba(184, 147, 92, 0.28);
+            }
         }
 
         /* Border garis halus bagian dalam bingkai */
@@ -1304,15 +1310,15 @@
         .wave-closing-2 { bottom: -10px; animation: secWaveMotion1 16s ease-in-out infinite alternate; }
 
         @keyframes secWaveMotion1 {
-            0% { transform: translateX(0) scaleY(1); }
-            50% { transform: translateX(-25%) scaleY(1.25); }
-            100% { transform: translateX(-50%) scaleY(0.92); }
+            0% { transform: translate3d(0, 0, 0) scaleY(1); }
+            50% { transform: translate3d(-25%, 0, 0) scaleY(1.12); }
+            100% { transform: translate3d(-50%, 0, 0) scaleY(0.95); }
         }
 
         @keyframes secWaveMotion2 {
-            0% { transform: translateX(-50%) scaleY(1.15); }
-            50% { transform: translateX(-20%) scaleY(0.85); }
-            100% { transform: translateX(0) scaleY(1.3); }
+            0% { transform: translate3d(-50%, 0, 0) scaleY(1.08); }
+            50% { transform: translate3d(-20%, 0, 0) scaleY(0.9); }
+            100% { transform: translate3d(0, 0, 0) scaleY(1.15); }
         }
 
         @keyframes burstFlashFade {
@@ -1541,6 +1547,37 @@
             #hero-event h2.font-cursive {
                 font-size: 2.7rem !important;
                 margin-bottom: 4px !important;
+            }
+        }
+
+        /* Mobile Performance & Hardware Acceleration Optimizations */
+        .sec-wave-svg,
+        .wave-svg,
+        .section-flower-ornament,
+        .svg-corner,
+        .couple-flower-ornament,
+        .cover-photo-wrapper,
+        .hero-photo-frame {
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .section-flower-ornament,
+            .svg-corner,
+            .couple-flower-ornament {
+                filter: none !important;
+            }
+
+            .quote-wrapper,
+            .countdown-item,
+            .event-card,
+            .bank-card,
+            .wish-form,
+            .bottom-nav {
+                backdrop-filter: blur(4px) !important;
+                -webkit-backdrop-filter: blur(4px) !important;
             }
         }
 
@@ -2576,11 +2613,11 @@
         }
         window.scrollTo(0, 0);
 
-        // Initialize AOS Animation with smooth easing
+        // Initialize AOS Animation with smooth easing and single execution
         AOS.init({
-            once: false,
-            offset: 70,
-            duration: 950,
+            once: true,
+            offset: 50,
+            duration: 800,
             easing: 'ease-out-cubic'
         });
 
@@ -2641,9 +2678,19 @@
                 const mainContent = document.getElementById('main-content');
                 mainContent.style.display = 'block';
 
+                // Reset AOS animation state for hidden elements so they animate properly on scroll
+                document.querySelectorAll('#main-content [data-aos]').forEach(el => {
+                    el.classList.remove('aos-animate');
+                });
+
                 setTimeout(() => {
                     mainContent.style.opacity = '1';
-                    AOS.refresh();
+                    window.scrollTo(0, 0);
+
+                    // Re-calculate element positions and trigger scroll animations cleanly
+                    if (typeof AOS !== 'undefined') {
+                        AOS.refreshHard();
+                    }
 
                     document.getElementById('bottom-nav').classList.add('show');
 
@@ -2651,9 +2698,7 @@
                     const music = document.getElementById('bg-music');
                     musicBtnWrapper.classList.add('show');
                     music.play().catch(e => console.log("Auto-play blocked by browser:", e));
-
-                    window.scrollTo({ top: 0, behavior: 'instant' });
-                }, 80);
+                }, 100);
             });
         }
 
