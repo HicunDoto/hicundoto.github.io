@@ -105,15 +105,66 @@
             margin-bottom: 1rem;
         }
 
-        /* Main Container */
+        /* Main Container with Animated Wave Gradient Background */
         .wrapper {
             width: 100%;
             max-width: 500px;
-            background: var(--bg-color);
+            background: linear-gradient(135deg, #faf7f2 0%, #f4ece1 25%, #fff8f0 50%, #f7efe4 75%, #faf7f2 100%);
+            background-size: 300% 300%;
+            animation: waveGradientBg 14s ease-in-out infinite;
             min-height: 100vh;
             position: relative;
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
             overflow: hidden;
+        }
+
+        @keyframes waveGradientBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Animated Flowing Waves Overlay Layer */
+        .animated-wave-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            opacity: 0.75;
+        }
+
+        .wave-svg {
+            position: absolute;
+            left: 0;
+            width: 200%;
+            height: 220px;
+            pointer-events: none;
+        }
+
+        .wave-svg-top1 {
+            top: -30px;
+            animation: waveFlowTop 14s ease-in-out infinite alternate;
+        }
+
+        .wave-svg-bottom1 {
+            bottom: -30px;
+            animation: waveFlowBottom 16s ease-in-out infinite alternate;
+        }
+
+        @keyframes waveFlowTop {
+            0% { transform: translateX(0) scaleY(1); }
+            50% { transform: translateX(-25%) scaleY(1.25); }
+            100% { transform: translateX(-50%) scaleY(0.9); }
+        }
+
+        @keyframes waveFlowBottom {
+            0% { transform: translateX(-50%) scaleY(1.1); }
+            50% { transform: translateX(-25%) scaleY(0.85); }
+            100% { transform: translateX(0) scaleY(1.3); }
         }
 
 
@@ -1200,6 +1251,70 @@
             animation: burstFlashFade 0.9s ease-out forwards;
         }
 
+        /* Per-Section Unique Animated Wave Overlay */
+        section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sec-wave-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .sec-wave-svg {
+            position: absolute;
+            left: 0;
+            width: 220%;
+            height: 240px;
+            pointer-events: none;
+        }
+
+        .wave-cover-1 { bottom: -40px; animation: secWaveMotion1 13s ease-in-out infinite alternate; }
+        .wave-cover-2 { bottom: -15px; animation: secWaveMotion2 17s ease-in-out infinite alternate; }
+
+        .wave-hero-top { top: -40px; animation: secWaveMotion1 15s ease-in-out infinite alternate; }
+        .wave-hero-bottom { bottom: -30px; animation: secWaveMotion2 18s ease-in-out infinite alternate; }
+
+        .wave-quote-1 { bottom: -35px; animation: secWaveMotion2 14s ease-in-out infinite alternate; }
+        .wave-quote-2 { bottom: -10px; animation: secWaveMotion1 16s ease-in-out infinite alternate; }
+
+        .wave-couple-1 { bottom: -40px; animation: secWaveMotion1 15s ease-in-out infinite alternate; }
+        .wave-couple-2 { bottom: -15px; animation: secWaveMotion2 19s ease-in-out infinite alternate; }
+
+        .wave-event-1 { bottom: -35px; animation: secWaveMotion2 13s ease-in-out infinite alternate; }
+        .wave-event-2 { bottom: -10px; animation: secWaveMotion1 17s ease-in-out infinite alternate; }
+
+        .wave-gallery-1 { bottom: -40px; animation: secWaveMotion1 16s ease-in-out infinite alternate; }
+        .wave-gallery-2 { bottom: -15px; animation: secWaveMotion2 14s ease-in-out infinite alternate; }
+
+        .wave-gift-1 { bottom: -35px; animation: secWaveMotion2 15s ease-in-out infinite alternate; }
+        .wave-gift-2 { bottom: -10px; animation: secWaveMotion1 18s ease-in-out infinite alternate; }
+
+        .wave-wishes-1 { bottom: -40px; animation: secWaveMotion1 14s ease-in-out infinite alternate; }
+        .wave-wishes-2 { bottom: -15px; animation: secWaveMotion2 17s ease-in-out infinite alternate; }
+
+        .wave-closing-1 { bottom: -35px; animation: secWaveMotion2 13s ease-in-out infinite alternate; }
+        .wave-closing-2 { bottom: -10px; animation: secWaveMotion1 16s ease-in-out infinite alternate; }
+
+        @keyframes secWaveMotion1 {
+            0% { transform: translateX(0) scaleY(1); }
+            50% { transform: translateX(-25%) scaleY(1.25); }
+            100% { transform: translateX(-50%) scaleY(0.92); }
+        }
+
+        @keyframes secWaveMotion2 {
+            0% { transform: translateX(-50%) scaleY(1.15); }
+            50% { transform: translateX(-20%) scaleY(0.85); }
+            100% { transform: translateX(0) scaleY(1.3); }
+        }
+
         @keyframes burstFlashFade {
             0% { opacity: 1; }
             100% { opacity: 0; }
@@ -1485,13 +1600,16 @@
     </div>
 
     <div class="wrapper">
+        <!-- ANIMATED WAVE GRADIENT OVERLAY LAYER -->
+        <div class="animated-wave-bg">
+            <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="wave-svg wave-svg-top1">
+                <path fill="rgba(212, 175, 55, 0.08)" d="M0,160 C320,300 420,0 720,160 C1020,320 1120,30 1440,160 L1440,0 L0,0 Z"></path>
+            </svg>
+            <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="wave-svg wave-svg-bottom1">
+                <path fill="rgba(184, 147, 92, 0.07)" d="M0,220 C280,60 520,280 800,120 C1080,0 1280,240 1440,80 L1440,320 L0,320 Z"></path>
+            </svg>
+        </div>
     <svg style="display: none;">
-  <!-- COVER GARLAND -->
-  <g id="corner-cover-floral">
-    <path d="M10 50 C40 40 80 45 130 35 C110 50 80 50 10 50 Z" fill="#c3d1be" opacity="0.75"/>
-    <path d="M40 42 C50 30 65 30 70 42 C60 45 45 45 40 42 Z" fill="#b2c4ab" opacity="0.85"/>
-    <path d="M80 43 C90 28 105 28 110 43 C100 45 85 45 80 43 Z" fill="#a0b599" opacity="0.8"/>
-    <path d="M50 10 C40 40 45 80 35 130 C50 110 50 80 50 10 Z" fill="#c3d1be" opacity="0.75"/>
   <!-- COVER GARLAND (Bunga Cover dengan Tangkai Sulur S-Curve Melengkung Anggun) -->
   <g id="corner-cover-floral">
     <!-- Base Botanical Garland Leaves -->
@@ -1836,6 +1954,14 @@
 
         <!-- 1. COVER SECTION -->
         <section id="cover">
+            <div class="sec-wave-bg">
+                <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-cover-1">
+                    <path fill="rgba(184, 147, 92, 0.25)" d="M0,192 C280,290 580,90 880,220 C1180,340 1340,110 1440,250 L1440,320 L0,320 Z"></path>
+                </svg>
+                <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-cover-2">
+                    <path fill="rgba(212, 175, 55, 0.20)" d="M0,240 C360,110 640,310 960,160 C1200,40 1380,280 1440,190 L1440,320 L0,320 Z"></path>
+                </svg>
+            </div>
             <div data-aos="fade-up" data-aos-duration="1000">
                 <div class="text-light-gray" style="letter-spacing: 4px; font-size: 0.8rem; text-transform: uppercase;">
                     Undangan Pernikahan
@@ -1875,6 +2001,14 @@
 
             <!-- 1. MAIN HERO SECTION ACARA (Tampil Full layar Paling Atas Setelah Buka Undangan) -->
             <section id="hero-event">
+                <div class="sec-wave-bg">
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-hero-top">
+                        <path fill="rgba(184, 147, 92, 0.22)" d="M0,140 C320,280 620,20 920,180 C1220,320 1360,60 1440,140 L1440,0 L0,0 Z"></path>
+                    </svg>
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-hero-bottom">
+                        <path fill="rgba(138, 103, 54, 0.24)" d="M0,210 C300,70 600,290 900,130 C1200,20 1380,270 1440,170 L1440,320 L0,320 Z"></path>
+                    </svg>
+                </div>
                 <div class="section-flower-ornament section-flower-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-1"></use></svg></div>
                 <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-1"></use></svg></div>
 
@@ -1936,6 +2070,14 @@
 
             <!-- 2. QUOTE SECTION -->
             <section id="quote">
+                <div class="sec-wave-bg">
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-quote-1">
+                        <path fill="rgba(88, 129, 87, 0.22)" d="M0,120 C340,310 660,30 980,210 C1240,330 1380,100 1440,190 L1440,320 L0,320 Z"></path>
+                    </svg>
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-quote-2">
+                        <path fill="rgba(212, 175, 55, 0.20)" d="M0,260 C260,110 560,290 860,140 C1160,10 1340,250 1440,160 L1440,320 L0,320 Z"></path>
+                    </svg>
+                </div>
                 <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-1"></use></svg></div>
                 <div class="section-flower-ornament section-flower-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-1"></use></svg></div>
                 <!-- Background Botanical Watermark -->
@@ -1969,6 +2111,14 @@
 
             <!-- 3. MEMPELAI SECTION -->
             <section id="couple">
+                <div class="sec-wave-bg">
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-couple-1">
+                        <path fill="rgba(229, 107, 111, 0.20)" d="M0,180 C310,40 590,300 890,110 C1190,20 1360,240 1440,140 L1440,320 L0,320 Z"></path>
+                    </svg>
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-couple-2">
+                        <path fill="rgba(184, 147, 92, 0.25)" d="M0,240 C380,130 680,310 980,180 C1220,60 1380,280 1440,210 L1440,320 L0,320 Z"></path>
+                    </svg>
+                </div>
                 <div class="section-flower-ornament section-flower-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-2"></use></svg></div>
                 <div class="section-flower-ornament section-flower-br"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-2"></use></svg></div>
 
@@ -2030,6 +2180,14 @@
 
             <!-- 4. EVENT SCHEDULE & COUNTDOWN -->
             <section id="event">
+                <div class="sec-wave-bg">
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-event-1">
+                        <path fill="rgba(212, 175, 55, 0.26)" d="M0,160 C290,310 590,50 890,230 C1180,340 1350,110 1440,210 L1440,320 L0,320 Z"></path>
+                    </svg>
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-event-2">
+                        <path fill="rgba(138, 103, 54, 0.24)" d="M0,230 C330,90 630,290 930,130 C1210,10 1370,250 1440,150 L1440,320 L0,320 Z"></path>
+                    </svg>
+                </div>
                 <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-3"></use></svg></div>
                 <div class="section-flower-ornament section-flower-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-3"></use></svg></div>
 
@@ -2116,6 +2274,14 @@
 
             <!-- 5. GALLERY -->
             <section id="gallery">
+                <div class="sec-wave-bg">
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-gallery-1">
+                        <path fill="rgba(255, 173, 173, 0.22)" d="M0,140 C320,290 620,30 920,200 C1220,330 1360,90 1440,180 L1440,320 L0,320 Z"></path>
+                    </svg>
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-gallery-2">
+                        <path fill="rgba(184, 147, 92, 0.24)" d="M0,250 C360,110 660,310 960,160 C1200,30 1380,270 1440,190 L1440,320 L0,320 Z"></path>
+                    </svg>
+                </div>
                 <div class="section-flower-ornament section-flower-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-4"></use></svg></div>
                 <div class="section-flower-ornament section-flower-br"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-4"></use></svg></div>
 
@@ -2195,6 +2361,14 @@
 
             <!-- 6. GIFT SECTION -->
             <section id="gift">
+                <div class="sec-wave-bg">
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-gift-1">
+                        <path fill="rgba(184, 147, 92, 0.28)" d="M0,170 C300,40 600,300 900,120 C1200,10 1360,260 1440,150 L1440,320 L0,320 Z"></path>
+                    </svg>
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-gift-2">
+                        <path fill="rgba(212, 175, 55, 0.24)" d="M0,240 C350,130 650,300 950,170 C1210,50 1370,270 1440,200 L1440,320 L0,320 Z"></path>
+                    </svg>
+                </div>
                 <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-1"></use></svg></div>
                 <div class="section-flower-ornament section-flower-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-1"></use></svg></div>
 <div class="section-intro" data-aos="fade-up">
@@ -2261,6 +2435,14 @@
 
             <!-- 7. UCAPAN & DOA (RSVP & WISHES) -->
             <section id="wishes">
+                <div class="sec-wave-bg">
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-wishes-1">
+                        <path fill="rgba(107, 142, 35, 0.22)" d="M0,150 C330,300 630,40 930,220 C1200,330 1360,100 1440,190 L1440,320 L0,320 Z"></path>
+                    </svg>
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-wishes-2">
+                        <path fill="rgba(184, 147, 92, 0.24)" d="M0,260 C270,110 570,290 870,150 C1170,10 1350,260 1440,170 L1440,320 L0,320 Z"></path>
+                    </svg>
+                </div>
                 <div class="section-flower-ornament section-flower-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-2"></use></svg></div>
                 <div class="section-flower-ornament section-flower-br"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-2"></use></svg></div>
 <div data-aos="fade-up">
@@ -2310,6 +2492,14 @@
 
             <!-- 8. CLOSING -->
             <section id="closing">
+                <div class="sec-wave-bg">
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-closing-1">
+                        <path fill="rgba(212, 175, 55, 0.28)" d="M0,130 C340,300 640,20 940,190 C1220,330 1370,80 1440,170 L1440,320 L0,320 Z"></path>
+                    </svg>
+                    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="sec-wave-svg wave-closing-2">
+                        <path fill="rgba(138, 103, 54, 0.26)" d="M0,220 C290,80 590,290 890,130 C1190,10 1370,260 1440,160 L1440,320 L0,320 Z"></path>
+                    </svg>
+                </div>
                 <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-3"></use></svg></div>
                 <div class="section-flower-ornament section-flower-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-3"></use></svg></div>
 
