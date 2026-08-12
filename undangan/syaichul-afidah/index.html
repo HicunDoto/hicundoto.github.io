@@ -116,98 +116,7 @@
             overflow: hidden;
         }
 
-        /* Floating Petals & Sparkle Effect */
-        .petals-container {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 500px;
-            height: 100vh;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 95;
-        }
 
-        .petal {
-            position: absolute;
-            pointer-events: none;
-            animation: floatPetal 10s linear infinite;
-            will-change: transform, opacity;
-        }
-
-        /* 3D Rose Pink Petals */
-        .petal.petal-pink {
-            background: linear-gradient(135deg, #fcebc2, #d4af37);
-            border-radius: 90% 10% 90% 10%;
-            box-shadow: 0 2px 5px rgba(212, 175, 55, 0.35);
-        }
-
-        /* Elegant Golden Petals/Foliage */
-        .petal.petal-gold {
-            background: linear-gradient(135deg, #f5d68d, #d4af37);
-            border-radius: 50% 0 50% 0;
-            box-shadow: 0 2px 5px rgba(212, 175, 55, 0.3);
-        }
-
-        /* Pure Cream Blossom Petals */
-        .petal.petal-cream {
-            background: linear-gradient(135deg, #fdfbf7, #f5ece1);
-            border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(245, 236, 225, 0.3);
-        }
-
-        /* Magical Gold Sparkles */
-        .petal.sparkle-star {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            color: #d4af37;
-            font-size: 1.1rem;
-            filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.6));
-            animation: floatSparkle 10s linear infinite, twinkle 2.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes floatPetal {
-            0% {
-                transform: translateY(-30px) translateX(0) rotate(0deg) scale(0.6) rotateY(0deg);
-                opacity: 0;
-            }
-            12% {
-                opacity: 0.85;
-            }
-            90% {
-                opacity: 0.85;
-            }
-            100% {
-                transform: translateY(105vh) translateX(var(--drift)) rotate(540deg) scale(1.1) rotateY(360deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes floatSparkle {
-            0% {
-                transform: translateY(-30px) translateX(0) scale(0.5);
-                opacity: 0;
-            }
-            20% {
-                opacity: 1;
-            }
-            80% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(105vh) translateX(var(--drift)) scale(1.2);
-                opacity: 0;
-            }
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.3; filter: drop-shadow(0 0 1px rgba(212, 175, 55, 0.2)); }
-            100% { opacity: 1; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.95)); }
-        }
 
         /* Ornamen Sudut Botanical SVG */
         .svg-corner {
@@ -271,7 +180,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 25px auto;
+            margin: 3px auto;
             width: 80%;
             opacity: 0.7;
         }
@@ -286,11 +195,12 @@
             position: relative;
             z-index: 10;
             text-align: center;
+            overflow: hidden;
         }
 
         #couple {
             background-color: #fdfaf5;
-            background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='120'%20height='120'%20viewBox='0%200%20120%20120'%3E%3Cg%20fill='none'%20stroke='%23b8935c'%20stroke-width='0.6'%20stroke-opacity='0.08'%3E%3Cpath%20d='M20,10%20C35,-5%2050,15%2060,5%20C70,-5%2085,15%20100,10'/%3E%3Cpath%20d='M10,20%20C-5,35%2015,50%205,60%20C-5,70%2015,85%2010,100'/%3E%3Cpath%20d='M110,20%20C125,35%20105,50%20115,60%20C125,70%20105,85%20110,100'/%3E%3Cpath%20d='M20,110%20C35,125%2050,105%2060,115%20C70,125%2085,105%20100,110'/%3E%3Cpath%20d='M60,60%20C55,50%2045,55%2040,60%20C35,65%2045,75%2055,70%20C65,65%2075,75%2080,70%20C85,65%2075,55%2065,60%20Z'/%3E%3Cpath%20d='M60,60%20C65,50%2075,55%2080,60%20C85,65%2075,75%2065,70%20C55,65%2045,75%2040,70%20C35,65%2045,55%2055,60%20Z'/%3E%3Ccircle%20cx='60'%20cy='60'%20r='6'/%3E%3Ccircle%20cx='60'%20cy='60'%20r='3'/%3E%3Cpath%20d='M45,45%20Q30,35%2040,25%20Q50,35%2045,45%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3Cpath%20d='M75,45%20Q90,35%2080,25%20Q70,35%2075,45%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3Cpath%20d='M45,75%20Q30,85%2040,95%20Q50,85%2045,75%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3Cpath%20d='M75,75%20Q90,85%2080,95%20Q70,85%2075,75%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='120'%20height='120'%20viewBox='0%200%20120%20120'%3E%3Cg%20fill='none'%20stroke='%23b8935c'%20stroke-width='0.6'%20stroke-opacity='0.08'%3E%3Cpath%20d='M20,10%20C35,-5%2050,15%2060,5%20C70,-5%2085,15%20100,10'/%3E%3Cpath%20d='M10,20%20C-5,35%2015,50%205,60%20C-5,70%2015,85%2010,100'/%3E%3Cpath%20d='M110,20%20C125,35%20105,50%20115,60%20C125,70%20105,85%20110,100'/%3E%3Cpath%20d='M20,110%20C35,125%2050,105%2060,115%20C70,125%2085,105%20100,110'/%3E%3Cpath%20d='M60,60%20C55,50%2045,55%2040,60%20C35,65%2045,75%2055,70%20C65,65%2075,75%2080,70%20C85,65%2075,55%2065,60%20Z'/%3E%3Cpath%20d='M60,60%20C65,50%2075,55%2080,60%20C85,65%2075,75%2065,70%20C55,65%2045,55%2055,60%20Z'/%3E%3Ccircle%20cx='60'%20cy='60'%20r='6'/%3E%3Ccircle%20cx='60'%20cy='60'%20r='3'/%3E%3Cpath%20d='M45,45%20Q30,35%2040,25%20Q50,35%2045,45%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3Cpath%20d='M75,45%20Q90,35%2080,25%20Q70,35%2075,45%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3Cpath%20d='M45,75%20Q30,85%2040,95%20Q50,85%2045,75%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3Cpath%20d='M75,75%20Q90,85%2080,95%20Q70,85%2075,75%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3C/g%3E%3C/svg%3E");
             background-repeat: repeat;
             background-position: center;
             background-size: 140px 140px;
@@ -307,6 +217,7 @@
             opacity: 0.95;
             filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.05));
             transition: transform 0.8s ease;
+            will-change: transform;
         }
 
         .couple-flower-tl {
@@ -334,23 +245,23 @@
         }
 
          @keyframes floralSwayTL {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(3deg) scale(1.03); }
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(2.5deg); }
          }
  
          @keyframes floralSwayTR {
-            0%, 100% { transform: scaleX(-1) rotate(0deg) scale(1); }
-            50% { transform: scaleX(-1) rotate(3deg) scale(1.03); }
+            0%, 100% { transform: scaleX(-1) rotate(0deg); }
+            50% { transform: scaleX(-1) rotate(2.5deg); }
          }
  
          @keyframes floralSwayBL {
-            0%, 100% { transform: scaleY(-1) rotate(0deg) scale(1); }
-            50% { transform: scaleY(-1) rotate(3deg) scale(1.03); }
+            0%, 100% { transform: scaleY(-1) rotate(0deg); }
+            50% { transform: scaleY(-1) rotate(2.5deg); }
          }
  
          @keyframes floralSwayBR {
-            0%, 100% { transform: scale(-1) rotate(0deg) scale(1); }
-            50% { transform: scale(-1) rotate(3deg) scale(1.03); }
+            0%, 100% { transform: scale(-1) rotate(0deg); }
+            50% { transform: scale(-1) rotate(2.5deg); }
          }
 
         /* Watermark Background Ornaments */
@@ -488,8 +399,13 @@
             background: var(--card-bg);
             border: 1px solid var(--border-gold);
             border-radius: 14px;
-            padding: 12px 8px;
+            padding: 10px 8px;
             min-width: 68px;
+            height: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             box-shadow: var(--shadow-card);
             backdrop-filter: blur(8px);
             position: relative;
@@ -1349,8 +1265,8 @@
         }
 
 
-        /* Unified Section Corner Flowers */
-        .section-flower-ornament {
+        /* Cover Corner Flourishes */
+        .svg-corner {
             position: absolute;
             width: 220px;
             height: 220px;
@@ -1359,44 +1275,157 @@
             opacity: 0.95;
             filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.05));
             transition: transform 0.8s ease;
+            will-change: transform;
         }
 
-        .section-flower-tl {
+        .svg-corner-tl {
             top: -20px;
             left: -20px;
             animation: floralSwayTL 9s ease-in-out infinite;
         }
 
-        .section-flower-tr {
+        .svg-corner-tr {
             top: -20px;
             right: -20px;
             animation: floralSwayTR 10s ease-in-out infinite;
         }
 
+        /* Unified Section Corner Flowers */
+        .section-flower-ornament {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.92;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.04));
+            transition: transform 0.8s ease;
+            will-change: transform;
+        }
+
+        /* Section Intro Container for clean text bounds */
+        .section-intro {
+            max-width: 320px;
+            margin: 0 auto 10px;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* Ensure all section content & text sit cleanly ABOVE ornaments */
+        section > [data-aos], section > div {
+            position: relative;
+            z-index: 5;
+        }
+
+        .section-flower-tl {
+            top: -15px;
+            left: -15px;
+            animation: floralSwayTL 9s ease-in-out infinite;
+        }
+
+        .section-flower-tr {
+            top: -15px;
+            right: -15px;
+            animation: floralSwayTR 10s ease-in-out infinite;
+        }
+
         .section-flower-bl {
-            bottom: -20px;
-            left: -20px;
+            bottom: -15px;
+            left: -15px;
             animation: floralSwayBL 10s ease-in-out infinite;
         }
 
         .section-flower-br {
-            bottom: -20px;
-            right: -20px;
+            bottom: -15px;
+            right: -15px;
             animation: floralSwayBR 9s ease-in-out infinite;
         }
 
 
         /* Responsive Corner Ornament Sizing */
-        @media (max-width: 400px) {
-            .svg-corner, .section-flower-ornament {
-                width: 175px !important;
-                height: 175px !important;
+        @media (max-width: 480px) {
+            .svg-corner {
+                width: 195px !important;
+                height: 195px !important;
+            }
+            .section-flower-ornament {
+                width: 160px !important;
+                height: 160px !important;
             }
         }
-        @media (max-width: 350px) {
-            .svg-corner, .section-flower-ornament {
+        @media (max-width: 360px) {
+            .svg-corner {
+                width: 170px !important;
+                height: 170px !important;
+            }
+            .section-flower-ornament {
                 width: 140px !important;
                 height: 140px !important;
+            }
+        }
+
+        /* Hero Event Circular Photo Frame & 100vh Full Screen */
+        #hero-event {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 30px 15px 40px;
+            position: relative;
+            text-align: center;
+        }
+
+        .hero-photo-wrapper {
+            width: 190px;
+            height: 190px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+
+
+        .hero-photo-frame {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, #d4af37, #f5d68d, #b8935c);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            animation: heroFloat 5s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroFloat {
+            0% {
+                transform: translateY(0px) scale(1);
+            }
+            100% {
+                transform: translateY(-8px) scale(1.02);
+            }
+        }
+
+        .hero-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #fff;
+        }
+
+        @media (max-height: 740px) {
+            #hero-event {
+                padding: 20px 15px 30px !important;
+            }
+            .hero-photo-wrapper {
+                width: 160px !important;
+                height: 160px !important;
+                margin: 12px auto 10px !important;
+            }
+            #hero-event h2.font-cursive {
+                font-size: 2.7rem !important;
+                margin-bottom: 4px !important;
             }
         }
 
@@ -1457,276 +1486,348 @@
 
     <div class="wrapper">
     <svg style="display: none;">
+  <!-- COVER GARLAND -->
   <g id="corner-cover-floral">
-    <!-- Sage Leaves Long Branch 1 -->
     <path d="M10 50 C40 40 80 45 130 35 C110 50 80 50 10 50 Z" fill="#c3d1be" opacity="0.75"/>
     <path d="M40 42 C50 30 65 30 70 42 C60 45 45 45 40 42 Z" fill="#b2c4ab" opacity="0.85"/>
     <path d="M80 43 C90 28 105 28 110 43 C100 45 85 45 80 43 Z" fill="#a0b599" opacity="0.8"/>
-    
-    <!-- Sage Leaves Long Branch 2 -->
     <path d="M50 10 C40 40 45 80 35 130 C50 110 50 80 50 10 Z" fill="#c3d1be" opacity="0.75"/>
-    <path d="M42 40 C30 50 30 65 42 70 C45 60 45 45 42 40 Z" fill="#b2c4ab" opacity="0.85"/>
-    <path d="M43 80 C28 90 28 105 43 110 C45 100 45 85 43 80 Z" fill="#a0b599" opacity="0.8"/>
+  <!-- COVER GARLAND (Bunga Cover dengan Tangkai Sulur S-Curve Melengkung Anggun) -->
+  <g id="corner-cover-floral">
+    <!-- Base Botanical Garland Leaves -->
+    <path d="M 10 65 C 5 40, 25 15, 65 10 C 55 35, 40 55, 10 65 Z" fill="#8ba888" opacity="0.95"/>
+    <path d="M 65 10 C 85 0, 120 10, 140 32 C 115 35, 85 30, 65 10 Z" fill="#9ec599" opacity="0.9"/>
+    <path d="M 10 65 C 0 85, 10 120, 32 140 C 35 115, 30 85, 10 65 Z" fill="#9ec599" opacity="0.9"/>
+    <path d="M 35 90 C 20 120, 35 155, 65 170 C 58 140, 50 115, 35 90 Z" fill="#759773" opacity="0.85"/>
+    <path d="M 90 35 C 120 20, 155 35, 170 65 C 140 58, 115 50, 90 35 Z" fill="#759773" opacity="0.85"/>
+
+    <!-- Tangkai Sulur Melengkung Anggun S-Curve (Sesuai Coretan Merah Pengguna) -->
+    <path d="M 50 45 C 38 85, 95 108, 72 148 C 62 162, 42 152, 50 138" stroke="#6b8e23" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+    <path d="M 50 45 C 38 85, 95 108, 72 148 C 62 162, 42 152, 50 138" stroke="#d4af37" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
     
-    <!-- Eucalyptus Branches -->
-    <path d="M15 15 Q80 30 110 80" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
-    <circle cx="45" cy="22" r="14" fill="#a8bbb0" opacity="0.65"/>
-    <circle cx="75" cy="35" r="13" fill="#bac8be" opacity="0.65"/>
-    <circle cx="95" cy="55" r="11" fill="#c3d2c8" opacity="0.65"/>
-    
-    <path d="M15 15 Q30 80 80 110" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
-    <circle cx="22" cy="45" r="14" fill="#a8bbb0" opacity="0.65"/>
-    <circle cx="35" cy="75" r="13" fill="#bac8be" opacity="0.65"/>
-    <circle cx="55" cy="95" r="11" fill="#c3d2c8" opacity="0.65"/>
-    
-    <!-- Flower 1 (Rose Pink - Big Corner) -->
-    <g transform="translate(45, 45)">
-        <circle cx="0" cy="0" r="22" fill="#f5d68d"/>
-        <path d="M-12,-6 Q-25,12 0,18 Q25,12 12,-6 Q0,-18 -12,-6 Z" fill="#d4af37"/>
-        <path d="M-10,-10 Q0,-22 10,-10 Q22,0 10,10 Q-6,22 -10,-10 Z" fill="#b8935c" opacity="0.9"/>
-        <circle cx="0" cy="0" r="10" fill="#8a6736"/>
-        <circle cx="0" cy="0" r="5" fill="#faf7f2"/>
+    <!-- Daun & Kuncup di Sepanjang Tangkai Sulur S-Curve -->
+    <path d="M 58 85 C 72 75, 80 90, 68 98 Z" fill="#8ba888"/>
+    <path d="M 75 120 C 88 110, 94 128, 82 132 Z" fill="#759773"/>
+    <g transform="translate(50, 138)">
+        <circle cx="0" cy="0" r="7" fill="#fdfbf7" stroke="#d4af37" stroke-width="1"/>
+        <circle cx="0" cy="0" r="4" fill="#eebeaa"/>
         <circle cx="0" cy="0" r="2" fill="#d4af37"/>
     </g>
     
-    <!-- Flower 2 (Peach Rose - Mid Horizontal) -->
-    <g transform="translate(95, 38)">
-        <circle cx="0" cy="0" r="16" fill="#fdfbf7"/>
-        <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#f4ece1"/>
-        <circle cx="0" cy="0" r="7" fill="#eebeaa"/>
+    <!-- Gold Sprigs & Pearl Tendrils -->
+    <path d="M 18 18 Q 85 35 155 30" stroke="#d4af37" stroke-width="2" fill="none"/>
+    <circle cx="120" cy="34" r="4.5" fill="#f4ece1" stroke="#d4af37" stroke-width="1"/>
+    <circle cx="140" cy="32" r="3.5" fill="#f4ece1" stroke="#d4af37" stroke-width="1"/>
+    <circle cx="155" cy="30" r="2.5" fill="#d4af37"/>
+    <path d="M 18 18 Q 35 85 30 155" stroke="#d4af37" stroke-width="2" fill="none"/>
+    <circle cx="34" cy="120" r="4.5" fill="#f4ece1" stroke="#d4af37" stroke-width="1"/>
+    <circle cx="32" cy="140" r="3.5" fill="#f4ece1" stroke="#d4af37" stroke-width="1"/>
+    <circle cx="30" cy="155" r="2.5" fill="#d4af37"/>
+
+    <!-- Main Golden Rose Center -->
+    <g transform="translate(52, 52)">
+        <circle cx="0" cy="0" r="28" fill="#f5d68d"/>
+        <path d="M-15,-8 Q-30,15 0,22 Q30,15 15,-8 Q0,-22 -15,-8 Z" fill="#d4af37"/>
+        <path d="M-12,-12 Q0,-26 12,-12 Q26,0 12,12 Q-8,26 -12,-12 Z" fill="#b8935c" opacity="0.9"/>
+        <circle cx="0" cy="0" r="12" fill="#8a6736"/>
+        <circle cx="0" cy="0" r="6" fill="#faf7f2"/>
+        <circle cx="0" cy="0" r="2.5" fill="#d4af37"/>
+    </g>
+
+    <!-- Side Soft Peach Flowers -->
+    <g transform="translate(108, 42)">
+        <circle cx="0" cy="0" r="18" fill="#fdfbf7"/>
+        <path d="M-12,-6 Q-24,12 0,16 Q24,12 12,-6 Q0,-16 -12,-6 Z" fill="#f4ece1"/>
+        <circle cx="0" cy="0" r="8" fill="#eebeaa"/>
+        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+    </g>
+    <g transform="translate(42, 108)">
+        <circle cx="0" cy="0" r="18" fill="#fdfbf7"/>
+        <path d="M-12,-6 Q-24,12 0,16 Q24,12 12,-6 Q0,-16 -12,-6 Z" fill="#f4ece1"/>
+        <circle cx="0" cy="0" r="8" fill="#eebeaa"/>
         <circle cx="0" cy="0" r="3" fill="#d4af37"/>
     </g>
 
-    <!-- Flower 3 (Peach Rose - Mid Vertical) -->
-    <g transform="translate(38, 95)">
-        <circle cx="0" cy="0" r="16" fill="#fdfbf7"/>
-        <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#f4ece1"/>
-        <circle cx="0" cy="0" r="7" fill="#eebeaa"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-    </g>
-
-    <!-- Flower 4 (White Blossom - Small Horizontal) -->
-    <g transform="translate(135, 32)">
+    <!-- Jasmine Star Accent -->
+    <g transform="translate(148, 38)">
         <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
         <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
         <circle cx="0" cy="0" r="3" fill="#d4af37"/>
     </g>
-
-    <!-- Flower 5 (White Blossom - Small Vertical) -->
-    <g transform="translate(32, 135)">
+    <g transform="translate(38, 148)">
         <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
         <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
         <circle cx="0" cy="0" r="3" fill="#d4af37"/>
     </g>
-    
-    <!-- Long Gold Vine Sprigs -->
-    <path d="M15 15 C60 20 120 15 160 20" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
-    <circle cx="160" cy="20" r="2.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="120" cy="18" r="1.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="85" cy="16" r="2" fill="#d4af37" opacity="0.85"/>
-
-    <path d="M15 15 C20 60 15 120 20 160" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
-    <circle cx="20" cy="160" r="2.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="18" cy="120" r="1.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="16" cy="85" r="2" fill="#d4af37" opacity="0.85"/>
-    <!-- Long hanging/drooping vine for cover page -->
-    <path d="M 30 30 C 55 75, 125 105, 110 165 C 100 185, 80 180, 75 165 C 70 148, 92 140, 100 155" stroke="#7e9387" stroke-width="1.5" opacity="0.75" fill="none"/>
-    <path d="M 30 30 C 55 75, 125 105, 110 165 C 100 185, 80 180, 75 165 C 70 148, 92 140, 100 155" stroke="#d4af37" stroke-width="0.8" opacity="0.6" fill="none"/>
-    
-    <!-- Hanging Branch Leaves & Flowers -->
-    <path d="M 46 54 C 52 45 62 48 58 58 Z" fill="#b2c4ab" opacity="0.85"/>
-    <g transform="translate(48, 62)">
-        <circle cx="0" cy="0" r="5" fill="#fdfbf7"/>
-        <circle cx="0" cy="0" r="1.5" fill="#d4af37"/>
-    </g>
-    <circle cx="70" cy="90" r="8" fill="#a8bbb0" opacity="0.75"/>
-    <path d="M 72 90 C 80 82 90 88 84 96 Z" fill="#c3d1be" opacity="0.85"/>
-    <g transform="translate(75, 115)">
-        <circle cx="0" cy="0" r="5" fill="#fdfbf7"/>
-        <circle cx="0" cy="0" r="1.5" fill="#d4af37"/>
-    </g>
-    <path d="M 98 128 C 108 120 115 128 108 136 Z" fill="#a0b599" opacity="0.85"/>
-    <g transform="translate(108, 122)">
-        <circle cx="0" cy="0" r="6" fill="#f5d68d"/>
-        <circle cx="0" cy="0" r="1.8" fill="#8a6736"/>
-    </g>
-    <path d="M 108 158 C 118 152 125 160 116 168 Z" fill="#b2c4ab" opacity="0.85"/>
-    <g transform="translate(122, 155)">
-        <circle cx="0" cy="0" r="4" fill="#fdfbf7"/>
-        <circle cx="0" cy="0" r="1.2" fill="#d4af37"/>
-    </g>
-    <circle cx="85" cy="170" r="6" fill="#bac8be" opacity="0.75"/>
-    <path d="M 100 152 L 102 155 L 105 155 L 102 156 L 100 159 L 98 156 L 95 155 L 98 155 Z" fill="#d4af37" opacity="0.9"/>
   </g>
-  <g id="corner-top-floral">
-    <!-- Sage Leaves Long Branch 1 -->
-    <path d="M10 50 C40 40 80 45 130 35 C110 50 80 50 10 50 Z" fill="#c3d1be" opacity="0.75"/>
-    <path d="M40 42 C50 30 65 30 70 42 C60 45 45 45 40 42 Z" fill="#b2c4ab" opacity="0.85"/>
-    <path d="M80 43 C90 28 105 28 110 43 C100 45 85 45 80 43 Z" fill="#a0b599" opacity="0.8"/>
+
+  <!-- VARIAN 1: Rose & Sage Super Rame Grand Bouquet -->
+  <g id="floral-style-1">
+    <path d="M 10 50 C 0 30, 20 10, 50 10 C 70 30, 40 60, 10 50 Z" fill="#588157" opacity="0.95"/>
+    <path d="M 50 10 C 70 0, 110 10, 135 30 C 115 45, 80 35, 50 10 Z" fill="#8ba888" opacity="0.9"/>
+    <path d="M 10 50 C 0 70, 10 110, 30 135 C 45 115, 35 80, 10 50 Z" fill="#8ba888" opacity="0.9"/>
+    <path d="M 30 80 C 15 110, 30 150, 65 165 C 60 135, 50 105, 30 80 Z" fill="#3a5a40" opacity="0.85"/>
+    <path d="M 80 30 C 110 15, 150 30, 165 65 C 135 60, 105 50, 80 30 Z" fill="#3a5a40" opacity="0.85"/>
     
-    <!-- Sage Leaves Long Branch 2 -->
-    <path d="M50 10 C40 40 45 80 35 130 C50 110 50 80 50 10 Z" fill="#c3d1be" opacity="0.75"/>
-    <path d="M42 40 C30 50 30 65 42 70 C45 60 45 45 42 40 Z" fill="#b2c4ab" opacity="0.85"/>
-    <path d="M43 80 C28 90 28 105 43 110 C45 100 45 85 43 80 Z" fill="#a0b599" opacity="0.8"/>
-    
-    <!-- Eucalyptus Branches -->
-    <path d="M15 15 Q80 30 110 80" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
-    <circle cx="45" cy="22" r="14" fill="#a8bbb0" opacity="0.65"/>
-    <circle cx="75" cy="35" r="13" fill="#bac8be" opacity="0.65"/>
-    <circle cx="95" cy="55" r="11" fill="#c3d2c8" opacity="0.65"/>
-    
-    <path d="M15 15 Q30 80 80 110" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
-    <circle cx="22" cy="45" r="14" fill="#a8bbb0" opacity="0.65"/>
-    <circle cx="35" cy="75" r="13" fill="#bac8be" opacity="0.65"/>
-    <circle cx="55" cy="95" r="11" fill="#c3d2c8" opacity="0.65"/>
-    
-    <!-- Flower 1 (Rose Pink - Big Corner) -->
-    <g transform="translate(45, 45)">
-        <circle cx="0" cy="0" r="22" fill="#f5d68d"/>
-        <path d="M-12,-6 Q-25,12 0,18 Q25,12 12,-6 Q0,-18 -12,-6 Z" fill="#d4af37"/>
-        <path d="M-10,-10 Q0,-22 10,-10 Q22,0 10,10 Q-6,22 -10,-10 Z" fill="#b8935c" opacity="0.9"/>
-        <circle cx="0" cy="0" r="10" fill="#8a6736"/>
-        <circle cx="0" cy="0" r="5" fill="#faf7f2"/>
+    <!-- Tangkai Sulur S-Curve Melengkung Anggun Sesuai Coretan Merah -->
+    <path d="M 50 45 C 38 85, 95 108, 72 148 C 62 162, 42 152, 50 138" stroke="#4a6b47" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+    <path d="M 50 45 C 38 85, 95 108, 72 148 C 62 162, 42 152, 50 138" stroke="#d4af37" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+    <path d="M 58 85 C 72 75, 80 90, 68 98 Z" fill="#8ba888"/>
+    <path d="M 75 120 C 88 110, 94 128, 82 132 Z" fill="#759773"/>
+    <g transform="translate(50, 138)">
+        <circle cx="0" cy="0" r="7" fill="#ffcad4"/>
+        <circle cx="0" cy="0" r="4" fill="#e56b6f"/>
         <circle cx="0" cy="0" r="2" fill="#d4af37"/>
     </g>
-    
-    <!-- Flower 2 (Peach Rose - Mid Horizontal) -->
-    <g transform="translate(95, 38)">
-        <circle cx="0" cy="0" r="16" fill="#fdfbf7"/>
-        <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#f4ece1"/>
-        <circle cx="0" cy="0" r="7" fill="#eebeaa"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+
+    <path d="M 15 15 Q 85 45 155 55" stroke="#4a6b47" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M 15 15 Q 45 85 55 155" stroke="#4a6b47" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+    <path d="M 18 18 Q 90 35 160 30" stroke="#d4af37" stroke-width="1.8" fill="none"/>
+    <circle cx="115" cy="34" r="4" fill="#d4af37"/>
+    <circle cx="140" cy="32" r="3.5" fill="#d4af37"/>
+    <circle cx="160" cy="30" r="2.5" fill="#d4af37"/>
+    <path d="M 18 18 Q 35 90 30 160" stroke="#d4af37" stroke-width="1.8" fill="none"/>
+    <circle cx="34" cy="115" r="4" fill="#d4af37"/>
+    <circle cx="32" cy="140" r="3.5" fill="#d4af37"/>
+    <circle cx="30" cy="160" r="2.5" fill="#d4af37"/>
+
+    <g transform="translate(54, 54)">
+        <circle cx="0" cy="0" r="28" fill="#f4acb7"/>
+        <path d="M-22,-10 C-30,10 0,30 22,10 C30,-10 0,-30 -22,-10 Z" fill="#ffcad4"/>
+        <path d="M-10,-22 C10,-30 30,0 10,22 C-10,30 -30,0 -10,-22 Z" fill="#ffb7b2"/>
+        <circle cx="0" cy="0" r="18" fill="#ff9baa"/>
+        <path d="M-12,-6 C-18,8 0,20 12,6 C18,-8 0,-20 -12,-6 Z" fill="#e56b6f"/>
+        <circle cx="0" cy="0" r="9" fill="#d4af37"/>
+        <circle cx="0" cy="0" r="4" fill="#fff5ea"/>
     </g>
 
-    <!-- Flower 3 (Peach Rose - Mid Vertical) -->
-    <g transform="translate(38, 95)">
-        <circle cx="0" cy="0" r="16" fill="#fdfbf7"/>
-        <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#f4ece1"/>
-        <circle cx="0" cy="0" r="7" fill="#eebeaa"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+    <g transform="translate(108, 44)">
+        <circle cx="0" cy="0" r="18" fill="#ffe5ec"/>
+        <circle cx="0" cy="0" r="14" fill="#ffc2d1"/>
+        <path d="M-8,-4 C-14,6 0,14 8,4 C14,-6 0,-14 -8,-4 Z" fill="#ffb3c6"/>
+        <circle cx="0" cy="0" r="6" fill="#d4af37"/>
+        <circle cx="0" cy="0" r="2.5" fill="#ffffff"/>
     </g>
 
-    <!-- Flower 4 (White Blossom - Small Horizontal) -->
-    <g transform="translate(135, 32)">
-        <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
-        <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+    <g transform="translate(44, 108)">
+        <circle cx="0" cy="0" r="18" fill="#ffe5ec"/>
+        <circle cx="0" cy="0" r="14" fill="#ffc2d1"/>
+        <path d="M-8,-4 C-14,6 0,14 8,4 C14,-6 0,-14 -8,-4 Z" fill="#ffb3c6"/>
+        <circle cx="0" cy="0" r="6" fill="#d4af37"/>
+        <circle cx="0" cy="0" r="2.5" fill="#ffffff"/>
     </g>
 
-    <!-- Flower 5 (White Blossom - Small Vertical) -->
-    <g transform="translate(32, 135)">
-        <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
-        <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+    <g transform="translate(145, 40)">
+        <circle cx="0" cy="0" r="12" fill="#fff5ea"/>
+        <circle cx="0" cy="0" r="8" fill="#ffcad4"/>
+        <circle cx="0" cy="0" r="4" fill="#d4af37"/>
     </g>
-    
-    <!-- Long Gold Vine Sprigs -->
-    <path d="M15 15 C60 20 120 15 160 20" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
-    <circle cx="160" cy="20" r="2.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="120" cy="18" r="1.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="85" cy="16" r="2" fill="#d4af37" opacity="0.85"/>
+    <g transform="translate(40, 145)">
+        <circle cx="0" cy="0" r="12" fill="#fff5ea"/>
+        <circle cx="0" cy="0" r="8" fill="#ffcad4"/>
+        <circle cx="0" cy="0" r="4" fill="#d4af37"/>
+    </g>
 
-    <path d="M15 15 C20 60 15 120 20 160" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
-    <circle cx="20" cy="160" r="2.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="18" cy="120" r="1.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="16" cy="85" r="2" fill="#d4af37" opacity="0.85"/>
-    <!-- Short hanging/drooping vine (doesn't cover text/images) -->
-    <path d="M 30 30 C 45 55, 75 75, 70 105 C 65 118, 52 115, 50 105 C 47 95, 60 90, 65 100" stroke="#7e9387" stroke-width="1.5" opacity="0.75" fill="none"/>
-    <path d="M 30 30 C 45 55, 75 75, 70 105 C 65 118, 52 115, 50 105 C 47 95, 60 90, 65 100" stroke="#d4af37" stroke-width="0.8" opacity="0.6" fill="none"/>
-    
-    <!-- Short Branch Leaves & Flowers -->
-    <path d="M 40 48 C 45 42 52 44 49 52 Z" fill="#b2c4ab" opacity="0.85"/>
-    <g transform="translate(45, 60)">
-        <circle cx="0" cy="0" r="4.5" fill="#fdfbf7"/>
-        <circle cx="0" cy="0" r="1.2" fill="#d4af37"/>
+    <g transform="translate(150, 75)">
+        <circle cx="0" cy="0" r="8" fill="#ffffff"/>
+        <circle cx="0" cy="0" r="2.5" fill="#d4af37"/>
     </g>
-    <path d="M 58 76 C 65 70 72 75 67 83 Z" fill="#c3d1be" opacity="0.85"/>
-    <g transform="translate(65, 95)">
-        <circle cx="0" cy="0" r="4.5" fill="#fdfbf7"/>
-        <circle cx="0" cy="0" r="1.2" fill="#d4af37"/>
+    <g transform="translate(75, 150)">
+        <circle cx="0" cy="0" r="8" fill="#ffffff"/>
+        <circle cx="0" cy="0" r="2.5" fill="#d4af37"/>
     </g>
-    <path d="M 60 98 L 61 100 L 63 100 L 61 101 L 60 103 L 59 101 L 57 100 L 59 100 Z" fill="#d4af37" opacity="0.9"/>
   </g>
-  <g id="corner-bottom-floral">
-    <!-- Sage Leaves Long Branch 1 -->
-    <path d="M10 50 C40 40 80 45 130 35 C110 50 80 50 10 50 Z" fill="#c3d1be" opacity="0.75"/>
-    <path d="M40 42 C50 30 65 30 70 42 C60 45 45 45 40 42 Z" fill="#b2c4ab" opacity="0.85"/>
-    <path d="M80 43 C90 28 105 28 110 43 C100 45 85 45 80 43 Z" fill="#a0b599" opacity="0.8"/>
-    
-    <!-- Sage Leaves Long Branch 2 -->
-    <path d="M50 10 C40 40 45 80 35 130 C50 110 50 80 50 10 Z" fill="#c3d1be" opacity="0.75"/>
-    <path d="M42 40 C30 50 30 65 42 70 C45 60 45 45 42 40 Z" fill="#b2c4ab" opacity="0.85"/>
-    <path d="M43 80 C28 90 28 105 43 110 C45 100 45 85 43 80 Z" fill="#a0b599" opacity="0.8"/>
-    
-    <!-- Eucalyptus Branches -->
-    <path d="M15 15 Q80 30 110 80" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
-    <circle cx="45" cy="22" r="14" fill="#a8bbb0" opacity="0.65"/>
-    <circle cx="75" cy="35" r="13" fill="#bac8be" opacity="0.65"/>
-    <circle cx="95" cy="55" r="11" fill="#c3d2c8" opacity="0.65"/>
-    
-    <path d="M15 15 Q30 80 80 110" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
-    <circle cx="22" cy="45" r="14" fill="#a8bbb0" opacity="0.65"/>
-    <circle cx="35" cy="75" r="13" fill="#bac8be" opacity="0.65"/>
-    <circle cx="55" cy="95" r="11" fill="#c3d2c8" opacity="0.65"/>
-    
-    <!-- Flower 1 (Rose Pink - Big Corner) -->
-    <g transform="translate(45, 45)">
-        <circle cx="0" cy="0" r="22" fill="#f5d68d"/>
-        <path d="M-12,-6 Q-25,12 0,18 Q25,12 12,-6 Q0,-18 -12,-6 Z" fill="#d4af37"/>
-        <path d="M-10,-10 Q0,-22 10,-10 Q22,0 10,10 Q-6,22 -10,-10 Z" fill="#b8935c" opacity="0.9"/>
-        <circle cx="0" cy="0" r="10" fill="#8a6736"/>
-        <circle cx="0" cy="0" r="5" fill="#faf7f2"/>
+
+  <!-- VARIAN 2: Royal Peony Cream-Pink & Rose Gold Super Rame Bouquet -->
+  <g id="floral-style-2">
+    <path d="M 12 55 C 2 35, 22 12, 55 12 C 75 32, 45 62, 12 55 Z" fill="#3a5a40" opacity="0.95"/>
+    <path d="M 55 12 C 75 2, 115 12, 140 35 C 120 50, 85 40, 55 12 Z" fill="#588157" opacity="0.9"/>
+    <path d="M 12 55 C 2 75, 12 115, 35 140 C 50 120, 40 85, 12 55 Z" fill="#588157" opacity="0.9"/>
+    <path d="M 35 85 C 18 115, 35 155, 70 170 C 62 140, 52 110, 35 85 Z" fill="#3a5a40" opacity="0.85"/>
+    <path d="M 85 35 C 115 18, 155 35, 170 70 C 140 62, 110 52, 85 35 Z" fill="#3a5a40" opacity="0.85"/>
+
+    <!-- Tangkai Sulur S-Curve Melengkung Anggun Sesuai Coretan Merah -->
+    <path d="M 50 45 C 38 85, 95 108, 72 148 C 62 162, 42 152, 50 138" stroke="#3a5a40" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+    <path d="M 50 45 C 38 85, 95 108, 72 148 C 62 162, 42 152, 50 138" stroke="#d4af37" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+    <path d="M 58 85 C 72 75, 80 90, 68 98 Z" fill="#588157"/>
+    <path d="M 75 120 C 88 110, 94 128, 82 132 Z" fill="#3a5a40"/>
+    <g transform="translate(50, 138)">
+        <circle cx="0" cy="0" r="7" fill="#fde2e4"/>
+        <circle cx="0" cy="0" r="4" fill="#ffb5a7"/>
         <circle cx="0" cy="0" r="2" fill="#d4af37"/>
     </g>
-    
-    <!-- Flower 2 (Peach Rose - Mid Horizontal) -->
-    <g transform="translate(95, 38)">
-        <circle cx="0" cy="0" r="16" fill="#fdfbf7"/>
-        <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#f4ece1"/>
-        <circle cx="0" cy="0" r="7" fill="#eebeaa"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+
+    <path d="M 15 15 Q 90 40 160 50" stroke="#d4af37" stroke-width="2" fill="none"/>
+    <circle cx="120" cy="42" r="4.5" fill="#f4ece1" stroke="#d4af37" stroke-width="1"/>
+    <circle cx="145" cy="46" r="3.5" fill="#f4ece1" stroke="#d4af37" stroke-width="1"/>
+    <circle cx="160" cy="50" r="2.5" fill="#d4af37"/>
+    <path d="M 15 15 Q 40 90 50 160" stroke="#d4af37" stroke-width="2" fill="none"/>
+    <circle cx="42" cy="120" r="4.5" fill="#f4ece1" stroke="#d4af37" stroke-width="1"/>
+    <circle cx="46" cy="145" r="3.5" fill="#f4ece1" stroke="#d4af37" stroke-width="1"/>
+    <circle cx="50" cy="160" r="2.5" fill="#d4af37"/>
+
+    <g transform="translate(56, 56)">
+        <circle cx="0" cy="0" r="30" fill="#fde2e4"/>
+        <path d="M-24,-12 C-32,12 0,32 24,12 C32,-12 0,-32 -24,-12 Z" fill="#fff1e6"/>
+        <path d="M-12,-24 C12,-32 32,0 12,24 C-12,32 -32,0 -12,-24 Z" fill="#fcd5ce"/>
+        <circle cx="0" cy="0" r="20" fill="#ffb5a7"/>
+        <circle cx="0" cy="0" r="14" fill="#f8edeb"/>
+        <circle cx="0" cy="0" r="8" fill="#d4af37"/>
+        <circle cx="0" cy="0" r="3.5" fill="#ffffff"/>
     </g>
 
-    <!-- Flower 3 (Peach Rose - Mid Vertical) -->
-    <g transform="translate(38, 95)">
-        <circle cx="0" cy="0" r="16" fill="#fdfbf7"/>
-        <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#f4ece1"/>
-        <circle cx="0" cy="0" r="7" fill="#eebeaa"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+    <g transform="translate(112, 48)">
+        <circle cx="0" cy="0" r="19" fill="#fde2e4"/>
+        <circle cx="0" cy="0" r="14" fill="#ffb5a7"/>
+        <path d="M-7,-3 C-12,5 0,12 7,3 C12,-5 0,-12 -7,-3 Z" fill="#f8edeb"/>
+        <circle cx="0" cy="0" r="6" fill="#d4af37"/>
+        <circle cx="0" cy="0" r="2" fill="#ffffff"/>
+    </g>
+    <g transform="translate(48, 112)">
+        <circle cx="0" cy="0" r="19" fill="#fde2e4"/>
+        <circle cx="0" cy="0" r="14" fill="#ffb5a7"/>
+        <path d="M-7,-3 C-12,5 0,12 7,3 C12,-5 0,-12 -7,-3 Z" fill="#f8edeb"/>
+        <circle cx="0" cy="0" r="6" fill="#d4af37"/>
+        <circle cx="0" cy="0" r="2" fill="#ffffff"/>
     </g>
 
-    <!-- Flower 4 (White Blossom - Small Horizontal) -->
-    <g transform="translate(135, 32)">
-        <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
-        <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+    <g transform="translate(148, 44)">
+        <circle cx="0" cy="0" r="13" fill="#fde2e4"/>
+        <circle cx="0" cy="0" r="8" fill="#ffb5a7"/>
+        <circle cx="0" cy="0" r="4" fill="#d4af37"/>
+    </g>
+    <g transform="translate(44, 148)">
+        <circle cx="0" cy="0" r="13" fill="#fde2e4"/>
+        <circle cx="0" cy="0" r="8" fill="#ffb5a7"/>
+        <circle cx="0" cy="0" r="4" fill="#d4af37"/>
+    </g>
+  </g>
+
+  <!-- VARIAN 3: Dahlia Champagne Super Rame Bouquet -->
+  <g id="floral-style-3">
+    <path d="M 12 60 C 2 40, 22 15, 60 12 C 50 32, 38 50, 12 60 Z" fill="#6b8e23" opacity="0.95"/>
+    <path d="M 60 12 C 80 2, 110 12, 128 32 C 108 32, 82 28, 60 12 Z" fill="#556b2f" opacity="0.9"/>
+    <path d="M 12 60 C 2 80, 12 110, 32 128 C 32 108, 28 82, 12 60 Z" fill="#556b2f" opacity="0.9"/>
+    <path d="M 32 80 C 18 110, 32 140, 58 155 C 52 130, 48 105, 32 80 Z" fill="#6b8e23" opacity="0.85"/>
+    <path d="M 80 32 C 110 18, 140 32, 155 58 C 130 52, 105 48, 80 32 Z" fill="#6b8e23" opacity="0.85"/>
+
+    <!-- Tangkai Sulur S-Curve Melengkung Anggun Sesuai Coretan Merah -->
+    <path d="M 50 45 C 38 85, 95 108, 72 148 C 62 162, 42 152, 50 138" stroke="#556b2f" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+    <path d="M 50 45 C 38 85, 95 108, 72 148 C 62 162, 42 152, 50 138" stroke="#d4af37" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+    <path d="M 58 85 C 72 75, 80 90, 68 98 Z" fill="#6b8e23"/>
+    <path d="M 75 120 C 88 110, 94 128, 82 132 Z" fill="#556b2f"/>
+    <g transform="translate(50, 138)">
+        <circle cx="0" cy="0" r="7" fill="#faf0ca"/>
+        <circle cx="0" cy="0" r="4" fill="#f4d35e"/>
+        <circle cx="0" cy="0" r="2" fill="#ca6702"/>
     </g>
 
-    <!-- Flower 5 (White Blossom - Small Vertical) -->
-    <g transform="translate(32, 135)">
-        <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
-        <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-    </g>
-    
-    <!-- Long Gold Vine Sprigs -->
-    <path d="M15 15 C60 20 120 15 160 20" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
-    <circle cx="160" cy="20" r="2.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="120" cy="18" r="1.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="85" cy="16" r="2" fill="#d4af37" opacity="0.85"/>
+    <path d="M 18 18 Q 85 35 155 35" stroke="#d4af37" stroke-width="2" fill="none"/>
+    <circle cx="125" cy="35" r="4" fill="#d4af37"/>
+    <circle cx="155" cy="35" r="2.5" fill="#d4af37"/>
+    <path d="M 18 18 Q 35 85 35 155" stroke="#d4af37" stroke-width="2" fill="none"/>
+    <circle cx="35" cy="125" r="4" fill="#d4af37"/>
+    <circle cx="35" cy="155" r="2.5" fill="#d4af37"/>
 
-    <path d="M15 15 C20 60 15 120 20 160" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
-    <circle cx="20" cy="160" r="2.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="18" cy="120" r="1.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="16" cy="85" r="2" fill="#d4af37" opacity="0.85"/>
+    <g transform="translate(52, 52)">
+        <circle cx="0" cy="0" r="28" fill="#faf0ca"/>
+        <path d="M0 -26 L6 -8 L26 0 L6 8 L0 26 L-6 8 L-26 0 L-6 -8 Z" fill="#f4d35e"/>
+        <path d="M-18 -18 L-4 -6 L-18 0 L-6 4 L-18 18 L-4 6 L0 18 L4 6 L18 18 L6 4 L18 0 L6 -4 L18 -18 L4 -6 L0 -18 L-4 -6 Z" fill="#ee9b00" opacity="0.75"/>
+        <circle cx="0" cy="0" r="14" fill="#ca6702"/>
+        <circle cx="0" cy="0" r="8" fill="#d4af37"/>
+        <circle cx="0" cy="0" r="3" fill="#ffffff"/>
+    </g>
+
+    <g transform="translate(108, 46)">
+        <circle cx="0" cy="0" r="17" fill="#ffffff"/>
+        <circle cx="0" cy="0" r="12" fill="#f4d35e"/>
+        <circle cx="0" cy="0" r="6" fill="#ca6702"/>
+        <circle cx="0" cy="0" r="2.5" fill="#ffffff"/>
+    </g>
+    <g transform="translate(46, 108)">
+        <circle cx="0" cy="0" r="17" fill="#ffffff"/>
+        <circle cx="0" cy="0" r="12" fill="#f4d35e"/>
+        <circle cx="0" cy="0" r="6" fill="#ca6702"/>
+        <circle cx="0" cy="0" r="2.5" fill="#ffffff"/>
+    </g>
+
+    <g transform="translate(145, 42)">
+        <circle cx="0" cy="0" r="13" fill="#faf0ca"/>
+        <circle cx="0" cy="0" r="8" fill="#f4d35e"/>
+        <circle cx="0" cy="0" r="4" fill="#d4af37"/>
+    </g>
+    <g transform="translate(42, 145)">
+        <circle cx="0" cy="0" r="13" fill="#faf0ca"/>
+        <circle cx="0" cy="0" r="8" fill="#f4d35e"/>
+        <circle cx="0" cy="0" r="4" fill="#d4af37"/>
+    </g>
+  </g>
+
+  <!-- VARIAN 4: Sakura Pink Super Rame Cluster -->
+  <g id="floral-style-4">
+    <!-- Tangkai Sulur S-Curve Melengkung Anggun Sesuai Coretan Merah -->
+    <path d="M 50 45 C 38 85, 95 108, 72 148 C 62 162, 42 152, 50 138" stroke="#6e4f28" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+    <path d="M 50 45 C 38 85, 95 108, 72 148 C 62 162, 42 152, 50 138" stroke="#d4af37" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+    <path d="M 58 85 C 72 75, 80 90, 68 98 Z" fill="#6b8e23"/>
+    <path d="M 75 120 C 88 110, 94 128, 82 132 Z" fill="#556b2f"/>
+    <g transform="translate(50, 138)">
+        <circle cx="0" cy="0" r="7" fill="#ffc6ff"/>
+        <circle cx="0" cy="0" r="4" fill="#ffadad"/>
+        <circle cx="0" cy="0" r="2" fill="#d4af37"/>
+    </g>
+
+    <path d="M 40 22 C 55 12, 70 20, 62 35 Z" fill="#6b8e23"/>
+    <path d="M 22 40 C 12 55, 20 70, 35 62 Z" fill="#6b8e23"/>
+    <path d="M 90 42 C 105 32, 120 40, 112 55 Z" fill="#556b2f"/>
+    <path d="M 42 90 C 32 105, 40 120, 55 112 Z" fill="#556b2f"/>
+
+    <g transform="translate(52, 52)">
+        <circle cx="0" cy="0" r="26" fill="#ffc6ff"/>
+        <path d="M 0 -22 C 10 -22 15 -10 0 0 C -15 -10 -10 -22 0 -22 Z" fill="#ffadad"/>
+        <path d="M 22 0 C 22 10 10 15 0 0 C 10 -15 22 -10 22 0 Z" fill="#ffadad"/>
+        <path d="M 14 18 C 8 24 -5 18 0 0 C 18 -5 24 8 14 18 Z" fill="#ffadad"/>
+        <path d="M -14 18 C -24 8 -18 -5 0 0 C 5 18 -8 24 -14 18 Z" fill="#ffadad"/>
+        <path d="M -20 0 C -20 -9 -9 -14 0 0 C -9 14 -20 9 -20 0 Z" fill="#ffadad"/>
+        <circle cx="0" cy="0" r="10" fill="#ffff3f"/>
+        <circle cx="0" cy="0" r="5" fill="#d4af37"/>
+        <circle cx="0" cy="0" r="2" fill="#ffffff"/>
+    </g>
+
+    <g transform="translate(108, 48)">
+        <circle cx="0" cy="0" r="18" fill="#ffffff"/>
+        <circle cx="0" cy="0" r="13" fill="#ffc6ff"/>
+        <circle cx="0" cy="0" r="6" fill="#d4af37"/>
+        <circle cx="0" cy="0" r="2" fill="#ffffff"/>
+    </g>
+    <g transform="translate(48, 108)">
+        <circle cx="0" cy="0" r="18" fill="#ffffff"/>
+        <circle cx="0" cy="0" r="13" fill="#ffc6ff"/>
+        <circle cx="0" cy="0" r="6" fill="#d4af37"/>
+        <circle cx="0" cy="0" r="2" fill="#ffffff"/>
+    </g>
+
+    <g transform="translate(145, 44)">
+        <circle cx="0" cy="0" r="14" fill="#ffffff"/>
+        <circle cx="0" cy="0" r="9" fill="#ffadad"/>
+        <circle cx="0" cy="0" r="4" fill="#d4af37"/>
+    </g>
+    <g transform="translate(44, 145)">
+        <circle cx="0" cy="0" r="14" fill="#ffffff"/>
+        <circle cx="0" cy="0" r="9" fill="#ffadad"/>
+        <circle cx="0" cy="0" r="4" fill="#d4af37"/>
+    </g>
+
+    <text x="135" y="30" fill="#d4af37" font-size="14">✦</text>
+    <text x="30" y="135" fill="#d4af37" font-size="14">✦</text>
+    <text x="120" y="120" fill="#d4af37" font-size="14">✦</text>
   </g>
 </svg>
 
     
 
 
-        <!-- Soft Floating Petals Animation -->
-        <div id="petals-container" class="petals-container"></div>
+
 
         <!-- SVG Botanical Corner Flourishes -->
         <div class="svg-corner svg-corner-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-cover-floral"></use></svg></div>
@@ -1772,6 +1873,56 @@
         <!-- KONTEN UTAMA (Sembunyikan sebelum tombol diklik) -->
         <div id="main-content">
 
+            <!-- 1. MAIN HERO SECTION ACARA (Tampil Full layar Paling Atas Setelah Buka Undangan) -->
+            <section id="hero-event">
+                <div class="section-flower-ornament section-flower-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-1"></use></svg></div>
+                <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-1"></use></svg></div>
+
+                <div data-aos="fade-up" data-aos-duration="1000" class="section-intro">
+                    <div class="text-light-gray" style="letter-spacing: 4px; font-size: 0.82rem; text-transform: uppercase; font-weight: 500;">
+                        The Wedding Of
+                    </div>
+
+                    <div class="hero-photo-wrapper" style="margin: 18px auto 16px;">
+                        <div class="hero-photo-frame">
+                            <img src="../../image/undangan/1.jpg" alt="Syaichul & Afidah">
+                        </div>
+                    </div>
+
+                    <h2 class="font-cursive text-gold-gradient" style="font-size: 3.2rem; margin-bottom: 6px;">
+                        Syaichul & Afidah
+                    </h2>
+
+                    <div class="font-serif text-gold-gradient fw-bold" style="letter-spacing: 2.5px; font-size: 1.05rem; margin-bottom: 22px;">
+                        MINGGU, 06 SEPTEMBER 2026
+                    </div>
+
+                    <div class="text-light-gray fw-bold" style="letter-spacing: 3px; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 14px;">
+                        SAVE THE DATE
+                    </div>
+
+                    <!-- Live Countdown Widget -->
+                    <div class="countdown-container" style="margin-top: 10px;">
+                        <div class="countdown-item">
+                            <div id="hero-cd-days" class="countdown-number">00</div>
+                            <div class="countdown-label">Hari</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div id="hero-cd-hours" class="countdown-number">00</div>
+                            <div class="countdown-label">Jam</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div id="hero-cd-mins" class="countdown-number">00</div>
+                            <div class="countdown-label">Menit</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div id="hero-cd-secs" class="countdown-number">00</div>
+                            <div class="countdown-label">Detik</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- SECTION DIVIDER SVG -->
             <div class="section-divider">
                 <svg viewBox="0 0 200 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1785,19 +1936,18 @@
 
             <!-- 2. QUOTE SECTION -->
             <section id="quote">
-<!-- Background Botanical Watermark -->
+                <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-1"></use></svg></div>
+                <div class="section-flower-ornament section-flower-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-1"></use></svg></div>
+                <!-- Background Botanical Watermark -->
                 <svg class="watermark-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M50,10 Q60,30 50,50 Q40,70 50,90 M30,30 Q50,40 70,30 M25,70 Q50,60 75,70" stroke="#b8935c" stroke-width="1.5"/>
                 </svg>
 
-                <div data-aos="fade-up" data-aos-duration="1000">
+                <div data-aos="zoom-in" data-aos-duration="1000">
                     <div class="quote-wrapper">
                         <i class="bi bi-quote quote-icon"></i>
                         <div class="font-garamond text-primary" style="font-size: 1.25rem; font-style: italic; line-height: 1.8;">
-                            "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari
-                            jenismu sendiri, supaya kamu merasa tenang dan tenteram kepadanya, dan dijadikan-Nya diantaramu rasa
-                            kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang
-                            berfikir."
+                            "Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."
                         </div>
                         <div class="mt-3 fw-bold text-primary" style="letter-spacing: 2px; font-size: 0.88rem;">
                             QS. AR-RUM: 21
@@ -1819,13 +1969,10 @@
 
             <!-- 3. MEMPELAI SECTION -->
             <section id="couple">
-        
-        <div class="section-flower-ornament section-flower-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-top-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-top-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-br"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
+                <div class="section-flower-ornament section-flower-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-2"></use></svg></div>
+                <div class="section-flower-ornament section-flower-br"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-2"></use></svg></div>
 
-        <div data-aos="fade-up">
+        <div class="section-intro" data-aos="fade-up">
                     <h2 class="font-serif text-gold-gradient mb-2" style="font-size: 2.2rem; font-weight: 600;">Mempelai</h2>
                     <p class="text-light-gray" style="font-size: 0.9rem;">
                         Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri pernikahan kami:
@@ -1840,7 +1987,7 @@
                         </div>
                         <h3 class="font-cursive couple-name-text">Achmad Syaichul Hadi</h3>
                         <p class="couple-parents-text">
-                            Putra dari<br>
+                            Putra Pertama dari<br>
                             <strong>Bpk. Nur Cholis</strong><br>
                             &<br>
                             <strong>Ibu Sri Atmini</strong>
@@ -1861,7 +2008,7 @@
                         </div>
                         <h3 class="font-cursive couple-name-text">Nurillah Afidah</h3>
                         <p class="couple-parents-text">
-                            Putri dari<br>
+                            Putri Pertama dari<br>
                             <strong>Bpk. (Alm) Agus Murtadho</strong><br>
                             &<br>
                             <strong>Ibu Sri Kusmawati</strong>
@@ -1883,13 +2030,10 @@
 
             <!-- 4. EVENT SCHEDULE & COUNTDOWN -->
             <section id="event">
-        
-        <div class="section-flower-ornament section-flower-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-top-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-top-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-br"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
+                <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-3"></use></svg></div>
+                <div class="section-flower-ornament section-flower-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-3"></use></svg></div>
 
-        <div data-aos="fade-up">
+        <div class="section-intro" data-aos="fade-up">
                     <h2 class="font-serif text-gold-gradient mb-2" style="font-size: 2.2rem; font-weight: 600;">Agenda Acara</h2>
                     <p class="text-light-gray mb-4" style="font-size: 0.9rem;">Hitung mundur menuju hari bahagia kami:</p>
 
@@ -1949,7 +2093,7 @@
 
                         <h3 class="font-serif event-title">Resepsi</h3>
                         <div class="event-time"><i class="bi bi-calendar-event"></i> Minggu, 06 September 2026</div>
-                        <div class="event-time"><i class="bi bi-clock"></i> Bebas / Selesai</div>
+                        <div class="event-time"><i class="bi bi-clock"></i> Bebas </div>
                         <div class="event-location">
                             <strong style="color: var(--text-color);">Desa Banjarbendo, Dusun Dukuh Banjarbendo</strong><br>
                             RT. 03 RW. 02, Kec. Sidoarjo, Kab. Sidoarjo
@@ -1972,17 +2116,14 @@
 
             <!-- 5. GALLERY -->
             <section id="gallery">
-        
-        <div class="section-flower-ornament section-flower-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-top-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-top-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-br"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
+                <div class="section-flower-ornament section-flower-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-4"></use></svg></div>
+                <div class="section-flower-ornament section-flower-br"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-4"></use></svg></div>
 
-        <div data-aos="fade-up">
+                <div class="section-intro" data-aos="fade-up">
                     <h2 class="font-serif text-gold-gradient mb-4" style="font-size: 2.2rem; font-weight: 600;">Galeri Momen</h2>
                     <div class="gallery-grid">
                         <!-- Item 1: Tall -->
-                        <div class="gallery-item tall" onclick="openLightbox('../../image/undangan/4.jpeg')">
+                        <div class="gallery-item tall" data-aos="zoom-in-up" data-aos-delay="100" onclick="openLightbox('../../image/undangan/4.jpeg')">
                             <span class="frame-corner corner-tl"></span>
                             <span class="frame-corner corner-tr"></span>
                             <span class="frame-corner corner-bl"></span>
@@ -1990,7 +2131,7 @@
                             <img src="../../image/undangan/4.jpeg" alt="Gallery 1">
                         </div>
                         <!-- Item 2: Square -->
-                        <div class="gallery-item square" onclick="openLightbox('../../image/undangan/5.jpeg')">
+                        <div class="gallery-item square" data-aos="zoom-in-up" data-aos-delay="200" onclick="openLightbox('../../image/undangan/5.jpeg')">
                             <span class="frame-corner corner-tl"></span>
                             <span class="frame-corner corner-tr"></span>
                             <span class="frame-corner corner-bl"></span>
@@ -1998,7 +2139,7 @@
                             <img src="../../image/undangan/5.jpeg" alt="Gallery 2" style="object-position: center 20%;">
                         </div>
                         <!-- Item 3: Square -->
-                        <div class="gallery-item square" onclick="openLightbox('../../image/undangan/6.jpeg')">
+                        <div class="gallery-item square" data-aos="zoom-in-up" data-aos-delay="300" onclick="openLightbox('../../image/undangan/6.jpeg')">
                             <span class="frame-corner corner-tl"></span>
                             <span class="frame-corner corner-tr"></span>
                             <span class="frame-corner corner-bl"></span>
@@ -2006,7 +2147,7 @@
                             <img src="../../image/undangan/6.jpeg" alt="Gallery 3">
                         </div>
                         <!-- Item 4: Wide -->
-                        <div class="gallery-item wide" onclick="openLightbox('../../image/undangan/7.jpeg')">
+                        <div class="gallery-item wide" data-aos="zoom-in-up" data-aos-delay="150" onclick="openLightbox('../../image/undangan/7.jpeg')">
                             <span class="frame-corner corner-tl"></span>
                             <span class="frame-corner corner-tr"></span>
                             <span class="frame-corner corner-bl"></span>
@@ -2014,7 +2155,7 @@
                             <img src="../../image/undangan/7.jpeg" alt="Gallery 4" style="object-position: center 60%;">
                         </div>
                         <!-- Item 5: Square -->
-                        <div class="gallery-item square" onclick="openLightbox('../../image/undangan/8.jpeg')">
+                        <div class="gallery-item square" data-aos="zoom-in-up" data-aos-delay="250" onclick="openLightbox('../../image/undangan/8.jpeg')">
                             <span class="frame-corner corner-tl"></span>
                             <span class="frame-corner corner-tr"></span>
                             <span class="frame-corner corner-bl"></span>
@@ -2022,7 +2163,7 @@
                             <img src="../../image/undangan/8.jpeg" alt="Gallery 5" style="object-position: center 50%;">
                         </div>
                         <!-- Item 6: Tall -->
-                        <div class="gallery-item tall" onclick="openLightbox('../../image/undangan/9.jpeg')">
+                        <div class="gallery-item tall" data-aos="zoom-in-up" data-aos-delay="350" onclick="openLightbox('../../image/undangan/9.jpeg')">
                             <span class="frame-corner corner-tl"></span>
                             <span class="frame-corner corner-tr"></span>
                             <span class="frame-corner corner-bl"></span>
@@ -2030,7 +2171,7 @@
                             <img src="../../image/undangan/9.jpeg" alt="Gallery 6">
                         </div>
                         <!-- Item 7: Square -->
-                        <div class="gallery-item square" onclick="openLightbox('../../image/undangan/10.jpeg')">
+                        <div class="gallery-item square" data-aos="zoom-in-up" data-aos-delay="400" onclick="openLightbox('../../image/undangan/10.jpeg')">
                             <span class="frame-corner corner-tl"></span>
                             <span class="frame-corner corner-tr"></span>
                             <span class="frame-corner corner-bl"></span>
@@ -2054,13 +2195,15 @@
 
             <!-- 6. GIFT SECTION -->
             <section id="gift">
-<div data-aos="fade-up">
+                <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-1"></use></svg></div>
+                <div class="section-flower-ornament section-flower-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-1"></use></svg></div>
+<div class="section-intro" data-aos="fade-up">
                     <h2 class="font-serif text-gold-gradient mb-2" style="font-size: 2.2rem; font-weight: 600;">Kirim Hadiah</h2>
                     <p class="text-light-gray mb-4" style="font-size: 0.9rem;">
                         Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih Anda, Anda dapat menggunakan fitur cashless berikut:
                     </p>
 
-                    <div class="bank-card">
+                    <div class="bank-card" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="100">
                         <!-- Card Corner Flourishes -->
                         <svg class="card-ornament card-ornament-tl" viewBox="0 0 50 50" fill="none">
                             <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
@@ -2082,7 +2225,7 @@
                     </div>
 
                     <!-- Kirim Kado / Hadiah Fisik -->
-                    <div class="bank-card" style="margin-top: 25px;">
+                    <div class="bank-card" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="200" style="margin-top: 25px;">
                         <!-- Card Corner Flourishes -->
                         <svg class="card-ornament card-ornament-tl" viewBox="0 0 50 50" fill="none">
                             <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
@@ -2118,6 +2261,8 @@
 
             <!-- 7. UCAPAN & DOA (RSVP & WISHES) -->
             <section id="wishes">
+                <div class="section-flower-ornament section-flower-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-2"></use></svg></div>
+                <div class="section-flower-ornament section-flower-br"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-2"></use></svg></div>
 <div data-aos="fade-up">
                     <h2 class="font-serif text-gold-gradient mb-2" style="font-size: 2.2rem; font-weight: 600;">Ucapan & Doa</h2>
                     <p class="text-light-gray mb-4" style="font-size: 0.9rem;">Berikan doa restu dan konfirmasi kehadiran Anda:</p>
@@ -2165,9 +2310,8 @@
 
             <!-- 8. CLOSING -->
             <section id="closing">
-                <div class="svg-corner svg-corner-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
-
-                <div class="svg-corner svg-corner-br"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
+                <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-3"></use></svg></div>
+                <div class="section-flower-ornament section-flower-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#floral-style-3"></use></svg></div>
 
                 <div data-aos="zoom-in">
                     <p class="text-light-gray" style="font-size: 0.95rem;">
@@ -2181,11 +2325,10 @@
 
         <!-- BOTTOM NAVIGATION -->
         <div id="bottom-nav" class="bottom-nav">
-            <a href="#quote" title="Quote"><i class="bi bi-journal-bookmark-fill"></i></a>
+            <a href="#hero-event" title="Acara"><i class="bi bi-house-heart-fill"></i></a>
             <a href="#couple" title="Mempelai"><i class="bi bi-heart-fill"></i></a>
             <a href="#event" title="Agenda"><i class="bi bi-calendar-event-fill"></i></a>
             <a href="#gallery" title="Galeri"><i class="bi bi-images"></i></a>
-            <a href="#gift" title="Hadiah"><i class="bi bi-gift-fill"></i></a>
             <a href="#wishes" title="Ucapan"><i class="bi bi-chat-heart-fill"></i></a>
         </div>
 
@@ -2228,41 +2371,7 @@
             supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         }
 
-        // 1. Floating Petals & Sparkle Generator (Meriah Ramai & Premium)
-        function createPetals(extra = 0) {
-            const container = document.getElementById('petals-container');
-            const particleCount = 55 + extra; // Increased to 55 for "meriah ramai" effect
-            const types = ['petal-pink', 'petal-gold', 'petal-cream', 'sparkle-star'];
-            const sparkleSymbols = ['✦', '✧', '•', '★'];
-            
-            for (let i = 0; i < particleCount; i++) {
-                const petal = document.createElement('div');
-                const type = types[Math.floor(Math.random() * types.length)];
-                petal.className = `petal ${type}`;
-                
-                // Sizes
-                const size = Math.random() * 12 + 8;
-                petal.style.width = size + 'px';
-                petal.style.height = (type === 'petal-cream' || type === 'sparkle-star' ? size : size * 1.35) + 'px';
-                
-                // Sparkle symbol text
-                if (type === 'sparkle-star') {
-                    petal.textContent = sparkleSymbols[Math.floor(Math.random() * sparkleSymbols.length)];
-                    petal.style.fontSize = (0.7 + Math.random() * 0.7) + 'rem';
-                }
-                
-                // Drift and Position
-                petal.style.left = Math.random() * 100 + '%';
-                petal.style.setProperty('--drift', (Math.random() * 140 - 70) + 'px');
-                
-                // Animation settings
-                petal.style.animationDelay = (Math.random() * 12) + 's';
-                petal.style.animationDuration = (Math.random() * 7 + 8) + 's';
-                
-                container.appendChild(petal);
-            }
-        }
-        createPetals();
+
 
         // 2. URL Query Guest Name
         const urlParams = new URLSearchParams(window.location.search);
@@ -2277,11 +2386,12 @@
         }
         window.scrollTo(0, 0);
 
-        // Initialize AOS Animation
+        // Initialize AOS Animation with smooth easing
         AOS.init({
-            once: true,
-            offset: 80,
-            duration: 850
+            once: false,
+            offset: 70,
+            duration: 950,
+            easing: 'ease-out-cubic'
         });
 
         // 3. Open Invitation Function with Floral Burst
@@ -2334,11 +2444,12 @@
                 btn.style.display = 'none';
                 document.body.classList.remove('locked');
 
+                const cover = document.getElementById('cover');
+                if (cover) cover.style.display = 'none';
+                document.querySelectorAll('.svg-corner').forEach(el => el.style.display = 'none');
+
                 const mainContent = document.getElementById('main-content');
                 mainContent.style.display = 'block';
-
-                // Extra soft petal burst on open!
-                createPetals(16);
 
                 setTimeout(() => {
                     mainContent.style.opacity = '1';
@@ -2351,7 +2462,7 @@
                     musicBtnWrapper.classList.add('show');
                     music.play().catch(e => console.log("Auto-play blocked by browser:", e));
 
-                    document.getElementById('quote').scrollIntoView({ behavior: 'smooth' });
+                    window.scrollTo({ top: 0, behavior: 'instant' });
                 }, 80);
             });
         }
@@ -2379,10 +2490,10 @@
                 const diff = targetDate - now;
 
                 if (diff < 0) {
-                    document.getElementById('cd-days').innerText = '00';
-                    document.getElementById('cd-hours').innerText = '00';
-                    document.getElementById('cd-mins').innerText = '00';
-                    document.getElementById('cd-secs').innerText = '00';
+                    ['cd-days', 'hero-cd-days'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = '00'; });
+                    ['cd-hours', 'hero-cd-hours'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = '00'; });
+                    ['cd-mins', 'hero-cd-mins'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = '00'; });
+                    ['cd-secs', 'hero-cd-secs'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = '00'; });
                     return;
                 }
 
@@ -2391,10 +2502,15 @@
                 const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                 const secs = Math.floor((diff % (1000 * 60)) / 1000);
 
-                document.getElementById('cd-days').innerText = days < 10 ? '0' + days : days;
-                document.getElementById('cd-hours').innerText = hours < 10 ? '0' + hours : hours;
-                document.getElementById('cd-mins').innerText = mins < 10 ? '0' + mins : mins;
-                document.getElementById('cd-secs').innerText = secs < 10 ? '0' + secs : secs;
+                const dStr = days < 10 ? '0' + days : days;
+                const hStr = hours < 10 ? '0' + hours : hours;
+                const mStr = mins < 10 ? '0' + mins : mins;
+                const sStr = secs < 10 ? '0' + secs : secs;
+
+                ['cd-days', 'hero-cd-days'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = dStr; });
+                ['cd-hours', 'hero-cd-hours'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = hStr; });
+                ['cd-mins', 'hero-cd-mins'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = mStr; });
+                ['cd-secs', 'hero-cd-secs'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = sStr; });
             }
             update();
             setInterval(update, 1000);
