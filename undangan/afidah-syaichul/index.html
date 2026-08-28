@@ -1,2605 +1,438 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
-    <title>Undangan Pernikahan - Afidah & Syaichul</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
-    <!-- AOS CSS untuk Animasi Scroll -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- Supabase JS Client SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+    <title>Dashboard Kirim WA - Undangan Afidah &amp; Syaichul</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
         :root {
-            --primary: #b8935c;
-            --primary-light: #f4ece1;
-            --primary-dark: #8a6736;
-            --accent-gold: #d4af37;
-            --bg-color: #faf7f2;
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --text-color: #3d352e;
-            --text-light: #7c7267;
-            --border-gold: rgba(184, 147, 92, 0.28);
-            --shadow-soft: 0 10px 30px rgba(184, 147, 92, 0.08);
-            --shadow-card: 0 15px 35px rgba(0, 0, 0, 0.04);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #dfd9cf;
-            color: var(--text-color);
-            overflow-x: hidden;
-            font-size: 14px;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* Typography */
-        .font-cursive {
-            font-family: 'Great Vibes', cursive;
-        }
-
-        .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
-
-        .font-garamond {
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        .text-gold-gradient {
-            background: linear-gradient(135deg, #b8935c 0%, #d4af37 50%, #8a6736 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: goldGlow 6s ease-in-out infinite alternate;
-        }
-
-        @keyframes goldGlow {
-            0% { filter: drop-shadow(0 0 1px rgba(212, 175, 55, 0.15)); }
-            100% { filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.55)); }
-        }
-
-        .text-primary {
-            color: var(--primary) !important;
-        }
-
-        .bg-primary {
-            background-color: var(--primary) !important;
-        }
-
-        .text-light-gray {
-            color: var(--text-light);
-        }
-
-        .mb-5 {
-            margin-bottom: 2rem;
-        }
-
-        h1, h2, h3 {
-            margin: 0;
-            font-weight: normal;
-        }
-
-        p {
-            line-height: 1.7;
-            margin-bottom: 1rem;
-        }
-
-        /* Main Container */
-        .wrapper {
-            width: 100%;
-            max-width: 500px;
-            background: var(--bg-color);
-            min-height: 100vh;
-            position: relative;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
-        }
-
-        /* Floating Petals & Sparkle Effect */
-        .petals-container {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 500px;
-            height: 100vh;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 95;
-        }
-
-        .petal {
-            position: absolute;
-            pointer-events: none;
-            animation: floatPetal 10s linear infinite;
-            will-change: transform, opacity;
-        }
-
-        /* 3D Rose Pink Petals */
-        .petal.petal-pink {
-            background: linear-gradient(135deg, #fcebc2, #d4af37);
-            border-radius: 90% 10% 90% 10%;
-            box-shadow: 0 2px 5px rgba(212, 175, 55, 0.35);
-        }
-
-        /* Elegant Golden Petals/Foliage */
-        .petal.petal-gold {
-            background: linear-gradient(135deg, #f5d68d, #d4af37);
-            border-radius: 50% 0 50% 0;
-            box-shadow: 0 2px 5px rgba(212, 175, 55, 0.3);
-        }
-
-        /* Pure Cream Blossom Petals */
-        .petal.petal-cream {
-            background: linear-gradient(135deg, #fdfbf7, #f5ece1);
-            border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(245, 236, 225, 0.3);
-        }
-
-        /* Magical Gold Sparkles */
-        .petal.sparkle-star {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            color: #d4af37;
-            font-size: 1.1rem;
-            filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.6));
-            animation: floatSparkle 10s linear infinite, twinkle 2.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes floatPetal {
-            0% {
-                transform: translateY(-30px) translateX(0) rotate(0deg) scale(0.6) rotateY(0deg);
-                opacity: 0;
-            }
-            12% {
-                opacity: 0.85;
-            }
-            90% {
-                opacity: 0.85;
-            }
-            100% {
-                transform: translateY(105vh) translateX(var(--drift)) rotate(540deg) scale(1.1) rotateY(360deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes floatSparkle {
-            0% {
-                transform: translateY(-30px) translateX(0) scale(0.5);
-                opacity: 0;
-            }
-            20% {
-                opacity: 1;
-            }
-            80% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(105vh) translateX(var(--drift)) scale(1.2);
-                opacity: 0;
-            }
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.3; filter: drop-shadow(0 0 1px rgba(212, 175, 55, 0.2)); }
-            100% { opacity: 1; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.95)); }
-        }
-
-        /* Ornamen Sudut Botanical SVG */
-        .svg-corner {
-            position: absolute;
-            width: 220px;
-            height: 220px;
-            opacity: 0.95;
-            z-index: 6;
-            pointer-events: none;
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.05));
-            transition: transform 0.8s ease;
-        }
-
-        .svg-corner-tl {
-            top: -20px;
-            left: -20px;
-            animation: floralSwayTL 9s ease-in-out infinite;
-        }
-
-        .svg-corner-tr {
-            top: -20px;
-            right: -20px;
-            animation: floralSwayTR 10s ease-in-out infinite;
-        }
-
-        .svg-corner-bl {
-            bottom: -20px;
-            left: -20px;
-            animation: floralSwayBL 10s ease-in-out infinite;
-        }
-
-        .svg-corner-br {
-            bottom: -20px;
-            right: -20px;
-            animation: floralSwayBR 9s ease-in-out infinite;
-        }
-
-        /* Card Corner Ornament */
-        .card-ornament {
-            position: absolute;
-            width: 45px;
-            height: 45px;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.55;
-        }
-
-        .card-ornament-tl {
-            top: 10px;
-            left: 10px;
-        }
-
-        .card-ornament-br {
-            bottom: 10px;
-            right: 10px;
-            transform: scale(-1);
-        }
-
-        /* Section Divider SVG */
-        .section-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 25px auto;
-            width: 80%;
-            opacity: 0.7;
-        }
-
-        .section-divider svg {
-            width: 180px;
-            height: 24px;
-        }
-
-        section {
-            padding: 65px 28px;
-            position: relative;
-            z-index: 10;
-            text-align: center;
-        }
-
-        #couple {
-            background-color: #fdfaf5;
-            background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='120'%20height='120'%20viewBox='0%200%20120%20120'%3E%3Cg%20fill='none'%20stroke='%23b8935c'%20stroke-width='0.6'%20stroke-opacity='0.08'%3E%3Cpath%20d='M20,10%20C35,-5%2050,15%2060,5%20C70,-5%2085,15%20100,10'/%3E%3Cpath%20d='M10,20%20C-5,35%2015,50%205,60%20C-5,70%2015,85%2010,100'/%3E%3Cpath%20d='M110,20%20C125,35%20105,50%20115,60%20C125,70%20105,85%20110,100'/%3E%3Cpath%20d='M20,110%20C35,125%2050,105%2060,115%20C70,125%2085,105%20100,110'/%3E%3Cpath%20d='M60,60%20C55,50%2045,55%2040,60%20C35,65%2045,75%2055,70%20C65,65%2075,75%2080,70%20C85,65%2075,55%2065,60%20Z'/%3E%3Cpath%20d='M60,60%20C65,50%2075,55%2080,60%20C85,65%2075,75%2065,70%20C55,65%2045,75%2040,70%20C35,65%2045,55%2055,60%20Z'/%3E%3Ccircle%20cx='60'%20cy='60'%20r='6'/%3E%3Ccircle%20cx='60'%20cy='60'%20r='3'/%3E%3Cpath%20d='M45,45%20Q30,35%2040,25%20Q50,35%2045,45%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3Cpath%20d='M75,45%20Q90,35%2080,25%20Q70,35%2075,45%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3Cpath%20d='M45,75%20Q30,85%2040,95%20Q50,85%2045,75%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3Cpath%20d='M75,75%20Q90,85%2080,95%20Q70,85%2075,75%20Z'%20fill='%23b8935c'%20fill-opacity='0.02'/%3E%3C/g%3E%3C/svg%3E");
-            background-repeat: repeat;
-            background-position: center;
-            background-size: 140px 140px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .couple-flower-ornament {
-            position: absolute;
-            width: 220px;
-            height: 220px;
-            pointer-events: none;
-            z-index: 3;
-            opacity: 0.95;
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.05));
-            transition: transform 0.8s ease;
-        }
-
-        .couple-flower-tl {
-            top: -20px;
-            left: -20px;
-            animation: floralSwayTL 9s ease-in-out infinite;
-        }
-
-        .couple-flower-tr {
-            top: -20px;
-            right: -20px;
-            animation: floralSwayTR 10s ease-in-out infinite;
-        }
-
-        .couple-flower-bl {
-            bottom: -20px;
-            left: -20px;
-            animation: floralSwayBL 10s ease-in-out infinite;
-        }
-
-        .couple-flower-br {
-            bottom: -20px;
-            right: -20px;
-            animation: floralSwayBR 9s ease-in-out infinite;
-        }
-
-        @keyframes floralSwayTL {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(3deg) scale(1.03); }
-        }
-
-        @keyframes floralSwayTR {
-            0%, 100% { transform: scaleX(-1) rotate(0deg) scale(1); }
-            50% { transform: scaleX(-1) rotate(3deg) scale(1.03); }
-        }
-
-        @keyframes floralSwayBL {
-            0%, 100% { transform: scaleY(-1) rotate(0deg) scale(1); }
-            50% { transform: scaleY(-1) rotate(3deg) scale(1.03); }
-        }
-
-        @keyframes floralSwayBR {
-            0%, 100% { transform: scale(-1) rotate(0deg) scale(1); }
-            50% { transform: scale(-1) rotate(3deg) scale(1.03); }
-        }
-
-        /* Watermark Background Ornaments */
-        .watermark-bg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 260px;
-            height: 260px;
-            opacity: 0.04;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Quote Section Styling */
-        .quote-wrapper {
-            position: relative;
-            background: rgba(255, 255, 255, 0.75);
-            padding: 30px 22px;
-            border-radius: 20px;
-            border: 1px solid var(--border-gold);
-            backdrop-filter: blur(8px);
-            box-shadow: var(--shadow-card);
-        }
-
-        .quote-icon {
-            font-size: 2.2rem;
-            color: var(--primary);
-            opacity: 0.3;
-            margin-bottom: 5px;
-        }
-
-        /* Ampersand Wreath Ornament */
-        .ampersand-wrapper {
-            position: relative;
-            width: 90px;
-            height: 90px;
-            margin: 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .wreath-svg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            animation: slowRotate 30s linear infinite;
-        }
-
-        @keyframes slowRotate {
-            100% { transform: rotate(360deg); }
-        }
-
-        .ampersand {
-            font-size: 3.8rem;
-            color: var(--primary);
-            opacity: 0.85;
-            line-height: 1;
-            z-index: 2;
-        }
-
-        /* ================== COVER SECTION ================== */
-        .cover-photo-wrapper {
-            position: relative;
-            width: 210px;
-            height: 280px;
-            margin: 15px auto 20px;
-            animation: gentleFloat 6s ease-in-out infinite;
-        }
-
-        .cover-photo-frame {
-            width: 100%;
-            height: 100%;
-            border-radius: 120px 120px 15px 15px;
-            padding: 7px;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.6), rgba(184, 147, 92, 0.3), rgba(244, 236, 225, 0.8));
-            box-shadow: 0 15px 35px rgba(184, 147, 92, 0.18);
-        }
-
-        .cover-photo-inner {
-            width: 100%;
-            height: 100%;
-            border-radius: 113px 113px 10px 10px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .cover-photo-inner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        @keyframes gentleFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-7px); }
-        }
-
-        .title-cursive {
-            font-size: 3.4rem;
-            color: var(--primary);
-            margin: 10px 0 15px;
-            line-height: 1.15;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.04);
-        }
-
-        .date-box {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-color);
-            margin: 20px 0;
-            padding: 12px 18px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 30px;
-            border: 1px dashed var(--border-gold);
-            display: inline-block;
-            letter-spacing: 2px;
-            box-shadow: var(--shadow-soft);
-        }
-
-        /* ================== COUNTDOWN SECTION ================== */
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin: 25px 0 10px;
-        }
-
-        .countdown-item {
-            background: var(--card-bg);
-            border: 1px solid var(--border-gold);
-            border-radius: 14px;
-            padding: 12px 8px;
-            min-width: 68px;
-            box-shadow: var(--shadow-card);
-            backdrop-filter: blur(8px);
-            position: relative;
-        }
-
-        .countdown-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary);
-            line-height: 1;
-        }
-
-        .countdown-label {
-            font-size: 0.7rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 5px;
-        }
-
-        /* ================== MEMPELAI SECTION ================== */
-        .couple-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 35px;
-            position: relative;
-            z-index: 5;
-            gap: 10px;
-        }
-
-        .couple-card {
-            width: 85%;
-            max-width: 340px;
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            padding: 10px 15px;
-            box-shadow: none;
-            backdrop-filter: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            transition: all 0.35s ease;
-        }
-
-        .couple-card:hover {
-            transform: translateY(-12px) rotate(0deg) !important;
-            box-shadow: none;
-            border-color: transparent;
-            animation-play-state: paused;
-        }
-
-        .couple-card:first-of-type {
-            transform: rotate(0deg);
-            animation: cardFloat1 7s ease-in-out infinite;
-        }
-
-        .couple-card:last-of-type {
-            transform: rotate(0deg);
-            animation: cardFloat2 7s ease-in-out infinite;
-        }
-
-        @keyframes cardFloat1 {
-            0%, 100% { transform: rotate(0deg) translateY(0); }
-            50% { transform: rotate(0deg) translateY(-8px); }
-        }
-
-        @keyframes cardFloat2 {
-            0%, 100% { transform: rotate(0deg) translateY(0); }
-            50% { transform: rotate(0deg) translateY(-8px); }
-        }
-
-        .couple-card .couple-img-frame {
-            width: 120px;
-            height: 165px;
-            border-radius: 60px 60px 12px 12px; /* Arch frame */
-            padding: 4px;
-            background: linear-gradient(135deg, var(--accent-gold), var(--primary-light), var(--primary));
-            margin-bottom: 15px;
-            overflow: hidden;
-            box-shadow: 0 6px 15px rgba(184, 147, 92, 0.15);
-        }
-
-        .couple-card .couple-img-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 56px 56px 8px 8px;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .couple-card:hover .couple-img-frame img {
-            transform: scale(1.08);
-        }
-
-        .couple-name-text {
-            font-size: 1.8rem !important;
-            color: var(--primary);
-            margin-bottom: 8px;
-            line-height: 1.2;
-        }
-
-        .couple-parents-text {
-            font-size: 0.85rem !important;
-            line-height: 1.6;
-            color: var(--text-light);
-            margin: 0;
-        }
-
-        .couple-parents-text strong {
-            color: var(--text-color);
-        }
-
-        /* Center divider */
-        .couple-divider {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            width: 70%;
-            margin: 15px 0;
-        }
-
-        .couple-divider .divider-line {
-            flex-grow: 1;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--primary), transparent);
-            opacity: 0.4;
-        }
-
-        .couple-divider .divider-amp {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin: 0 20px;
-            opacity: 0.8;
-            line-height: 1;
-            animation: ampersandPulse 4s ease-in-out infinite;
-        }
-
-        @keyframes ampersandPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.12); }
-        }
-
-        /* ================== EVENT SCHEDULE ================== */
-        .event-card {
-            background: var(--card-bg);
-            padding: 32px 22px;
-            border-radius: 24px;
-            margin-bottom: 25px;
-            border: 1px solid var(--border-gold);
-            box-shadow: var(--shadow-card);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .event-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-        }
-
-        .event-title {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .event-time {
-            font-size: 0.95rem;
-            color: var(--text-color);
-            font-weight: 500;
-            margin: 8px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .event-time i {
-            color: var(--primary);
-        }
-
-        .event-location {
-            font-size: 0.92rem;
-            color: var(--text-light);
-            padding-top: 15px;
-            margin-top: 15px;
-            border-top: 1px dashed rgba(184, 147, 92, 0.2);
-        }
-
-        /* ================== BUTTONS ================== */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.35s ease;
-            border: none;
-            cursor: pointer;
-            margin-top: 18px;
-            gap: 8px;
-            box-shadow: 0 6px 18px rgba(184, 147, 92, 0.25);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 22px rgba(184, 147, 92, 0.35);
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-        }
-
-        /* ================== GALLERY GRID COLLAGE ================== */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            padding: 10px 2px;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            background: #fff;
-            padding: 8px; /* Bingkai space */
-            border: 3px double var(--primary); /* Bingkai double gold */
-            box-shadow: var(--shadow-card);
-            border-radius: 4px;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 12px 28px rgba(184, 147, 92, 0.28);
-        }
-
-        /* Border garis halus bagian dalam bingkai */
-        .gallery-item::after {
-            content: '';
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            right: 3px;
-            bottom: 3px;
-            border: 1px solid rgba(184, 147, 92, 0.35);
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            border-radius: 2px;
-        }
-
-        /* Vintage corner ornaments inside the frame */
-        .gallery-item .frame-corner {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            border: 1.2px solid var(--primary);
-            z-index: 3;
-            pointer-events: none;
-        }
-
-        .gallery-item .corner-tl { top: 5px; left: 5px; border-right: none; border-bottom: none; }
-        .gallery-item .corner-tr { top: 5px; right: 5px; border-left: none; border-bottom: none; }
-        .gallery-item .corner-bl { bottom: 5px; left: 5px; border-right: none; border-top: none; }
-        .gallery-item .corner-br { bottom: 5px; right: 5px; border-left: none; border-top: none; }
-
-        /* Grid sizes */
-        .gallery-item.tall {
-            grid-row: span 2;
-            height: 100%;
-        }
-
-        .gallery-item.wide {
-            grid-column: span 2;
-            height: auto;
-            aspect-ratio: 1.85 / 1;
-        }
-
-        .gallery-item.square {
-            height: auto;
-            aspect-ratio: 1.25 / 1;
-        }
-
-        /* ================== GALLERY LIGHTBOX ================== */
-        .gallery-lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .gallery-lightbox.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .gallery-lightbox img {
-            max-width: 90%;
-            max-height: 80%;
-            border-radius: 8px;
-            border: 4px solid white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-lightbox.show img {
-            transform: scale(1);
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            color: #fff;
-            font-size: 2.5rem;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .lightbox-close:hover {
-            color: var(--primary);
-        }
-
-        /* Lightbox Navigation Buttons */
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.15);
-            border: none;
-            color: white;
-            font-size: 2rem;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            z-index: 10010;
-            backdrop-filter: blur(4px);
-            outline: none;
-        }
-
-        .lightbox-nav:hover {
-            background: rgba(255, 255, 255, 0.35);
-            color: var(--primary);
-        }
-
-        .lightbox-nav:active {
-            transform: translateY(-50%) scale(0.95);
-        }
-
-        .lightbox-prev {
-            left: 20px;
-        }
-
-        .lightbox-next {
-            right: 20px;
-        }
-        
-        @media (max-width: 576px) {
-            .lightbox-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1.5rem;
-            }
-            .lightbox-prev {
-                left: 10px;
-            }
-            .lightbox-next {
-                right: 10px;
-            }
-        }
-
-        /* ================== GIFT SECTION ================== */
-        .bank-card {
-            background: var(--card-bg);
-            padding: 28px 22px;
-            border-radius: 20px;
-            box-shadow: var(--shadow-card);
-            border: 1px solid var(--border-gold);
-            backdrop-filter: blur(10px);
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        /* ================== WISHES / RSVP SECTION ================== */
-        .wish-form {
-            background: var(--card-bg);
-            padding: 28px 22px;
-            border-radius: 20px;
-            box-shadow: var(--shadow-card);
-            border: 1px solid var(--border-gold);
-            backdrop-filter: blur(10px);
-            text-align: left;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-color);
-            margin-bottom: 6px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 11px 15px;
-            border: 1px solid var(--border-gold);
-            border-radius: 12px;
-            font-size: 0.9rem;
-            font-family: inherit;
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--text-color);
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(184, 147, 92, 0.15);
-        }
-
-        .wish-list {
-            max-height: 340px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            text-align: left;
-            padding-right: 4px;
-            scrollbar-width: thin;
-            scrollbar-color: #d4af37 rgba(212, 175, 55, 0.1);
-        }
-
-        /* Gold Custom Scrollbar for Wish List */
-        .wish-list::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .wish-list::-webkit-scrollbar-track {
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 10px;
-        }
-
-        .wish-list::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #b8935c 0%, #d4af37 100%);
-            border-radius: 10px;
-            box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.15);
-        }
-
-        .wish-list::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #d4af37 0%, #8a6736 100%);
-        }
-
-        .wish-card {
-            background: white;
-            padding: 15px;
-            border-radius: 14px;
-            border-left: 4px solid var(--primary);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-            animation: fadeIn 0.4s ease-in-out;
-            position: relative;
-        }
-
-        .wish-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 6px;
-        }
-
-        .wish-name {
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 0.92rem;
-        }
-
-        .wish-badge {
-            font-size: 0.72rem;
-            padding: 3px 8px;
-            border-radius: 10px;
-            background: var(--primary-light);
-            color: var(--primary-dark);
-            font-weight: 500;
-        }
-
-        .wish-text {
-            font-size: 0.88rem;
-            color: var(--text-color);
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        /* Lock scroll before opening */
-        body.locked {
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        #cover {
-            min-height: 100vh;
-            min-height: 100svh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 25px 28px !important;
-        }
-
-        #main-content {
-            display: none;
-            opacity: 0;
-            transition: opacity 1.2s ease;
-        }
-
-        /* ================== BOTTOM NAVIGATION ================== */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) translateY(100%);
-            width: 100%;
-            max-width: 500px;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 10px;
-            box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.08);
-            z-index: 1000;
-            border-top-left-radius: 24px;
-            border-top-right-radius: 24px;
-            border-top: 1px solid var(--border-gold);
-
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .bottom-nav.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .bottom-nav a {
-            color: var(--text-light);
-            font-size: 1.15rem;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: all 0.3s;
-            padding: 4px 8px;
-            border-radius: 12px;
-        }
-
-        .bottom-nav a:hover,
-        .bottom-nav a.active {
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        #closing {
-            padding-bottom: 95px;
-        }
-
-        /* ================== MUSIC BUTTON ================== */
-        .music-btn-wrapper {
-            position: fixed;
-            bottom: 85px;
-            right: 20px;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.5s ease;
-        }
-
-        .music-btn-wrapper.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .music-btn {
-            width: 46px;
-            height: 46px;
+            --primary: #25d366;
+            --primary-dark: #128c7e;
+            --primary-light: #dcf8c6;
+            --bg: #0f1923;
+            --bg-card: #1a2634;
+            --bg-card2: #1e2d3d;
+            --border: rgba(255,255,255,0.08);
+            --text: #e8edf2;
+            --text-muted: #7f8c9a;
+            --sent-bg: rgba(37, 211, 102, 0.12);
+            --sent-border: rgba(37, 211, 102, 0.35);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1a2f45 50%, #0d1b2a 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 24px;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
+        .header-icon {
+            width: 48px; height: 48px;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            box-shadow: 0 8px 20px rgba(184, 147, 92, 0.4);
-            cursor: pointer;
-            position: relative;
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: white; flex-shrink: 0;
+            box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
         }
-
-        .music-btn::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 2px solid var(--primary);
-            animation: pulseRing 2s infinite;
+        .header-text h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.2rem; font-weight: 700; }
+        .header-text p { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+        .header-actions { margin-left: auto; }
+        /* STATS BAR */
+        .stats-bar { background: var(--bg-card); border-bottom: 1px solid var(--border); }
+        .stats-inner { max-width: 900px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .stat-item { display: flex; align-items: center; gap: 7px; font-size: 0.82rem; }
+        .stat-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .stat-dot.sent { background: var(--primary); }
+        .stat-dot.unsent { background: var(--text-muted); }
+        .stat-label { color: var(--text-muted); }
+        .stat-value { font-weight: 600; }
+        .progress-bar-wrap { flex: 1; min-width: 120px; background: rgba(255,255,255,0.06); border-radius: 20px; height: 8px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary-dark), var(--primary)); border-radius: 20px; transition: width 0.5s ease; }
+        .sent-chip { background: rgba(37,211,102,0.15); color: var(--primary); border: 1px solid rgba(37,211,102,0.3); border-radius: 20px; padding: 3px 12px; font-size: 0.75rem; font-weight: 600; }
+        /* TOOLBAR */
+        .toolbar { max-width: 900px; margin: 18px auto 0; padding: 0 24px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .search-box { flex: 1; min-width: 180px; position: relative; }
+        .search-box input {
+            width: 100%; background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 10px 16px 10px 40px; color: var(--text);
+            font-size: 0.88rem; font-family: 'Inter', sans-serif; outline: none;
         }
-
-        .music-btn i {
-            animation: spin 4s linear infinite;
+        .search-box input:focus { border-color: rgba(37,211,102,0.4); }
+        .search-box input::placeholder { color: var(--text-muted); }
+        .search-box i { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+        .filter-btn {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+            padding: 9px 15px; color: var(--text-muted); font-size: 0.82rem;
+            font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.2s;
+            display: flex; align-items: center; gap: 6px;
         }
-
-        .music-btn.paused i {
-            animation-play-state: paused;
+        .filter-btn:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+        .filter-btn.active { background: var(--primary); border-color: var(--primary); color: white; }
+        /* CATEGORY CHIPS */
+        .category-chips { max-width: 900px; margin: 12px auto 0; padding: 0 24px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .chip { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 0.78rem; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+        .chip:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+        .chip.active { background: rgba(37,211,102,0.15); border-color: rgba(37,211,102,0.5); color: var(--primary); }
+        #result-count { max-width: 900px; margin: 10px auto 0; padding: 0 24px; font-size: 0.8rem; color: var(--text-muted); }
+        /* CONTACT LIST */
+        .contact-list { max-width: 900px; margin: 16px auto 40px; padding: 0 24px; display: flex; flex-direction: column; gap: 10px; }
+        .contact-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+            padding: 14px 16px; display: flex; align-items: center; gap: 12px;
+            transition: all 0.25s ease;
         }
-
-        .music-btn.paused::before {
-            animation: none;
+        .contact-card:hover { border-color: rgba(255,255,255,0.14); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,0.25); }
+        .contact-card.is-sent { background: var(--sent-bg); border-color: var(--sent-border); }
+        .contact-card.is-sent .contact-name { color: #a8f0c6; }
+        .contact-avatar { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; flex-shrink: 0; text-transform: uppercase; }
+        .contact-info { flex: 1; min-width: 0; }
+        .contact-name { font-size: 0.93rem; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: capitalize; }
+        .contact-meta { display: flex; align-items: center; gap: 8px; margin-top: 3px; flex-wrap: wrap; }
+        .contact-phone { font-size: 0.78rem; color: var(--text-muted); }
+        .contact-badge { font-size: 0.67rem; padding: 2px 8px; border-radius: 20px; font-weight: 500; flex-shrink: 0; }
+        .badge-kat { background: rgba(212,175,55,0.15); color: #d4af37; border: 1px solid rgba(212,175,55,0.3); }
+        .badge-digital { background: rgba(52,152,219,0.15); color: #3498db; border: 1px solid rgba(52,152,219,0.3); }
+        .badge-cetak { background: rgba(149,165,166,0.15); color: #95a5a6; border: 1px solid rgba(149,165,166,0.3); }
+        .contact-sent-label { font-size: 0.7rem; color: var(--primary); display: flex; align-items: center; gap: 3px; margin-top: 3px; }
+        .contact-actions { display: flex; gap: 7px; flex-shrink: 0; align-items: center; }
+        /* BUTTONS */
+        .btn-send {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white; border: none; border-radius: 10px; padding: 8px 16px;
+            font-size: 0.8rem; font-weight: 600; font-family: 'Inter', sans-serif;
+            cursor: pointer; display: flex; align-items: center; gap: 5px;
+            transition: all 0.2s; white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(37,211,102,0.25);
         }
-
-        @keyframes pulseRing {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.5); opacity: 0; }
+        .btn-send:hover { transform: translateY(-1px); box-shadow: 0 5px 16px rgba(37,211,102,0.4); }
+        .btn-resend {
+            background: transparent; color: var(--text-muted); border: 1px solid var(--border);
+            border-radius: 10px; padding: 8px 16px; font-size: 0.8rem; font-weight: 500;
+            font-family: 'Inter', sans-serif; cursor: pointer; display: flex; align-items: center;
+            gap: 5px; transition: all 0.2s; white-space: nowrap;
         }
-
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
+        .btn-resend:hover { border-color: var(--primary); color: var(--primary); background: rgba(37,211,102,0.06); }
+        .btn-unmark {
+            background: transparent; color: var(--text-muted); border: none;
+            border-radius: 8px; padding: 7px 9px; font-size: 1rem; cursor: pointer; transition: all 0.2s;
         }
-
-        /* Toast Notification */
-        .toast-notification {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: rgba(61, 53, 46, 0.92);
-            color: white;
-            padding: 10px 22px;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            pointer-events: none;
+        .btn-unmark:hover { color: #e74c3c; background: rgba(231,76,60,0.1); }
+        /* EMPTY STATE */
+        .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+        .empty-state i { font-size: 2.8rem; margin-bottom: 14px; display: block; }
+        /* MODAL */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.72);
+            z-index: 500; backdrop-filter: blur(4px);
+            align-items: center; justify-content: center; padding: 20px;
         }
-
-        .toast-notification.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
+        .modal-overlay.show { display: flex; }
+        .modal-box {
+            background: var(--bg-card2); border: 1px solid var(--border);
+            border-radius: 20px; padding: 26px; max-width: 480px; width: 100%;
+            animation: modalIn 0.28s cubic-bezier(0.34,1.56,0.64,1);
         }
-
-        /* ================== BUKA UNDANGAN FLORAL BURST OVERLAY ================== */
-        #floral-burst-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .modal-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 9px; }
+        .modal-preview {
+            background: #0b141a; border-radius: 12px; padding: 14px;
+            font-size: 0.83rem; line-height: 1.75; color: #d1f7d6;
+            white-space: pre-line; max-height: 320px; overflow-y: auto;
+            border: 1px solid rgba(37,211,102,0.15);
         }
-
-        #floral-burst-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Ripple rings radiating outward */
-        .burst-ring {
-            position: absolute;
-            border-radius: 50%;
-            border: 2px solid rgba(184, 147, 92, 0.5);
-            animation: burstRingExpand 1.4s ease-out forwards;
-        }
-
-        .burst-ring:nth-child(1) { animation-delay: 0s; }
-        .burst-ring:nth-child(2) { animation-delay: 0.15s; }
-        .burst-ring:nth-child(3) { animation-delay: 0.3s; }
-        .burst-ring:nth-child(4) { animation-delay: 0.45s; }
-
-        @keyframes burstRingExpand {
-            0% {
-                width: 10px;
-                height: 10px;
-                opacity: 0.9;
-                border-color: rgba(212, 175, 55, 0.85);
-                box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-            }
-            100% {
-                width: 500px;
-                height: 500px;
-                opacity: 0;
-                border-color: rgba(184, 147, 92, 0.05);
-            }
-        }
-
-        /* Rotating botanical SVG ornament at center */
-        .burst-center-ornament {
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            animation: burstOrnamentAppear 1.8s ease-out forwards;
-            transform-origin: center;
-        }
-
-        @keyframes burstOrnamentAppear {
-            0% { transform: scale(0) rotate(-45deg); opacity: 0; }
-            30% { transform: scale(1.15) rotate(8deg); opacity: 1; }
-            60% { transform: scale(1) rotate(0deg); opacity: 1; }
-            85% { transform: scale(1.05) rotate(3deg); opacity: 1; }
-            100% { transform: scale(0) rotate(20deg); opacity: 0; }
-        }
-
-        /* Scattered micro floral particles */
-        .burst-particle {
-            position: absolute;
-            pointer-events: none;
-            animation: burstParticleFloat 1.6s ease-out forwards;
-            font-size: 1.2rem;
-            opacity: 0;
-        }
-
-        @keyframes burstParticleFloat {
-            0% {
-                transform: translate(0, 0) rotate(0deg) scale(0);
-                opacity: 0;
-            }
-            20% {
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc));
-                opacity: 0;
-            }
-        }
-
-        /* Full-screen soft shimmer flash */
-        .burst-flash {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.18) 0%, rgba(255, 255, 255, 0) 70%);
-            animation: burstFlashFade 0.9s ease-out forwards;
-        }
-
-        @keyframes burstFlashFade {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        /* Corner ornaments that fly in when overlay is shown */
-        .burst-corner {
-            position: absolute;
-            width: 90px;
-            height: 90px;
-            opacity: 0;
-            animation: burstCornerReveal 1.5s ease-out forwards;
-        }
-
-        .burst-corner-tl { top: 0; left: 0; transform-origin: top left; }
-        .burst-corner-tr { top: 0; right: 0; transform: scaleX(-1); transform-origin: top right; }
-        .burst-corner-bl { bottom: 0; left: 0; transform: scaleY(-1); transform-origin: bottom left; }
-        .burst-corner-br { bottom: 0; right: 0; transform: scale(-1); transform-origin: bottom right; }
-
-        @keyframes burstCornerReveal {
-            0% { opacity: 0; transform: scale(0.3); }
-            50% { opacity: 0.7; }
-            80% { opacity: 0.65; }
-            100% { opacity: 0; transform: scale(1.3); }
-        }
-
-        /* Optimize layout for smaller screen heights (e.g., iPhone 7, iPhone SE, etc.) */
-        @media (max-height: 740px) {
-            #cover {
-                padding: 15px 20px !important;
-            }
-            #cover h2.font-cursive {
-                font-size: 2.8rem !important;
-            }
-            .cover-photo-wrapper {
-                width: 170px !important;
-                height: 220px !important;
-                margin: 10px auto 12px !important;
-            }
-            .cover-photo-frame {
-                border-radius: 95px 95px 12px 12px !important;
-                padding: 5px !important;
-            }
-            .cover-photo-inner {
-                border-radius: 90px 90px 8px 8px !important;
-            }
-            .date-box {
-                margin: 10px 0 !important;
-                padding: 8px 14px !important;
-                font-size: 0.85rem !important;
-            }
-            #cover .mt-2 {
-                margin-top: 0.5rem !important;
-            }
-            #guest-name {
-                font-size: 1.15rem !important;
-            }
-            #cover .btn {
-                margin-top: 10px !important;
-                padding: 10px 24px !important;
-                font-size: 0.9rem !important;
-            }
-        }
-
-
-        /* Unified Section Corner Flowers */
-        .section-flower-ornament {
-            position: absolute;
-            width: 220px;
-            height: 220px;
-            pointer-events: none;
-            z-index: 3;
-            opacity: 0.95;
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.05));
-            transition: transform 0.8s ease;
-        }
-
-        .section-flower-tl {
-            top: -20px;
-            left: -20px;
-            animation: floralSwayTL 9s ease-in-out infinite;
-        }
-
-        .section-flower-tr {
-            top: -20px;
-            right: -20px;
-            animation: floralSwayTR 10s ease-in-out infinite;
-        }
-
-        .section-flower-bl {
-            bottom: -20px;
-            left: -20px;
-            animation: floralSwayBL 10s ease-in-out infinite;
-        }
-
-        .section-flower-br {
-            bottom: -20px;
-            right: -20px;
-            animation: floralSwayBR 9s ease-in-out infinite;
-        }
-
-
-        /* Responsive Corner Ornament Sizing */
-        @media (max-width: 400px) {
-            .svg-corner, .section-flower-ornament {
-                width: 175px !important;
-                height: 175px !important;
-            }
-        }
-        @media (max-width: 350px) {
-            .svg-corner, .section-flower-ornament {
-                width: 140px !important;
-                height: 140px !important;
-            }
-        }
-
+        .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
+        .modal-actions button { flex: 1; }
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
     </style>
 </head>
-
-<body class="locked">
-
-    <!-- FLORAL BURST OVERLAY (shown on click) -->
-    <div id="floral-burst-overlay">
-        <!-- Full screen shimmer flash -->
-        <div class="burst-flash"></div>
-
-        <!-- Expanding ripple rings -->
-        <div class="burst-ring"></div>
-        <div class="burst-ring"></div>
-        <div class="burst-ring"></div>
-        <div class="burst-ring"></div>
-
-        <!-- Botanical center ornament -->
-        <svg class="burst-center-ornament" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="100" cy="100" r="70" stroke="#d4af37" stroke-width="0.8" stroke-dasharray="4 6" opacity="0.6"/>
-            <circle cx="100" cy="100" r="50" stroke="#b8935c" stroke-width="0.6" opacity="0.5"/>
-            <path d="M100,30 Q115,55 100,70 Q85,55 100,30Z" fill="#b8935c" opacity="0.5"/>
-            <path d="M100,170 Q115,145 100,130 Q85,145 100,170Z" fill="#b8935c" opacity="0.5"/>
-            <path d="M30,100 Q55,115 70,100 Q55,85 30,100Z" fill="#b8935c" opacity="0.5"/>
-            <path d="M170,100 Q145,115 130,100 Q145,85 170,100Z" fill="#b8935c" opacity="0.5"/>
-            <path d="M50,50 Q68,72 62,85 Q49,75 50,50Z" fill="#d4af37" opacity="0.45"/>
-            <path d="M150,50 Q132,72 138,85 Q151,75 150,50Z" fill="#d4af37" opacity="0.45"/>
-            <path d="M50,150 Q68,128 62,115 Q49,125 50,150Z" fill="#d4af37" opacity="0.45"/>
-            <path d="M150,150 Q132,128 138,115 Q151,125 150,150Z" fill="#d4af37" opacity="0.45"/>
-            <circle cx="100" cy="100" r="12" stroke="#b8935c" stroke-width="1.5" fill="rgba(212,175,55,0.15)"/>
-            <circle cx="100" cy="100" r="5" fill="#b8935c" opacity="0.7"/>
-        </svg>
-
-        <!-- Corner ornaments -->
-        <svg class="burst-corner burst-corner-tl" viewBox="0 0 100 100" fill="none">
-            <path d="M5,5 Q40,15 25,50 Q15,75 5,95 M5,5 Q15,40 50,25 Q75,15 95,5" stroke="#d4af37" stroke-width="1.5" fill="none"/>
-            <circle cx="25" cy="50" r="3" fill="#d4af37" opacity="0.8"/>
-            <circle cx="50" cy="25" r="3" fill="#d4af37" opacity="0.8"/>
-        </svg>
-        <svg class="burst-corner burst-corner-tr" viewBox="0 0 100 100" fill="none">
-            <path d="M5,5 Q40,15 25,50 Q15,75 5,95 M5,5 Q15,40 50,25 Q75,15 95,5" stroke="#d4af37" stroke-width="1.5" fill="none"/>
-            <circle cx="25" cy="50" r="3" fill="#d4af37" opacity="0.8"/>
-            <circle cx="50" cy="25" r="3" fill="#d4af37" opacity="0.8"/>
-        </svg>
-        <svg class="burst-corner burst-corner-bl" viewBox="0 0 100 100" fill="none">
-            <path d="M5,5 Q40,15 25,50 Q15,75 5,95 M5,5 Q15,40 50,25 Q75,15 95,5" stroke="#d4af37" stroke-width="1.5" fill="none"/>
-            <circle cx="25" cy="50" r="3" fill="#d4af37" opacity="0.8"/>
-            <circle cx="50" cy="25" r="3" fill="#d4af37" opacity="0.8"/>
-        </svg>
-        <svg class="burst-corner burst-corner-br" viewBox="0 0 100 100" fill="none">
-            <path d="M5,5 Q40,15 25,50 Q15,75 5,95 M5,5 Q15,40 50,25 Q75,15 95,5" stroke="#d4af37" stroke-width="1.5" fill="none"/>
-            <circle cx="25" cy="50" r="3" fill="#d4af37" opacity="0.8"/>
-            <circle cx="50" cy="25" r="3" fill="#d4af37" opacity="0.8"/>
-        </svg>
+<body>
+<!-- HEADER -->
+<div class="header">
+    <div class="header-inner">
+        <div class="header-icon"><i class="bi bi-whatsapp"></i></div>
+        <div class="header-text">
+            <h1>Dashboard Kirim WA</h1>
+            <p>Undangan Pernikahan Afidah &amp; Syaichul</p>
+        </div>
+        <div class="header-actions">
+            <button class="filter-btn" onclick="resetAll()">
+                <i class="bi bi-arrow-counterclockwise"></i> Reset
+            </button>
+        </div>
     </div>
-
-    <div class="wrapper">
-    <svg style="display: none;">
-  <g id="corner-cover-floral">
-    <!-- Sage Leaves Long Branch 1 -->
-    <path d="M10 50 C40 40 80 45 130 35 C110 50 80 50 10 50 Z" fill="#c3d1be" opacity="0.75"/>
-    <path d="M40 42 C50 30 65 30 70 42 C60 45 45 45 40 42 Z" fill="#b2c4ab" opacity="0.85"/>
-    <path d="M80 43 C90 28 105 28 110 43 C100 45 85 45 80 43 Z" fill="#a0b599" opacity="0.8"/>
-    
-    <!-- Sage Leaves Long Branch 2 -->
-    <path d="M50 10 C40 40 45 80 35 130 C50 110 50 80 50 10 Z" fill="#c3d1be" opacity="0.75"/>
-    <path d="M42 40 C30 50 30 65 42 70 C45 60 45 45 42 40 Z" fill="#b2c4ab" opacity="0.85"/>
-    <path d="M43 80 C28 90 28 105 43 110 C45 100 45 85 43 80 Z" fill="#a0b599" opacity="0.8"/>
-    
-    <!-- Eucalyptus Branches -->
-    <path d="M15 15 Q80 30 110 80" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
-    <circle cx="45" cy="22" r="14" fill="#a8bbb0" opacity="0.65"/>
-    <circle cx="75" cy="35" r="13" fill="#bac8be" opacity="0.65"/>
-    <circle cx="95" cy="55" r="11" fill="#c3d2c8" opacity="0.65"/>
-    
-    <path d="M15 15 Q30 80 80 110" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
-    <circle cx="22" cy="45" r="14" fill="#a8bbb0" opacity="0.65"/>
-    <circle cx="35" cy="75" r="13" fill="#bac8be" opacity="0.65"/>
-    <circle cx="55" cy="95" r="11" fill="#c3d2c8" opacity="0.65"/>
-    
-    <!-- Flower 1 (Rose Pink - Big Corner) -->
-    <g transform="translate(45, 45)">
-        <circle cx="0" cy="0" r="22" fill="#f5d68d"/>
-        <path d="M-12,-6 Q-25,12 0,18 Q25,12 12,-6 Q0,-18 -12,-6 Z" fill="#d4af37"/>
-        <path d="M-10,-10 Q0,-22 10,-10 Q22,0 10,10 Q-6,22 -10,-10 Z" fill="#b8935c" opacity="0.9"/>
-        <circle cx="0" cy="0" r="10" fill="#8a6736"/>
-        <circle cx="0" cy="0" r="5" fill="#faf7f2"/>
-        <circle cx="0" cy="0" r="2" fill="#d4af37"/>
-    </g>
-    
-    <!-- Flower 2 (Peach Rose - Mid Horizontal) -->
-    <g transform="translate(95, 38)">
-        <circle cx="0" cy="0" r="16" fill="#fdfbf7"/>
-        <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#f4ece1"/>
-        <circle cx="0" cy="0" r="7" fill="#eebeaa"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-    </g>
-
-    <!-- Flower 3 (Peach Rose - Mid Vertical) -->
-    <g transform="translate(38, 95)">
-        <circle cx="0" cy="0" r="16" fill="#fdfbf7"/>
-        <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#f4ece1"/>
-        <circle cx="0" cy="0" r="7" fill="#eebeaa"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-    </g>
-
-    <!-- Flower 4 (White Blossom - Small Horizontal) -->
-    <g transform="translate(135, 32)">
-        <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
-        <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-    </g>
-
-    <!-- Flower 5 (White Blossom - Small Vertical) -->
-    <g transform="translate(32, 135)">
-        <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
-        <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-    </g>
-    
-    <!-- Long Gold Vine Sprigs -->
-    <path d="M15 15 C60 20 120 15 160 20" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
-    <circle cx="160" cy="20" r="2.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="120" cy="18" r="1.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="85" cy="16" r="2" fill="#d4af37" opacity="0.85"/>
-
-    <path d="M15 15 C20 60 15 120 20 160" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
-    <circle cx="20" cy="160" r="2.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="18" cy="120" r="1.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="16" cy="85" r="2" fill="#d4af37" opacity="0.85"/>
-    <!-- Long hanging/drooping vine for cover page -->
-    <path d="M 30 30 C 55 75, 125 105, 110 165 C 100 185, 80 180, 75 165 C 70 148, 92 140, 100 155" stroke="#7e9387" stroke-width="1.5" opacity="0.75" fill="none"/>
-    <path d="M 30 30 C 55 75, 125 105, 110 165 C 100 185, 80 180, 75 165 C 70 148, 92 140, 100 155" stroke="#d4af37" stroke-width="0.8" opacity="0.6" fill="none"/>
-    
-    <!-- Hanging Branch Leaves & Flowers -->
-    <path d="M 46 54 C 52 45 62 48 58 58 Z" fill="#b2c4ab" opacity="0.85"/>
-    <g transform="translate(48, 62)">
-        <circle cx="0" cy="0" r="5" fill="#fdfbf7"/>
-        <circle cx="0" cy="0" r="1.5" fill="#d4af37"/>
-    </g>
-    <circle cx="70" cy="90" r="8" fill="#a8bbb0" opacity="0.75"/>
-    <path d="M 72 90 C 80 82 90 88 84 96 Z" fill="#c3d1be" opacity="0.85"/>
-    <g transform="translate(75, 115)">
-        <circle cx="0" cy="0" r="5" fill="#fdfbf7"/>
-        <circle cx="0" cy="0" r="1.5" fill="#d4af37"/>
-    </g>
-    <path d="M 98 128 C 108 120 115 128 108 136 Z" fill="#a0b599" opacity="0.85"/>
-    <g transform="translate(108, 122)">
-        <circle cx="0" cy="0" r="6" fill="#f5d68d"/>
-        <circle cx="0" cy="0" r="1.8" fill="#8a6736"/>
-    </g>
-    <path d="M 108 158 C 118 152 125 160 116 168 Z" fill="#b2c4ab" opacity="0.85"/>
-    <g transform="translate(122, 155)">
-        <circle cx="0" cy="0" r="4" fill="#fdfbf7"/>
-        <circle cx="0" cy="0" r="1.2" fill="#d4af37"/>
-    </g>
-    <circle cx="85" cy="170" r="6" fill="#bac8be" opacity="0.75"/>
-    <path d="M 100 152 L 102 155 L 105 155 L 102 156 L 100 159 L 98 156 L 95 155 L 98 155 Z" fill="#d4af37" opacity="0.9"/>
-  </g>
-  <g id="corner-top-floral">
-    <!-- Sage Leaves Long Branch 1 -->
-    <path d="M10 50 C40 40 80 45 130 35 C110 50 80 50 10 50 Z" fill="#c3d1be" opacity="0.75"/>
-    <path d="M40 42 C50 30 65 30 70 42 C60 45 45 45 40 42 Z" fill="#b2c4ab" opacity="0.85"/>
-    <path d="M80 43 C90 28 105 28 110 43 C100 45 85 45 80 43 Z" fill="#a0b599" opacity="0.8"/>
-    
-    <!-- Sage Leaves Long Branch 2 -->
-    <path d="M50 10 C40 40 45 80 35 130 C50 110 50 80 50 10 Z" fill="#c3d1be" opacity="0.75"/>
-    <path d="M42 40 C30 50 30 65 42 70 C45 60 45 45 42 40 Z" fill="#b2c4ab" opacity="0.85"/>
-    <path d="M43 80 C28 90 28 105 43 110 C45 100 45 85 43 80 Z" fill="#a0b599" opacity="0.8"/>
-    
-    <!-- Eucalyptus Branches -->
-    <path d="M15 15 Q80 30 110 80" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
-    <circle cx="45" cy="22" r="14" fill="#a8bbb0" opacity="0.65"/>
-    <circle cx="75" cy="35" r="13" fill="#bac8be" opacity="0.65"/>
-    <circle cx="95" cy="55" r="11" fill="#c3d2c8" opacity="0.65"/>
-    
-    <path d="M15 15 Q30 80 80 110" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
-    <circle cx="22" cy="45" r="14" fill="#a8bbb0" opacity="0.65"/>
-    <circle cx="35" cy="75" r="13" fill="#bac8be" opacity="0.65"/>
-    <circle cx="55" cy="95" r="11" fill="#c3d2c8" opacity="0.65"/>
-    
-    <!-- Flower 1 (Rose Pink - Big Corner) -->
-    <g transform="translate(45, 45)">
-        <circle cx="0" cy="0" r="22" fill="#f5d68d"/>
-        <path d="M-12,-6 Q-25,12 0,18 Q25,12 12,-6 Q0,-18 -12,-6 Z" fill="#d4af37"/>
-        <path d="M-10,-10 Q0,-22 10,-10 Q22,0 10,10 Q-6,22 -10,-10 Z" fill="#b8935c" opacity="0.9"/>
-        <circle cx="0" cy="0" r="10" fill="#8a6736"/>
-        <circle cx="0" cy="0" r="5" fill="#faf7f2"/>
-        <circle cx="0" cy="0" r="2" fill="#d4af37"/>
-    </g>
-    
-    <!-- Flower 2 (Peach Rose - Mid Horizontal) -->
-    <g transform="translate(95, 38)">
-        <circle cx="0" cy="0" r="16" fill="#fdfbf7"/>
-        <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#f4ece1"/>
-        <circle cx="0" cy="0" r="7" fill="#eebeaa"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-    </g>
-
-    <!-- Flower 3 (Peach Rose - Mid Vertical) -->
-    <g transform="translate(38, 95)">
-        <circle cx="0" cy="0" r="16" fill="#fdfbf7"/>
-        <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#f4ece1"/>
-        <circle cx="0" cy="0" r="7" fill="#eebeaa"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-    </g>
-
-    <!-- Flower 4 (White Blossom - Small Horizontal) -->
-    <g transform="translate(135, 32)">
-        <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
-        <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-    </g>
-
-    <!-- Flower 5 (White Blossom - Small Vertical) -->
-    <g transform="translate(32, 135)">
-        <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
-        <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-    </g>
-    
-    <!-- Long Gold Vine Sprigs -->
-    <path d="M15 15 C60 20 120 15 160 20" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
-    <circle cx="160" cy="20" r="2.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="120" cy="18" r="1.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="85" cy="16" r="2" fill="#d4af37" opacity="0.85"/>
-
-    <path d="M15 15 C20 60 15 120 20 160" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
-    <circle cx="20" cy="160" r="2.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="18" cy="120" r="1.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="16" cy="85" r="2" fill="#d4af37" opacity="0.85"/>
-    <!-- Short hanging/drooping vine (doesn't cover text/images) -->
-    <path d="M 30 30 C 45 55, 75 75, 70 105 C 65 118, 52 115, 50 105 C 47 95, 60 90, 65 100" stroke="#7e9387" stroke-width="1.5" opacity="0.75" fill="none"/>
-    <path d="M 30 30 C 45 55, 75 75, 70 105 C 65 118, 52 115, 50 105 C 47 95, 60 90, 65 100" stroke="#d4af37" stroke-width="0.8" opacity="0.6" fill="none"/>
-    
-    <!-- Short Branch Leaves & Flowers -->
-    <path d="M 40 48 C 45 42 52 44 49 52 Z" fill="#b2c4ab" opacity="0.85"/>
-    <g transform="translate(45, 60)">
-        <circle cx="0" cy="0" r="4.5" fill="#fdfbf7"/>
-        <circle cx="0" cy="0" r="1.2" fill="#d4af37"/>
-    </g>
-    <path d="M 58 76 C 65 70 72 75 67 83 Z" fill="#c3d1be" opacity="0.85"/>
-    <g transform="translate(65, 95)">
-        <circle cx="0" cy="0" r="4.5" fill="#fdfbf7"/>
-        <circle cx="0" cy="0" r="1.2" fill="#d4af37"/>
-    </g>
-    <path d="M 60 98 L 61 100 L 63 100 L 61 101 L 60 103 L 59 101 L 57 100 L 59 100 Z" fill="#d4af37" opacity="0.9"/>
-  </g>
-  <g id="corner-bottom-floral">
-    <!-- Sage Leaves Long Branch 1 -->
-    <path d="M10 50 C40 40 80 45 130 35 C110 50 80 50 10 50 Z" fill="#c3d1be" opacity="0.75"/>
-    <path d="M40 42 C50 30 65 30 70 42 C60 45 45 45 40 42 Z" fill="#b2c4ab" opacity="0.85"/>
-    <path d="M80 43 C90 28 105 28 110 43 C100 45 85 45 80 43 Z" fill="#a0b599" opacity="0.8"/>
-    
-    <!-- Sage Leaves Long Branch 2 -->
-    <path d="M50 10 C40 40 45 80 35 130 C50 110 50 80 50 10 Z" fill="#c3d1be" opacity="0.75"/>
-    <path d="M42 40 C30 50 30 65 42 70 C45 60 45 45 42 40 Z" fill="#b2c4ab" opacity="0.85"/>
-    <path d="M43 80 C28 90 28 105 43 110 C45 100 45 85 43 80 Z" fill="#a0b599" opacity="0.8"/>
-    
-    <!-- Eucalyptus Branches -->
-    <path d="M15 15 Q80 30 110 80" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
-    <circle cx="45" cy="22" r="14" fill="#a8bbb0" opacity="0.65"/>
-    <circle cx="75" cy="35" r="13" fill="#bac8be" opacity="0.65"/>
-    <circle cx="95" cy="55" r="11" fill="#c3d2c8" opacity="0.65"/>
-    
-    <path d="M15 15 Q30 80 80 110" stroke="#7e9387" stroke-width="1.2" opacity="0.6"/>
-    <circle cx="22" cy="45" r="14" fill="#a8bbb0" opacity="0.65"/>
-    <circle cx="35" cy="75" r="13" fill="#bac8be" opacity="0.65"/>
-    <circle cx="55" cy="95" r="11" fill="#c3d2c8" opacity="0.65"/>
-    
-    <!-- Flower 1 (Rose Pink - Big Corner) -->
-    <g transform="translate(45, 45)">
-        <circle cx="0" cy="0" r="22" fill="#f5d68d"/>
-        <path d="M-12,-6 Q-25,12 0,18 Q25,12 12,-6 Q0,-18 -12,-6 Z" fill="#d4af37"/>
-        <path d="M-10,-10 Q0,-22 10,-10 Q22,0 10,10 Q-6,22 -10,-10 Z" fill="#b8935c" opacity="0.9"/>
-        <circle cx="0" cy="0" r="10" fill="#8a6736"/>
-        <circle cx="0" cy="0" r="5" fill="#faf7f2"/>
-        <circle cx="0" cy="0" r="2" fill="#d4af37"/>
-    </g>
-    
-    <!-- Flower 2 (Peach Rose - Mid Horizontal) -->
-    <g transform="translate(95, 38)">
-        <circle cx="0" cy="0" r="16" fill="#fdfbf7"/>
-        <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#f4ece1"/>
-        <circle cx="0" cy="0" r="7" fill="#eebeaa"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-    </g>
-
-    <!-- Flower 3 (Peach Rose - Mid Vertical) -->
-    <g transform="translate(38, 95)">
-        <circle cx="0" cy="0" r="16" fill="#fdfbf7"/>
-        <path d="M-10,-5 Q-20,10 0,14 Q20,10 10,-5 Q0,-14 -10,-5 Z" fill="#f4ece1"/>
-        <circle cx="0" cy="0" r="7" fill="#eebeaa"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-    </g>
-
-    <!-- Flower 4 (White Blossom - Small Horizontal) -->
-    <g transform="translate(135, 32)">
-        <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
-        <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-    </g>
-
-    <!-- Flower 5 (White Blossom - Small Vertical) -->
-    <g transform="translate(32, 135)">
-        <circle cx="0" cy="0" r="10" fill="#fdfbf7"/>
-        <path d="M0 -9 L3 -3 L9 -3 L4 1 L6 7 L0 3 L-6 7 L-4 1 L-9 -3 L-3 -3 Z" fill="#f5ece1"/>
-        <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-    </g>
-    
-    <!-- Long Gold Vine Sprigs -->
-    <path d="M15 15 C60 20 120 15 160 20" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
-    <circle cx="160" cy="20" r="2.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="120" cy="18" r="1.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="85" cy="16" r="2" fill="#d4af37" opacity="0.85"/>
-
-    <path d="M15 15 C20 60 15 120 20 160" stroke="#d4af37" stroke-width="1.2" opacity="0.65" fill="none"/>
-    <circle cx="20" cy="160" r="2.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="18" cy="120" r="1.5" fill="#d4af37" opacity="0.85"/>
-    <circle cx="16" cy="85" r="2" fill="#d4af37" opacity="0.85"/>
-  </g>
-</svg>
-
-    
-
-
-        <!-- Soft Floating Petals Animation -->
-        <div id="petals-container" class="petals-container"></div>
-
-        <!-- SVG Botanical Corner Flourishes -->
-        <div class="svg-corner svg-corner-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-cover-floral"></use></svg></div>
-
-        <div class="svg-corner svg-corner-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-cover-floral"></use></svg></div>
-
-        <!-- 1. COVER SECTION -->
-        <section id="cover">
-            <div data-aos="fade-up" data-aos-duration="1000">
-                <div class="text-light-gray" style="letter-spacing: 4px; font-size: 0.8rem; text-transform: uppercase;">
-                    Undangan Pernikahan
-                </div>
-
-                <h2 class="font-cursive text-gold-gradient" style="font-size: 3.4rem; margin-top: 5px;">
-                    Afidah & Syaichul
-                </h2>
-
-                <div class="cover-photo-wrapper">
-                    <div class="cover-photo-frame">
-                        <div class="cover-photo-inner">
-                            <img src="../../image/undangan/1.jpg" alt="Afidah & Syaichul">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="date-box">
-                    <i class="bi bi-calendar3 me-1 text-primary"></i> SABTU, 05 SEPTEMBER 2026
-                </div>
-
-                <div class="mt-2">
-                    <div class="text-light-gray mb-1" style="font-size: 0.85rem;">Kepada Yth. Bapak/Ibu/Saudara/i:</div>
-                    <div id="guest-name" class="font-serif fw-bold text-primary" style="font-size: 1.35rem;">
-                        Tamu Undangan
-                    </div>
-
-                    <button id="btn-buka" class="btn" onclick="bukaUndangan()">
-                        <i class="bi bi-envelope-open-heart"></i> Buka Undangan
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- KONTEN UTAMA (Sembunyikan sebelum tombol diklik) -->
-        <div id="main-content">
-
-            <!-- SECTION DIVIDER SVG -->
-            <div class="section-divider">
-                <svg viewBox="0 0 200 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0,12 L80,12 M120,12 L200,12" stroke="#b8935c" stroke-width="0.8" opacity="0.6"/>
-                    <circle cx="100" cy="12" r="5" fill="#none" stroke="#b8935c" stroke-width="1.2"/>
-                    <circle cx="100" cy="12" r="2" fill="#b8935c"/>
-                    <circle cx="88" cy="12" r="2.5" fill="#b8935c" opacity="0.7"/>
-                    <circle cx="112" cy="12" r="2.5" fill="#b8935c" opacity="0.7"/>
-                </svg>
-            </div>
-
-            <!-- 2. QUOTE SECTION -->
-            <section id="quote">
-<!-- Background Botanical Watermark -->
-                <svg class="watermark-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50,10 Q60,30 50,50 Q40,70 50,90 M30,30 Q50,40 70,30 M25,70 Q50,60 75,70" stroke="#b8935c" stroke-width="1.5"/>
-                </svg>
-
-                <div data-aos="fade-up" data-aos-duration="1000">
-                    <div class="quote-wrapper">
-                        <i class="bi bi-quote quote-icon"></i>
-                        <div class="font-garamond text-primary" style="font-size: 1.25rem; font-style: italic; line-height: 1.8;">
-                            "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari
-                            jenismu sendiri, supaya kamu merasa tenang dan tenteram kepadanya, dan dijadikan-Nya diantaramu rasa
-                            kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang
-                            berfikir."
-                        </div>
-                        <div class="mt-3 fw-bold text-primary" style="letter-spacing: 2px; font-size: 0.88rem;">
-                            QS. AR-RUM: 21
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION DIVIDER -->
-            <div class="section-divider">
-                <svg viewBox="0 0 200 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0,12 L80,12 M120,12 L200,12" stroke="#b8935c" stroke-width="0.8" opacity="0.6"/>
-                    <circle cx="100" cy="12" r="5" fill="#none" stroke="#b8935c" stroke-width="1.2"/>
-                    <circle cx="100" cy="12" r="2" fill="#b8935c"/>
-                    <circle cx="88" cy="12" r="2.5" fill="#b8935c" opacity="0.7"/>
-                    <circle cx="112" cy="12" r="2.5" fill="#b8935c" opacity="0.7"/>
-        </svg>
-            </div>
-
-            <!-- 3. MEMPELAI SECTION -->
-            <section id="couple">
-        
-        <div class="section-flower-ornament section-flower-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-top-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-top-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-br"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
-
-        <div data-aos="fade-up">
-                    <h2 class="font-serif text-gold-gradient mb-2" style="font-size: 2.2rem; font-weight: 600;">Mempelai</h2>
-                    <p class="text-light-gray" style="font-size: 0.9rem;">
-                        Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri pernikahan kami:
-                    </p>
-                </div>
-
-                <div class="couple-container">
-                    <!-- Bride -->
-                    <div class="couple-card" data-aos="fade-right" data-aos-delay="100">
-                        <div class="couple-img-frame">
-                            <img src="../../image/undangan/2.jpeg" alt="Afidah">
-                        </div>
-                        <h3 class="font-cursive couple-name-text">Nurillah Afidah</h3>
-                        <p class="couple-parents-text">
-                            Putri dari<br>
-                            <strong>Bpk. (Alm) Agus Murtadho</strong><br>
-                            &<br>
-                            <strong>Ibu Sri Kusmawati</strong>
-                        </p>
-                    </div>
-
-                    <!-- Divider -->
-                    <div class="couple-divider" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="divider-line"></div>
-                        <div class="divider-amp">&</div>
-                        <div class="divider-line"></div>
-                    </div>
-
-                    <!-- Groom -->
-                    <div class="couple-card" data-aos="fade-left" data-aos-delay="300">
-                        <div class="couple-img-frame">
-                            <img src="../../image/undangan/3.jpeg" alt="Syaichul">
-                        </div>
-                        <h3 class="font-cursive couple-name-text">Achmad Syaichul Hadi</h3>
-                        <p class="couple-parents-text">
-                            Putra dari<br>
-                            <strong>Bpk. Nur Cholis</strong><br>
-                            &<br>
-                            <strong>Ibu Sri Atmini</strong>
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION DIVIDER -->
-            <div class="section-divider">
-                <svg viewBox="0 0 200 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0,12 L80,12 M120,12 L200,12" stroke="#b8935c" stroke-width="0.8" opacity="0.6"/>
-                    <circle cx="100" cy="12" r="5" fill="#none" stroke="#b8935c" stroke-width="1.2"/>
-                    <circle cx="100" cy="12" r="2" fill="#b8935c"/>
-                    <circle cx="88" cy="12" r="2.5" fill="#b8935c" opacity="0.7"/>
-                    <circle cx="112" cy="12" r="2.5" fill="#b8935c" opacity="0.7"/>
-                </svg>
-            </div>
-
-            <!-- 4. EVENT SCHEDULE & COUNTDOWN -->
-            <section id="event">
-        
-        <div class="section-flower-ornament section-flower-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-top-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-top-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-br"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
-
-        <div data-aos="fade-up">
-                    <h2 class="font-serif text-gold-gradient mb-2" style="font-size: 2.2rem; font-weight: 600;">Agenda Acara</h2>
-                    <p class="text-light-gray mb-4" style="font-size: 0.9rem;">Hitung mundur menuju hari bahagia kami:</p>
-
-                    <!-- Live Countdown Widget -->
-                    <div class="countdown-container">
-                        <div class="countdown-item">
-                            <div id="cd-days" class="countdown-number">00</div>
-                            <div class="countdown-label">Hari</div>
-                        </div>
-                        <div class="countdown-item">
-                            <div id="cd-hours" class="countdown-number">00</div>
-                            <div class="countdown-label">Jam</div>
-                        </div>
-                        <div class="countdown-item">
-                            <div id="cd-mins" class="countdown-number">00</div>
-                            <div class="countdown-label">Menit</div>
-                        </div>
-                        <div class="countdown-item">
-                            <div id="cd-secs" class="countdown-number">00</div>
-                            <div class="countdown-label">Detik</div>
-                        </div>
-                    </div>
-
-                    <!-- Event Akad -->
-                    <div class="event-card mt-4" data-aos="fade-up" data-aos-delay="100">
-                        <!-- Card Corner Flourishes -->
-                        <svg class="card-ornament card-ornament-tl" viewBox="0 0 50 50" fill="none">
-                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
-                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
-                        </svg>
-                        <svg class="card-ornament card-ornament-br" viewBox="0 0 50 50" fill="none">
-                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
-                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
-                        </svg>
-
-                        <h3 class="font-serif event-title">Akad Nikah</h3>
-                        <div class="event-time"><i class="bi bi-calendar-event"></i> Sabtu, 05 September 2026</div>
-                        <div class="event-time"><i class="bi bi-clock"></i> 09:00 WIB</div>
-                        <div class="event-location">
-                            <strong style="color: var(--text-color);">Masjid Nurul Huda</strong><br>
-                            Jl. Ngampelsari No. 3, Ngampelsari, Kec. Candi, Kab. Sidoarjo
-                        </div>
-                        <a href="https://maps.app.goo.gl/xnVfWpPQTEFfb2V16" target="_blank" class="btn"><i class="bi bi-geo-alt-fill"></i> Peta Lokasi</a>
-                    </div>
-
-                    <!-- Event Resepsi -->
-                    <div class="event-card" data-aos="fade-up" data-aos-delay="200">
-                        <!-- Card Corner Flourishes -->
-                        <svg class="card-ornament card-ornament-tl" viewBox="0 0 50 50" fill="none">
-                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
-                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
-                        </svg>
-                        <svg class="card-ornament card-ornament-br" viewBox="0 0 50 50" fill="none">
-                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
-                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
-                        </svg>
-
-                        <h3 class="font-serif event-title">Resepsi</h3>
-                        <div class="event-time"><i class="bi bi-calendar-event"></i> Sabtu, 05 September 2026</div>
-                        <div class="event-time"><i class="bi bi-clock"></i> 16:00 - 20:00 WIB</div>
-                        <div class="event-location">
-                            <strong style="color: var(--text-color);">Jalan Muntoha, RT.2/RW.2, Ngampelsari</strong><br>
-                            Kec. Candi, Kabupaten Sidoarjo, Jawa Timur 61271
-                        </div>
-                        <a href="https://maps.app.goo.gl/eMWY1DFyJzGEtnuB7" target="_blank" class="btn"><i class="bi bi-geo-alt-fill"></i> Peta Lokasi</a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION DIVIDER -->
-            <div class="section-divider">
-                <svg viewBox="0 0 200 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0,12 L80,12 M120,12 L200,12" stroke="#b8935c" stroke-width="0.8" opacity="0.6"/>
-                    <circle cx="100" cy="12" r="5" fill="#none" stroke="#b8935c" stroke-width="1.2"/>
-                    <circle cx="100" cy="12" r="2" fill="#b8935c"/>
-                    <circle cx="88" cy="12" r="2.5" fill="#b8935c" opacity="0.7"/>
-                    <circle cx="112" cy="12" r="2.5" fill="#b8935c" opacity="0.7"/>
-                </svg>
-            </div>
-
-            <!-- 5. GALLERY -->
-            <section id="gallery">
-        
-        <div class="section-flower-ornament section-flower-tl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-top-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-tr"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-top-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
-        <div class="section-flower-ornament section-flower-br"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
-
-        <div data-aos="fade-up">
-                    <h2 class="font-serif text-gold-gradient mb-4" style="font-size: 2.2rem; font-weight: 600;">Galeri Momen</h2>
-                    <div class="gallery-grid">
-                        <!-- Item 1: Tall -->
-                        <div class="gallery-item tall" onclick="openLightbox('../../image/undangan/4.jpeg')">
-                            <span class="frame-corner corner-tl"></span>
-                            <span class="frame-corner corner-tr"></span>
-                            <span class="frame-corner corner-bl"></span>
-                            <span class="frame-corner corner-br"></span>
-                            <img src="../../image/undangan/4.jpeg" alt="Gallery 1">
-                        </div>
-                        <!-- Item 2: Square -->
-                        <div class="gallery-item square" onclick="openLightbox('../../image/undangan/5.jpeg')">
-                            <span class="frame-corner corner-tl"></span>
-                            <span class="frame-corner corner-tr"></span>
-                            <span class="frame-corner corner-bl"></span>
-                            <span class="frame-corner corner-br"></span>
-                            <img src="../../image/undangan/5.jpeg" alt="Gallery 2" style="object-position: center 20%;">
-                        </div>
-                        <!-- Item 3: Square -->
-                        <div class="gallery-item square" onclick="openLightbox('../../image/undangan/6.jpeg')">
-                            <span class="frame-corner corner-tl"></span>
-                            <span class="frame-corner corner-tr"></span>
-                            <span class="frame-corner corner-bl"></span>
-                            <span class="frame-corner corner-br"></span>
-                            <img src="../../image/undangan/6.jpeg" alt="Gallery 3">
-                        </div>
-                        <!-- Item 4: Wide -->
-                        <div class="gallery-item wide" onclick="openLightbox('../../image/undangan/7.jpeg')">
-                            <span class="frame-corner corner-tl"></span>
-                            <span class="frame-corner corner-tr"></span>
-                            <span class="frame-corner corner-bl"></span>
-                            <span class="frame-corner corner-br"></span>
-                            <img src="../../image/undangan/7.jpeg" alt="Gallery 4" style="object-position: center 60%;">
-                        </div>
-                        <!-- Item 5: Square -->
-                        <div class="gallery-item square" onclick="openLightbox('../../image/undangan/8.jpeg')">
-                            <span class="frame-corner corner-tl"></span>
-                            <span class="frame-corner corner-tr"></span>
-                            <span class="frame-corner corner-bl"></span>
-                            <span class="frame-corner corner-br"></span>
-                            <img src="../../image/undangan/8.jpeg" alt="Gallery 5" style="object-position: center 50%;">
-                        </div>
-                        <!-- Item 6: Tall -->
-                        <div class="gallery-item tall" onclick="openLightbox('../../image/undangan/9.jpeg')">
-                            <span class="frame-corner corner-tl"></span>
-                            <span class="frame-corner corner-tr"></span>
-                            <span class="frame-corner corner-bl"></span>
-                            <span class="frame-corner corner-br"></span>
-                            <img src="../../image/undangan/9.jpeg" alt="Gallery 6">
-                        </div>
-                        <!-- Item 7: Square -->
-                        <div class="gallery-item square" onclick="openLightbox('../../image/undangan/10.jpeg')">
-                            <span class="frame-corner corner-tl"></span>
-                            <span class="frame-corner corner-tr"></span>
-                            <span class="frame-corner corner-bl"></span>
-                            <span class="frame-corner corner-br"></span>
-                            <img src="../../image/undangan/10.jpeg" alt="Gallery 7" style="object-position: center 20%;">
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION DIVIDER -->
-            <div class="section-divider">
-                <svg viewBox="0 0 200 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0,12 L80,12 M120,12 L200,12" stroke="#b8935c" stroke-width="0.8" opacity="0.6"/>
-                    <circle cx="100" cy="12" r="5" fill="#none" stroke="#b8935c" stroke-width="1.2"/>
-                    <circle cx="100" cy="12" r="2" fill="#b8935c"/>
-                    <circle cx="88" cy="12" r="2.5" fill="#b8935c" opacity="0.7"/>
-                    <circle cx="112" cy="12" r="2.5" fill="#b8935c" opacity="0.7"/>
-                </svg>
-            </div>
-
-            <!-- 6. GIFT SECTION -->
-            <section id="gift">
-<div data-aos="fade-up">
-                    <h2 class="font-serif text-gold-gradient mb-2" style="font-size: 2.2rem; font-weight: 600;">Kirim Hadiah</h2>
-                    <p class="text-light-gray mb-4" style="font-size: 0.9rem;">
-                        Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih Anda, Anda dapat menggunakan fitur cashless berikut:
-                    </p>
-
-                    <div class="bank-card">
-                        <!-- Card Corner Flourishes -->
-                        <svg class="card-ornament card-ornament-tl" viewBox="0 0 50 50" fill="none">
-                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
-                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
-                        </svg>
-                        <svg class="card-ornament card-ornament-br" viewBox="0 0 50 50" fill="none">
-                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
-                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
-                        </svg>
-
-                        <div class="fw-bold text-primary mb-1" style="font-size: 1.25rem;">Bank BCA</div>
-                        <div class="text-light-gray" style="font-size: 0.9rem;">a.n. Nurillah Afidah</div>
-                        <div class="fw-bold my-2" style="font-size: 1.55rem; letter-spacing: 1px; color: var(--text-color);">
-                            7265085369
-                        </div>
-                        <button class="btn" style="padding: 9px 22px; font-size: 0.85rem;" onclick="copyAccount('7265085369')">
-                            <i class="bi bi-clipboard-check"></i> Salin Nomor Rekening
-                        </button>
-                    </div>
-
-                    <!-- Kirim Kado / Hadiah Fisik -->
-                    <div class="bank-card" style="margin-top: 25px;">
-                        <!-- Card Corner Flourishes -->
-                        <svg class="card-ornament card-ornament-tl" viewBox="0 0 50 50" fill="none">
-                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
-                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
-                        </svg>
-                        <svg class="card-ornament card-ornament-br" viewBox="0 0 50 50" fill="none">
-                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
-                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
-                        </svg>
-
-                        <div class="fw-bold text-primary mb-1" style="font-size: 1.25rem;">Kirim Hadiah Fisik</div>
-                        <div class="text-light-gray" style="font-size: 0.9rem;">Penerima: Nurillah Afidah</div>
-                        <div class="fw-bold my-2" style="font-size: 0.95rem; color: var(--text-color); line-height: 1.6; padding: 0 10px; font-weight: 500;">
-                            Jalan Muntoha, RT.2/RW.2, Ngampelsari, Kec. Candi, Kabupaten Sidoarjo, Jawa Timur 61271
-                        </div>
-                        <button class="btn" style="padding: 9px 22px; font-size: 0.85rem;" onclick="copyAddress('Jalan Muntoha, RT.2/RW.2, Ngampelsari, Kec. Candi, Kabupaten Sidoarjo, Jawa Timur 61271')">
-                            <i class="bi bi-clipboard-check"></i> Salin Alamat Kirim
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION DIVIDER -->
-            <div class="section-divider">
-                <svg viewBox="0 0 200 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0,12 L80,12 M120,12 L200,12" stroke="#b8935c" stroke-width="0.8" opacity="0.6"/>
-                    <circle cx="100" cy="12" r="5" fill="#none" stroke="#b8935c" stroke-width="1.2"/>
-                    <circle cx="100" cy="12" r="2" fill="#b8935c"/>
-                    <circle cx="88" cy="12" r="2.5" fill="#b8935c" opacity="0.7"/>
-                    <circle cx="112" cy="12" r="2.5" fill="#b8935c" opacity="0.7"/>
-                </svg>
-            </div>
-
-            <!-- 7. UCAPAN & DOA (RSVP & WISHES) -->
-            <section id="wishes">
-<div data-aos="fade-up">
-                    <h2 class="font-serif text-gold-gradient mb-2" style="font-size: 2.2rem; font-weight: 600;">Ucapan & Doa</h2>
-                    <p class="text-light-gray mb-4" style="font-size: 0.9rem;">Berikan doa restu dan konfirmasi kehadiran Anda:</p>
-
-                    <div class="wish-form">
-                        <!-- Card Corner Flourishes -->
-                        <svg class="card-ornament card-ornament-tl" viewBox="0 0 50 50" fill="none">
-                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
-                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
-                        </svg>
-                        <svg class="card-ornament card-ornament-br" viewBox="0 0 50 50" fill="none">
-                            <path d="M2,2 Q20,8 12,25 Q8,38 2,48 M2,2 Q8,20 25,12 Q38,8 48,2" stroke="#b8935c" stroke-width="1.2" fill="none"/>
-                            <circle cx="12" cy="25" r="1.5" fill="#b8935c"/>
-                        </svg>
-
-                        <form id="rsvp-form" onsubmit="handleWishSubmit(event)">
-                            <div class="form-group">
-                                <label for="wish-name">Nama Anda</label>
-                                <input type="text" id="wish-name" class="form-control" placeholder="Masukkan nama Anda..." required>
-                            </div>
-                            <div class="form-group">
-                                <label for="wish-status">Konfirmasi Kehadiran</label>
-                                <select id="wish-status" class="form-control" required>
-                                    <option value="Hadir">Hadir</option>
-                                    <option value="Masih Ragu">Masih Ragu</option>
-                                    <option value="Tidak Hadir">Tidak Hadir</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="wish-message">Pesan / Doa Restu</label>
-                                <textarea id="wish-message" class="form-control" rows="3" placeholder="Tuliskan ucapan dan doa manis Anda..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn w-100" style="width: 100%; margin-top: 10px;">
-                                <i class="bi bi-send-fill"></i> Kirim Ucapan
-                            </button>
-                        </form>
-                    </div>
-
-                    <!-- List of Wishes -->
-                    <div id="wish-list" class="wish-list">
-                        <!-- Initial placeholder item if empty -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- 8. CLOSING -->
-            <section id="closing">
-                <div class="svg-corner svg-corner-bl"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
-
-                <div class="svg-corner svg-corner-br"><svg viewBox="0 0 200 200" fill="none"><use href="#corner-bottom-floral"></use></svg></div>
-
-                <div data-aos="zoom-in">
-                    <p class="text-light-gray" style="font-size: 0.95rem;">
-                        Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, kami mengucapkan terima kasih sebesar-besarnya.
-                    </p>
-                    <div class="mt-4 text-primary font-serif" style="font-size: 1.15rem; letter-spacing: 1px;">Hormat Kami Yang Berbahagia,</div>
-                    <h2 class="font-cursive text-gold-gradient mt-2" style="font-size: 3.2rem;">Afidah & Syaichul</h2>
-                </div>
-            </section>
-        </div> <!-- End of main-content -->
-
-        <!-- BOTTOM NAVIGATION -->
-        <div id="bottom-nav" class="bottom-nav">
-            <a href="#quote" title="Quote"><i class="bi bi-journal-bookmark-fill"></i></a>
-            <a href="#couple" title="Mempelai"><i class="bi bi-heart-fill"></i></a>
-            <a href="#event" title="Agenda"><i class="bi bi-calendar-event-fill"></i></a>
-            <a href="#gallery" title="Galeri"><i class="bi bi-images"></i></a>
-            <a href="#gift" title="Hadiah"><i class="bi bi-gift-fill"></i></a>
-            <a href="#wishes" title="Ucapan"><i class="bi bi-chat-heart-fill"></i></a>
-        </div>
-
-        <!-- MUSIC PLAYER & FLOATING DISK -->
-        <audio id="bg-music" loop>
-            <source src="../../music/1.mp3" type="audio/mpeg">
-        </audio>
-
-        <div id="music-btn-wrapper" class="music-btn-wrapper">
-            <div id="music-btn" class="music-btn" onclick="toggleMusic()">
-                <i class="bi bi-disc-fill"></i>
-            </div>
-        </div>
-
-        <!-- TOAST NOTIFICATION -->
-        <div id="toast-notification" class="toast-notification">
-            <i class="bi bi-check-circle-fill text-primary me-2"></i> Nomor rekening berhasil disalin!
-        </div>
-
-        <!-- LIGHTBOX / ZOOM PHOTO -->
-        <div id="gallery-lightbox" class="gallery-lightbox" onclick="closeLightbox()">
-            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-            <button class="lightbox-nav lightbox-prev" onclick="prevImage(event)" aria-label="Previous image">&#10094;</button>
-            <img id="lightbox-img" src="" alt="Zoomed Momen" onclick="event.stopPropagation()">
-            <button class="lightbox-nav lightbox-next" onclick="nextImage(event)" aria-label="Next image">&#10095;</button>
-        </div>
-
+</div>
+<!-- STATS -->
+<div class="stats-bar">
+    <div class="stats-inner">
+        <div class="stat-item"><div class="stat-dot sent"></div><span class="stat-label">Terkirim:</span><span class="stat-value" id="stat-sent">0</span></div>
+        <div class="stat-item"><div class="stat-dot unsent"></div><span class="stat-label">Belum:</span><span class="stat-value" id="stat-unsent">0</span></div>
+        <div class="stat-item"><span class="stat-label">Total:</span><span class="stat-value" id="stat-total">0</span></div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+        <span class="sent-chip" id="progress-pct">0%</span>
     </div>
+</div>
+<!-- TOOLBAR -->
+<div class="toolbar">
+    <div class="search-box">
+        <i class="bi bi-search"></i>
+        <input type="text" id="search-input" placeholder="Cari nama atau nomor..." oninput="applyFilters()">
+    </div>
+    <button class="filter-btn active" id="filter-all" onclick="setStatusFilter('all')">Semua</button>
+    <button class="filter-btn" id="filter-sent" onclick="setStatusFilter('sent')"><i class="bi bi-check2-circle"></i> Terkirim</button>
+    <button class="filter-btn" id="filter-unsent" onclick="setStatusFilter('unsent')"><i class="bi bi-clock"></i> Belum</button>
+</div>
+<!-- CATEGORY CHIPS -->
+<div class="category-chips" id="category-chips"></div>
+<div id="result-count"></div>
+<!-- CONTACT LIST -->
+<div class="contact-list" id="contact-list"></div>
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-preview">
+    <div class="modal-box">
+        <div class="modal-title"><i class="bi bi-chat-text" style="color:var(--primary)"></i> Preview Pesan</div>
+        <div class="modal-preview" id="modal-msg"></div>
+        <div class="modal-actions">
+            <button class="btn-resend" onclick="closeModal()"><i class="bi bi-x"></i> Batal</button>
+            <button class="btn-send" onclick="confirmSend()"><i class="bi bi-whatsapp"></i> Buka WA</button>
+        </div>
+    </div>
+</div>
+<script>
+const CONTACTS = [
+    {"no":"8","nama":"mbak mita","kat":"KJA","jenis":"Digital","hp":"0813-3651-7984"},
+    {"no":"9","nama":"mbak anita","kat":"KJA","jenis":"Digital","hp":"0813-3511-5608"},
+    {"no":"10","nama":"mbak bella","kat":"KJA","jenis":"Digital","hp":"0888-5101-556"},
+    {"no":"13","nama":"yovita","kat":"Broadway","jenis":"Digital","hp":"0813-1348-0388"},
+    {"no":"30","nama":"linda","kat":"Uinsa","jenis":"Cetak","hp":"0813-1461-8595"},
+    {"no":"31","nama":"dea","kat":"Uinsa","jenis":"Cetak","hp":"0896-1683-3715"},
+    {"no":"32","nama":"zitni","kat":"Uinsa","jenis":"Cetak","hp":"0821-3159-0719"},
+    {"no":"33","nama":"silvi","kat":"Uinsa","jenis":"Cetak","hp":"0895-3371-96858"},
+    {"no":"34","nama":"syekha","kat":"Uinsa","jenis":"Cetak","hp":"0896-7901-9503"},
+    {"no":"35","nama":"yola","kat":"Uinsa","jenis":"Cetak","hp":"0821-3920-3520"},
+    {"no":"36","nama":"hera","kat":"Uinsa","jenis":"Digital","hp":"0812-3151-1999"},
+    {"no":"37","nama":"heny","kat":"Uinsa","jenis":"Digital","hp":"0812-5988-8663"},
+    {"no":"38","nama":"rizca","kat":"Uinsa","jenis":"Digital","hp":"0813-3575-7497"},
+    {"no":"39","nama":"mbak indah","kat":"Uinsa","jenis":"Digital","hp":"0877-3424-2143"},
+    {"no":"40","nama":"azizah","kat":"Uinsa","jenis":"Digital","hp":"0858-2966-2848"},
+    {"no":"41","nama":"dita","kat":"Uinsa","jenis":"Digital","hp":"0857-3020-4465"},
+    {"no":"42","nama":"viqyh","kat":"Uinsa","jenis":"Digital","hp":"0856-0711-5458"},
+    {"no":"43","nama":"iqbal","kat":"Uinsa","jenis":"Digital","hp":"0812-4344-8686"},
+    {"no":"44","nama":"anas","kat":"Uinsa","jenis":"Digital","hp":"0812-6503-3541"},
+    {"no":"45","nama":"ika","kat":"Uinsa","jenis":"Digital","hp":"0813-4522-2677"},
+    {"no":"46","nama":"lilu","kat":"Uinsa","jenis":"Digital","hp":"0813-5761-6486"},
+    {"no":"47","nama":"yesy","kat":"Uinsa","jenis":"Digital","hp":"0857-0776-3825"},
+    {"no":"48","nama":"uut","kat":"Uinsa","jenis":"Digital","hp":"0882-3544-6027"},
+    {"no":"49","nama":"fery","kat":"Uinsa","jenis":"Digital","hp":"0877-5088-0015"},
+    {"no":"50","nama":"pasya","kat":"Uinsa","jenis":"Digital","hp":"0822-3116-9390"},
+    {"no":"51","nama":"herdin","kat":"Uinsa","jenis":"Digital","hp":"0877-7771-5610"},
+    {"no":"52","nama":"indah rohmatul","kat":"Uinsa","jenis":"Digital","hp":"0822-4441-1617"},
+    {"no":"54","nama":"nabila","kat":"Uinsa","jenis":"Digital","hp":"0858-9526-7046"},
+    {"no":"55","nama":"miftah","kat":"Uinsa","jenis":"Digital","hp":"0857-0726-4226"},
+    {"no":"56","nama":"meliana","kat":"Uinsa","jenis":"Digital","hp":"0858-5244-0602"},
+    {"no":"57","nama":"afrian","kat":"Uinsa","jenis":"Digital","hp":"0896-7620-5604"},
+    {"no":"59","nama":"dwi mega","kat":"Uinsa","jenis":"Digital","hp":"0895-2365-3779"},
+    {"no":"60","nama":"aisyah adinda","kat":"Uinsa","jenis":"Digital","hp":"0851-6276-0762"},
+    {"no":"61","nama":"dinda","kat":"Uinsa","jenis":"Digital","hp":"0896-8732-4423"},
+    {"no":"62","nama":"sindy","kat":"Uinsa","jenis":"Digital","hp":"0819-1679-9138"},
+    {"no":"63","nama":"yesika","kat":"Uinsa","jenis":"Digital","hp":"0823-3525-7452"},
+    {"no":"65","nama":"shinta jonia","kat":"Uinsa","jenis":"Digital","hp":"0815-5474-1899"},
+    {"no":"66","nama":"akmal","kat":"Uinsa","jenis":"Digital","hp":"0813-3676-7544"},
+    {"no":"67","nama":"mas ardi","kat":"IAI","jenis":"Digital","hp":"0856-5530-5365"},
+    {"no":"68","nama":"ursulah","kat":"IAI","jenis":"Digital","hp":"0852-3107-7202"},
+    {"no":"69","nama":"cindy","kat":"IAI","jenis":"Digital","hp":"0896-1697-1198"},
+    {"no":"70","nama":"adinda","kat":"IAI","jenis":"Digital","hp":"0813-3173-5401"},
+    {"no":"71","nama":"fira","kat":"IAI","jenis":"Digital","hp":"0857-2322-4483"},
+    {"no":"72","nama":"thorik","kat":"IAI","jenis":"Digital","hp":"0851-6279-9109"},
+    {"no":"73","nama":"mahen","kat":"IAI","jenis":"Digital","hp":"0896-4329-1056"},
+    {"no":"74","nama":"surya","kat":"IAI","jenis":"Digital","hp":"0857-3365-4175"},
+    {"no":"75","nama":"zhafirah","kat":"IAI","jenis":"Digital","hp":"0821-3616-0418"},
+    {"no":"76","nama":"marizta","kat":"IAI","jenis":"Digital","hp":"0812-4926-3283"},
+    {"no":"77","nama":"herman uin","kat":"IAI","jenis":"Digital","hp":"0822-2760-8109"},
+    {"no":"78","nama":"hana uin","kat":"IAI","jenis":"Digital","hp":"0895-3241-06070"},
+    {"no":"79","nama":"alza uin","kat":"IAI","jenis":"Digital","hp":"0812-3560-1825"},
+    {"no":"80","nama":"kak salma","kat":"IAI","jenis":"Digital","hp":"0856-5501-1660"},
+    {"no":"81","nama":"mas riski","kat":"IAI","jenis":"Digital","hp":"0856-5527-2573"},
+    {"no":"82","nama":"kak ulfa","kat":"IAI","jenis":"Digital","hp":"0857-3541-9418"},
+    {"no":"83","nama":"datus","kat":"SMK","jenis":"Cetak","hp":"0878-5547-4150"},
+    {"no":"85","nama":"salsa","kat":"SMK","jenis":"Digital","hp":"0818-0318-1999"},
+    {"no":"89","nama":"novinda","kat":"SMK","jenis":"Digital","hp":"0813-3675-2563"},
+    {"no":"93","nama":"liso","kat":"SMK","jenis":"Digital","hp":"0895-3858-93698"},
+    {"no":"97","nama":"fafa","kat":"SMK","jenis":"Digital","hp":"0812-5998-6161"},
+    {"no":"99","nama":"dewi","kat":"SMK","jenis":"Digital","hp":"0878-6678-0828"},
+    {"no":"107","nama":"wulan/wl","kat":"SMK","jenis":"Digital","hp":"0878-6400-2633"},
+    {"no":"109","nama":"erin","kat":"SMK","jenis":"Digital","hp":"0895-3371-85544"},
+    {"no":"111","nama":"tiwi","kat":"SMP","jenis":"Digital","hp":"0821-3173-4172"},
+    {"no":"112","nama":"elita","kat":"SMP","jenis":"Digital","hp":"0896-8726-6553"},
+    {"no":"113","nama":"fransiska","kat":"SMP","jenis":"Digital","hp":"0895-2921-5202"},
+    {"no":"114","nama":"kayun","kat":"SMP","jenis":"Digital","hp":"0853-3099-9939"},
+    {"no":"117","nama":"bagus","kat":"SMP","jenis":"Digital","hp":"0857-3316-0010"},
+    {"no":"118","nama":"agung","kat":"SMP","jenis":"Digital","hp":"0896-1083-4267"},
+    {"no":"119","nama":"wachid","kat":"SMP","jenis":"Digital","hp":"0882-2814-3537"},
+    {"no":"123","nama":"fitri","kat":"SMP","jenis":"Digital","hp":"0821-4325-6112"},
+    {"no":"125","nama":"rizal","kat":"SMP","jenis":"Digital","hp":"0858-5261-8103"},
+    {"no":"126","nama":"levi","kat":"SMP","jenis":"Digital","hp":"0858-1999-0312"},
+    {"no":"133","nama":"afan","kat":"SD","jenis":"Digital","hp":"0821-4292-7469"},
+    {"no":"136","nama":"alvian","kat":"SD","jenis":"Digital","hp":"0813-8600-5892"},
+    {"no":"138","nama":"kholifah","kat":"SD","jenis":"Digital","hp":"0877-0340-0393"},
+    {"no":"140","nama":"diva","kat":"SD","jenis":"Digital","hp":"0895-2960-7200"},
+    {"no":"141","nama":"reza","kat":"SD","jenis":"Digital","hp":"0882-0093-21356"},
+    {"no":"142","nama":"risma","kat":"SD","jenis":"Digital","hp":"0895-2960-7200"},
+    {"no":"143","nama":"arikha","kat":"SD","jenis":"Digital","hp":"0856-4528-1281"},
+    {"no":"144","nama":"tama","kat":"SD","jenis":"Digital","hp":"0818-0345-9318"}
+];
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // ================= Supabase Config =================
-        const SUPABASE_URL = 'https://dfrnrtnpeqqcislyxpbs.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmcm5ydG5wZXFxY2lzbHl4cGJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU2Mzk5MzIsImV4cCI6MjEwMTIxNTkzMn0.jdjakrw7nGbUaYhgEe-UXhA_Us8ErHqYb33bxxqMjDA';
-        const INVITATION_SLUG = 'afidah-syaichul';
+const LS_KEY = 'wa_sent_afidah_syaichul';
+const COLORS = ['#25d366','#128c7e','#3498db','#9b59b6','#e67e22','#e74c3c','#1abc9c','#f39c12'];
+let sentSet = new Set(JSON.parse(localStorage.getItem(LS_KEY)||'[]'));
+let curFilter = 'all';
+let curCat = '';
+let pendingContact = null;
 
-        let supabaseClient = null;
-        if (typeof supabase !== 'undefined' && SUPABASE_URL && SUPABASE_ANON_KEY && !SUPABASE_URL.includes('YOUR_SUPABASE')) {
-            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        }
+function buildMsg(nama) {
+    return `Yth. Bapak/Ibu/Saudara/i\n${nama}\nDi Tempat\n-----------\nDengan segala kerendahan hati, kami mengundang Bapak/Ibu/Saudara/i dan teman-teman untuk menghadiri acara,\n===========\nPernikahan  *Afidah & Syaichul*\n===========\n\nLink undangan bisa diakses lengkap di:\nhttps://inv.ringvitation.my.id/afidah-syaichul/?untuk=${encodeURIComponent(nama)}\n\nMerupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir di acara kami\nMohon maaf perihal undangan hanya di bagikan melalui pesan ini\nTerima kasih banyak atas perhatiannya\n *Afidah & Syaichul*`;
+}
 
-        // 1. Floating Petals & Sparkle Generator (Meriah Ramai & Premium)
-        function createPetals(extra = 0) {
-            const container = document.getElementById('petals-container');
-            const particleCount = 55 + extra; // Increased to 55 for "meriah ramai" effect
-            const types = ['petal-pink', 'petal-gold', 'petal-cream', 'sparkle-star'];
-            const sparkleSymbols = ['✦', '✧', '•', '★'];
-            
-            for (let i = 0; i < particleCount; i++) {
-                const petal = document.createElement('div');
-                const type = types[Math.floor(Math.random() * types.length)];
-                petal.className = `petal ${type}`;
-                
-                // Sizes
-                const size = Math.random() * 12 + 8;
-                petal.style.width = size + 'px';
-                petal.style.height = (type === 'petal-cream' || type === 'sparkle-star' ? size : size * 1.35) + 'px';
-                
-                // Sparkle symbol text
-                if (type === 'sparkle-star') {
-                    petal.textContent = sparkleSymbols[Math.floor(Math.random() * sparkleSymbols.length)];
-                    petal.style.fontSize = (0.7 + Math.random() * 0.7) + 'rem';
-                }
-                
-                // Drift and Position
-                petal.style.left = Math.random() * 100 + '%';
-                petal.style.setProperty('--drift', (Math.random() * 140 - 70) + 'px');
-                
-                // Animation settings
-                petal.style.animationDelay = (Math.random() * 12) + 's';
-                petal.style.animationDuration = (Math.random() * 7 + 8) + 's';
-                
-                container.appendChild(petal);
-            }
-        }
-        createPetals();
+function toWA(hp) {
+    let n = hp.replace(/[-\s]/g, '');
+    if (n.startsWith('0')) n = '62' + n.slice(1);
+    return n;
+}
 
-        // 2. URL Query Guest Name
-        const urlParams = new URLSearchParams(window.location.search);
-        const guestName = urlParams.get('to');
-        if (guestName) {
-            document.getElementById('guest-name').innerText = guestName;
-        }
+function getCategories() {
+    return [...new Set(CONTACTS.map(c => c.kat))].sort();
+}
 
-        // Prevent Scroll Restoration
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
-        }
-        window.scrollTo(0, 0);
+function renderChips() {
+    const el = document.getElementById('category-chips');
+    let html = `<div class="chip ${curCat===''?'active':''}" onclick="setCat('')">Semua</div>`;
+    getCategories().forEach(cat => {
+        html += `<div class="chip ${curCat===cat?'active':''}" onclick="setCat('${cat}')">${cat}</div>`;
+    });
+    el.innerHTML = html;
+}
 
-        // Initialize AOS Animation
-        AOS.init({
-            once: true,
-            offset: 80,
-            duration: 850
-        });
+function getFiltered() {
+    const q = document.getElementById('search-input').value.toLowerCase();
+    return CONTACTS.filter(c => {
+        const sent = sentSet.has(c.no);
+        const mStatus = curFilter==='all'||(curFilter==='sent'&&sent)||(curFilter==='unsent'&&!sent);
+        const mCat = !curCat || c.kat===curCat;
+        const mQ = !q || c.nama.toLowerCase().includes(q) || c.hp.includes(q);
+        return mStatus && mCat && mQ;
+    });
+}
 
-        // 3. Open Invitation Function with Floral Burst
-        function triggerFloralBurst(callback) {
-            const overlay = document.getElementById('floral-burst-overlay');
-            overlay.classList.add('active');
+function renderList() {
+    const list = document.getElementById('contact-list');
+    const filtered = getFiltered();
+    document.getElementById('result-count').textContent = filtered.length < CONTACTS.length
+        ? `Menampilkan ${filtered.length} dari ${CONTACTS.length} kontak`
+        : `${CONTACTS.length} kontak dengan nomor WA`;
 
-            // Generate scattered floral particles
-            const particles = ['✿', '❀', '✾', '❁', '✽', '⚘', '❃', '✦', '✧', '❋'];
-            const colors = ['#d4af37', '#b8935c', '#e8d3b4', '#c5a059', '#f0e6d3'];
-            const particleContainer = overlay;
+    if (!filtered.length) {
+        list.innerHTML = '<div class="empty-state"><i class="bi bi-person-x"></i><p>Tidak ada kontak yang sesuai filter</p></div>';
+        updateStats(); return;
+    }
 
-            for (let i = 0; i < 24; i++) {
-                const p = document.createElement('div');
-                p.className = 'burst-particle';
-                const angle = (i / 24) * 360;
-                const radius = 80 + Math.random() * 140;
-                const tx = Math.cos(angle * Math.PI / 180) * radius + 'px';
-                const ty = Math.sin(angle * Math.PI / 180) * radius + 'px';
-                const rot = (Math.random() - 0.5) * 720 + 'deg';
-                const sc = (0.6 + Math.random() * 1.2).toFixed(2);
-                p.style.cssText = `
-                    --tx: ${tx}; --ty: ${ty}; --rot: ${rot}; --sc: ${sc};
-                    left: calc(50% - 10px); top: calc(50% - 10px);
-                    color: ${colors[i % colors.length]};
-                    animation-delay: ${(Math.random() * 0.2).toFixed(2)}s;
-                    font-size: ${0.9 + Math.random() * 1.2}rem;
-                `;
-                p.textContent = particles[i % particles.length];
-                particleContainer.appendChild(p);
-            }
-
-            // After animation ends, clean up & call callback
-            setTimeout(() => {
-                overlay.classList.remove('active');
-                // Remove dynamically created particles
-                overlay.querySelectorAll('.burst-particle').forEach(el => el.remove());
-                if (callback) callback();
-            }, 1800);
-        }
-
-        function bukaUndangan() {
-            const btn = document.getElementById('btn-buka');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="bi bi-stars"></i> Membuka...';
-            btn.style.opacity = '0.7';
-
-            // Trigger floral burst overlay first!
-            triggerFloralBurst(() => {
-                btn.style.display = 'none';
-                document.body.classList.remove('locked');
-
-                const mainContent = document.getElementById('main-content');
-                mainContent.style.display = 'block';
-
-                // Extra soft petal burst on open!
-                createPetals(16);
-
-                setTimeout(() => {
-                    mainContent.style.opacity = '1';
-                    AOS.refresh();
-
-                    document.getElementById('bottom-nav').classList.add('show');
-
-                    const musicBtnWrapper = document.getElementById('music-btn-wrapper');
-                    const music = document.getElementById('bg-music');
-                    musicBtnWrapper.classList.add('show');
-                    music.play().catch(e => console.log("Auto-play blocked by browser:", e));
-
-                    document.getElementById('quote').scrollIntoView({ behavior: 'smooth' });
-                }, 80);
-            });
-        }
-
-        // 4. Toggle Music Function
-        function toggleMusic() {
-            const music = document.getElementById('bg-music');
-            const musicBtn = document.getElementById('music-btn');
-
-            if (music.paused) {
-                music.play();
-                musicBtn.classList.remove('paused');
-            } else {
-                music.pause();
-                musicBtn.classList.add('paused');
-            }
-        }
-
-        // 5. Countdown Timer (Target: 05 September 2026 09:00:00)
-        function startCountdown() {
-            const targetDate = new Date("September 05, 2026 09:00:00").getTime();
-
-            function update() {
-                const now = new Date().getTime();
-                const diff = targetDate - now;
-
-                if (diff < 0) {
-                    document.getElementById('cd-days').innerText = '00';
-                    document.getElementById('cd-hours').innerText = '00';
-                    document.getElementById('cd-mins').innerText = '00';
-                    document.getElementById('cd-secs').innerText = '00';
-                    return;
-                }
-
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-                document.getElementById('cd-days').innerText = days < 10 ? '0' + days : days;
-                document.getElementById('cd-hours').innerText = hours < 10 ? '0' + hours : hours;
-                document.getElementById('cd-mins').innerText = mins < 10 ? '0' + mins : mins;
-                document.getElementById('cd-secs').innerText = secs < 10 ? '0' + secs : secs;
-            }
-            update();
-            setInterval(update, 1000);
-        }
-        startCountdown();
-
-        // 6. Copy Account with Toast Notification
-        function copyAccount(accountNo) {
-            navigator.clipboard.writeText(accountNo).then(() => {
-                showToast("Nomor rekening berhasil disalin!");
-            }).catch(err => {
-                const textArea = document.createElement("textarea");
-                textArea.value = accountNo;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand("copy");
-                document.body.removeChild(textArea);
-                showToast("Nomor rekening berhasil disalin!");
-            });
-        }
-
-        function copyAddress(addressText) {
-            navigator.clipboard.writeText(addressText).then(() => {
-                showToast("Alamat berhasil disalin!");
-            }).catch(err => {
-                const textArea = document.createElement("textarea");
-                textArea.value = addressText;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand("copy");
-                document.body.removeChild(textArea);
-                showToast("Alamat berhasil disalin!");
-            });
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById('toast-notification');
-            toast.innerHTML = `<i class="bi bi-check-circle-fill text-primary me-2"></i> ${message}`;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // 7. Load & Handle Wishes (Supabase + LocalStorage Fallback)
-        const LOCAL_STORAGE_KEY = 'wedding_wishes_' + INVITATION_SLUG;
-
-        async function loadWishes() {
-            const wishListEl = document.getElementById('wish-list');
-            let wishes = [];
-
-            if (supabaseClient) {
-                try {
-                    const { data, error } = await supabaseClient
-                        .from('wishes')
-                        .select('*')
-                        .eq('invitation_slug', 'afidah-syaichul')
-                        .order('created_at', { ascending: false });
-
-                    if (!error && data) {
-                        wishes = data;
-                    }
-                } catch (e) {
-                    console.log("Menggunakan fallback local storage:", e);
-                }
-            }
-
-            // Fallback to local storage if empty or Supabase not connected yet
-            if (wishes.length === 0) {
-                wishes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
-            }
-
-            if (wishes.length > 0) {
-                wishListEl.innerHTML = '';
-                wishes.forEach(w => renderWishCard(w));
-            }
-        }
-
-        function renderWishCard(w) {
-            const wishListEl = document.getElementById('wish-list');
-            const card = document.createElement('div');
-            card.className = 'wish-card';
-            card.innerHTML = `
-                <div class="wish-header">
-                    <span class="wish-name">${escapeHtml(w.name)}</span>
-                    <span class="wish-badge">${escapeHtml(w.status)}</span>
+    list.innerHTML = '';
+    filtered.forEach(c => {
+        const sent = sentSet.has(c.no);
+        const col = COLORS[parseInt(c.no) % COLORS.length];
+        const init = c.nama.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+        const div = document.createElement('div');
+        div.className = 'contact-card' + (sent?' is-sent':'');
+        div.innerHTML = `
+            <div class="contact-avatar" style="background:${col}22;color:${col};border:1.5px solid ${col}55">${init}</div>
+            <div class="contact-info">
+                <div class="contact-name">${c.nama}</div>
+                <div class="contact-meta">
+                    <span class="contact-phone"><i class="bi bi-telephone" style="font-size:.7rem;margin-right:2px"></i>${c.hp}</span>
+                    <span class="contact-badge badge-kat">${c.kat}</span>
+                    <span class="contact-badge ${c.jenis==='Digital'?'badge-digital':'badge-cetak'}">${c.jenis}</span>
                 </div>
-                <p class="wish-text">${escapeHtml(w.message)}</p>
-            `;
-            wishListEl.appendChild(card);
-        }
-
-        async function handleWishSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('wish-name').value.trim();
-            const status = document.getElementById('wish-status').value;
-            const message = document.getElementById('wish-message').value.trim();
-
-            if (!name || !message) return;
-
-            const newWish = { name, status, message, invitation_slug: INVITATION_SLUG, created_at: new Date().toISOString() };
-
-            // Save to Local Storage
-            const localWishes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
-            localWishes.unshift(newWish);
-            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(localWishes));
-
-            // Save to Supabase DB if client active
-            if (supabaseClient) {
-                try {
-                    await supabaseClient.from('wishes').insert([
-                        { name: name, status: status, message: message, invitation_slug: INVITATION_SLUG }
-                    ]);
-                } catch (err) {
-                    console.log("Supabase insert error:", err);
+                ${sent?'<div class="contact-sent-label"><i class="bi bi-check2-all"></i> Sudah terkirim</div>':''}
+            </div>
+            <div class="contact-actions">
+                ${sent
+                    ? `<button class="btn-resend" onclick="preview('${c.no}')"><i class="bi bi-arrow-repeat"></i> Kirim Ulang</button>
+                       <button class="btn-unmark" onclick="markUnsent('${c.no}')" title="Tandai belum terkirim"><i class="bi bi-x-circle"></i></button>`
+                    : `<button class="btn-send" onclick="preview('${c.no}')"><i class="bi bi-whatsapp"></i> Kirim</button>`
                 }
-            }
+            </div>
+        `;
+        list.appendChild(div);
+    });
+    updateStats();
+}
 
-            // Render to DOM
-            const wishListEl = document.getElementById('wish-list');
-            const card = document.createElement('div');
-            card.className = 'wish-card';
-            card.innerHTML = `
-                <div class="wish-header">
-                    <span class="wish-name">${escapeHtml(name)}</span>
-                    <span class="wish-badge">${escapeHtml(status)}</span>
-                </div>
-                <p class="wish-text">${escapeHtml(message)}</p>
-            `;
-            wishListEl.prepend(card);
+function updateStats() {
+    const total = CONTACTS.length;
+    const sent = sentSet.size;
+    const pct = Math.round(sent/total*100);
+    document.getElementById('stat-total').textContent = total;
+    document.getElementById('stat-sent').textContent = sent;
+    document.getElementById('stat-unsent').textContent = total-sent;
+    document.getElementById('progress-fill').style.width = pct+'%';
+    document.getElementById('progress-pct').textContent = pct+'%';
+}
 
-            document.getElementById('rsvp-form').reset();
-            showToast("Terima kasih atas ucapan & doa restu Anda!");
-        }
+function setStatusFilter(f) {
+    curFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('filter-'+f).classList.add('active');
+    renderList();
+}
 
-        function escapeHtml(text) {
-            return text.replace(/[&<>"']/g, function(m) {
-                return {
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    '"': '&quot;',
-                    "'": '&#039;'
-                }[m];
-            });
-        }
+function setCat(cat) {
+    curCat = cat; renderChips(); renderList();
+}
 
-        loadWishes();
+function applyFilters() { renderList(); }
 
-        // 8. Gallery Lightbox Functions
-        const GALLERY_IMAGES = [
-            '../../image/undangan/4.jpeg',
-            '../../image/undangan/5.jpeg',
-            '../../image/undangan/6.jpeg',
-            '../../image/undangan/7.jpeg',
-            '../../image/undangan/8.jpeg',
-            '../../image/undangan/9.jpeg',
-            '../../image/undangan/10.jpeg'
-        ];
-        let currentImageIndex = 0;
+function preview(no) {
+    const c = CONTACTS.find(x => x.no===no);
+    if (!c) return;
+    pendingContact = c;
+    document.getElementById('modal-msg').textContent = buildMsg(c.nama);
+    document.getElementById('modal-preview').classList.add('show');
+}
 
-        function openLightbox(imgSrc) {
-            const lightbox = document.getElementById('gallery-lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            currentImageIndex = GALLERY_IMAGES.indexOf(imgSrc);
-            if (currentImageIndex === -1) currentImageIndex = 0;
-            lightboxImg.src = GALLERY_IMAGES[currentImageIndex];
-            lightbox.classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
+function confirmSend() {
+    if (!pendingContact) return;
+    const c = pendingContact;
+    window.open('https://wa.me/'+toWA(c.hp)+'?text='+encodeURIComponent(buildMsg(c.nama)), '_blank');
+    sentSet.add(c.no);
+    localStorage.setItem(LS_KEY, JSON.stringify([...sentSet]));
+    closeModal(); renderList();
+}
 
-        function closeLightbox() {
-            const lightbox = document.getElementById('gallery-lightbox');
-            lightbox.classList.remove('show');
-            if (!document.body.classList.contains('locked')) {
-                document.body.style.overflow = '';
-            }
-        }
+function markUnsent(no) {
+    sentSet.delete(no);
+    localStorage.setItem(LS_KEY, JSON.stringify([...sentSet]));
+    renderList();
+}
 
-        function prevImage(e) {
-            e.stopPropagation();
-            currentImageIndex = (currentImageIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
-            document.getElementById('lightbox-img').src = GALLERY_IMAGES[currentImageIndex];
-        }
+function closeModal() {
+    document.getElementById('modal-preview').classList.remove('show');
+    pendingContact = null;
+}
 
-        function nextImage(e) {
-            e.stopPropagation();
-            currentImageIndex = (currentImageIndex + 1) % GALLERY_IMAGES.length;
-            document.getElementById('lightbox-img').src = GALLERY_IMAGES[currentImageIndex];
-        }
+function resetAll() {
+    if (!confirm('Reset semua status kirim?')) return;
+    sentSet.clear(); localStorage.removeItem(LS_KEY);
+    renderChips(); renderList();
+}
 
-        // Key listener for lightbox navigation
-        window.addEventListener('keydown', function(e) {
-            const lightbox = document.getElementById('gallery-lightbox');
-            if (lightbox && lightbox.classList.contains('show')) {
-                if (e.key === 'ArrowLeft') {
-                    prevImage(e);
-                } else if (e.key === 'ArrowRight') {
-                    nextImage(e);
-                } else if (e.key === 'Escape') {
-                    closeLightbox();
-                }
-            }
-        });
-    </script>
+document.getElementById('modal-preview').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
+
+// INIT
+renderChips();
+renderList();
+</script>
 </body>
-
 </html>
