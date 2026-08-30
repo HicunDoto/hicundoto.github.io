@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Kirim WA - Undangan Afidah &amp; Syaichul</title>
+    <title>Dashboard Kirim Undangan (WA &amp; IG) - Afidah &amp; Syaichul</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
@@ -11,17 +11,24 @@
             --primary: #25d366;
             --primary-dark: #128c7e;
             --primary-light: #dcf8c6;
+            --ig-pink: #e1306c;
+            --ig-purple: #833ab4;
+            --ig-orange: #fd1d1d;
+            --ig-gradient: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
             --bg: #0f1923;
             --bg-card: #1a2634;
             --bg-card2: #1e2d3d;
             --border: rgba(255,255,255,0.08);
             --text: #e8edf2;
             --text-muted: #7f8c9a;
-            --sent-bg: rgba(37, 211, 102, 0.12);
-            --sent-border: rgba(37, 211, 102, 0.35);
+            --sent-wa-bg: rgba(37, 211, 102, 0.12);
+            --sent-wa-border: rgba(37, 211, 102, 0.35);
+            --sent-ig-bg: rgba(225, 48, 108, 0.12);
+            --sent-ig-border: rgba(225, 48, 108, 0.35);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+        
         /* HEADER */
         .header {
             background: linear-gradient(135deg, #0d1b2a 0%, #1a2f45 50%, #0d1b2a 100%);
@@ -29,20 +36,102 @@
             padding: 18px 24px;
             position: sticky; top: 0; z-index: 100;
         }
-        .header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
+        .header-inner { max-width: 920px; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
         .header-icon {
             width: 48px; height: 48px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border-radius: 14px; display: flex; align-items: center; justify-content: center;
             font-size: 1.4rem; color: white; flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        .header-icon.is-wa {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+        }
+        .header-icon.is-ig {
+            background: var(--ig-gradient);
+            box-shadow: 0 4px 16px rgba(225, 48, 108, 0.38);
+        }
+        .header-icon.is-all {
+            background: linear-gradient(135deg, #3498db, #833ab4);
+            box-shadow: 0 4px 16px rgba(52, 152, 219, 0.35);
         }
         .header-text h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.2rem; font-weight: 700; }
         .header-text p { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
         .header-actions { margin-left: auto; }
+        
+        /* CHANNEL TABS */
+        .channel-tabs-wrap {
+            background: rgba(15, 25, 35, 0.85);
+            border-bottom: 1px solid var(--border);
+            padding: 10px 0;
+        }
+        .channel-tabs {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .channel-tab {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px 14px;
+            color: var(--text-muted);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+        .channel-tab:hover {
+            border-color: rgba(255,255,255,0.2);
+            color: var(--text);
+            background: var(--bg-card2);
+        }
+        .channel-tab .tab-badge {
+            font-size: 0.7rem;
+            padding: 2px 7px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.08);
+            font-weight: 600;
+        }
+        .channel-tab.active-all {
+            background: rgba(52, 152, 219, 0.16);
+            border-color: rgba(52, 152, 219, 0.5);
+            color: #60a5fa;
+        }
+        .channel-tab.active-all .tab-badge {
+            background: rgba(52, 152, 219, 0.3);
+            color: #fff;
+        }
+        .channel-tab.active-wa {
+            background: rgba(37, 211, 102, 0.15);
+            border-color: rgba(37, 211, 102, 0.5);
+            color: var(--primary);
+        }
+        .channel-tab.active-wa .tab-badge {
+            background: rgba(37, 211, 102, 0.28);
+            color: #fff;
+        }
+        .channel-tab.active-ig {
+            background: rgba(225, 48, 108, 0.15);
+            border-color: rgba(225, 48, 108, 0.5);
+            color: #f472b6;
+        }
+        .channel-tab.active-ig .tab-badge {
+            background: rgba(225, 48, 108, 0.28);
+            color: #fff;
+        }
+
         /* STATS BAR */
         .stats-bar { background: var(--bg-card); border-bottom: 1px solid var(--border); }
-        .stats-inner { max-width: 900px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .stats-inner { max-width: 920px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
         .stat-item { display: flex; align-items: center; gap: 7px; font-size: 0.82rem; }
         .stat-dot { width: 10px; height: 10px; border-radius: 50%; }
         .stat-dot.sent { background: var(--primary); }
@@ -51,14 +140,18 @@
         .stat-value { font-weight: 600; }
         .progress-bar-wrap { flex: 1; min-width: 120px; background: rgba(255,255,255,0.06); border-radius: 20px; height: 8px; overflow: hidden; }
         .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary-dark), var(--primary)); border-radius: 20px; transition: width 0.5s ease; }
+        .progress-bar-fill.is-ig { background: var(--ig-gradient); }
         .sent-chip { background: rgba(37,211,102,0.15); color: var(--primary); border: 1px solid rgba(37,211,102,0.3); border-radius: 20px; padding: 3px 12px; font-size: 0.75rem; font-weight: 600; }
+        .sent-chip.is-ig { background: rgba(225,48,108,0.15); color: #f472b6; border-color: rgba(225,48,108,0.3); }
+
         /* TOOLBAR */
-        .toolbar { max-width: 900px; margin: 18px auto 0; padding: 0 24px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .toolbar { max-width: 920px; margin: 18px auto 0; padding: 0 24px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
         .search-box { flex: 1; min-width: 180px; position: relative; }
         .search-box input {
             width: 100%; background: var(--bg-card); border: 1px solid var(--border);
             border-radius: 12px; padding: 10px 16px 10px 40px; color: var(--text);
             font-size: 0.88rem; font-family: 'Inter', sans-serif; outline: none;
+            transition: border-color 0.2s;
         }
         .search-box input:focus { border-color: rgba(37,211,102,0.4); }
         .search-box input::placeholder { color: var(--text-muted); }
@@ -71,33 +164,58 @@
         }
         .filter-btn:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
         .filter-btn.active { background: var(--primary); border-color: var(--primary); color: white; }
+
         /* CATEGORY CHIPS */
-        .category-chips { max-width: 900px; margin: 12px auto 0; padding: 0 24px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .category-chips { max-width: 920px; margin: 12px auto 0; padding: 0 24px; display: flex; gap: 8px; flex-wrap: wrap; }
         .chip { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 0.78rem; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
         .chip:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
         .chip.active { background: rgba(37,211,102,0.15); border-color: rgba(37,211,102,0.5); color: var(--primary); }
-        #result-count { max-width: 900px; margin: 10px auto 0; padding: 0 24px; font-size: 0.8rem; color: var(--text-muted); }
+        #result-count { max-width: 920px; margin: 10px auto 0; padding: 0 24px; font-size: 0.8rem; color: var(--text-muted); }
+
         /* CONTACT LIST */
-        .contact-list { max-width: 900px; margin: 16px auto 40px; padding: 0 24px; display: flex; flex-direction: column; gap: 10px; }
+        .contact-list { max-width: 920px; margin: 16px auto 40px; padding: 0 24px; display: flex; flex-direction: column; gap: 10px; }
         .contact-card {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
             padding: 14px 16px; display: flex; align-items: center; gap: 12px;
             transition: all 0.25s ease;
         }
         .contact-card:hover { border-color: rgba(255,255,255,0.14); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,0.25); }
-        .contact-card.is-sent { background: var(--sent-bg); border-color: var(--sent-border); }
-        .contact-card.is-sent .contact-name { color: #a8f0c6; }
-        .contact-avatar { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; flex-shrink: 0; text-transform: uppercase; }
+        .contact-card.is-sent.card-wa { background: var(--sent-wa-bg); border-color: var(--sent-wa-border); }
+        .contact-card.is-sent.card-wa .contact-name { color: #a8f0c6; }
+        .contact-card.is-sent.card-ig { background: var(--sent-ig-bg); border-color: var(--sent-ig-border); }
+        .contact-card.is-sent.card-ig .contact-name { color: #fbcfe8; }
+        
+        .contact-avatar {
+            width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center;
+            justify-content: center; font-weight: 700; font-size: 0.95rem; flex-shrink: 0;
+            text-transform: uppercase; position: relative;
+        }
+        .contact-avatar .avatar-badge {
+            position: absolute; bottom: -3px; right: -3px; width: 16px; height: 16px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 0.6rem; color: white; border: 1.5px solid var(--bg-card);
+        }
+        .avatar-badge.badge-wa-icon { background: var(--primary); }
+        .avatar-badge.badge-ig-icon { background: var(--ig-gradient); }
+
         .contact-info { flex: 1; min-width: 0; }
         .contact-name { font-size: 0.93rem; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: capitalize; }
         .contact-meta { display: flex; align-items: center; gap: 8px; margin-top: 3px; flex-wrap: wrap; }
-        .contact-phone { font-size: 0.78rem; color: var(--text-muted); }
+        .contact-phone { font-size: 0.78rem; color: var(--text-muted); display: flex; align-items: center; gap: 3px; }
+        .contact-ig-link {
+            font-size: 0.78rem; color: #f472b6; text-decoration: none; display: flex; align-items: center; gap: 3px;
+            transition: color 0.2s;
+        }
+        .contact-ig-link:hover { color: #fd1d1d; text-decoration: underline; }
         .contact-badge { font-size: 0.67rem; padding: 2px 8px; border-radius: 20px; font-weight: 500; flex-shrink: 0; }
         .badge-kat { background: rgba(212,175,55,0.15); color: #d4af37; border: 1px solid rgba(212,175,55,0.3); }
         .badge-digital { background: rgba(52,152,219,0.15); color: #3498db; border: 1px solid rgba(52,152,219,0.3); }
         .badge-cetak { background: rgba(149,165,166,0.15); color: #95a5a6; border: 1px solid rgba(149,165,166,0.3); }
+        .badge-channel-wa { background: rgba(37,211,102,0.15); color: #25d366; border: 1px solid rgba(37,211,102,0.35); }
+        .badge-channel-ig { background: rgba(225,48,108,0.15); color: #f472b6; border: 1px solid rgba(225,48,108,0.35); }
         .contact-sent-label { font-size: 0.7rem; color: var(--primary); display: flex; align-items: center; gap: 3px; margin-top: 3px; }
         .contact-actions { display: flex; gap: 7px; flex-shrink: 0; align-items: center; }
+
         /* BUTTONS */
         .btn-send {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -108,6 +226,24 @@
             box-shadow: 0 3px 10px rgba(37,211,102,0.25);
         }
         .btn-send:hover { transform: translateY(-1px); box-shadow: 0 5px 16px rgba(37,211,102,0.4); }
+
+        .btn-ig {
+            background: var(--ig-gradient);
+            color: white; border: none; border-radius: 10px; padding: 8px 16px;
+            font-size: 0.8rem; font-weight: 600; font-family: 'Inter', sans-serif;
+            cursor: pointer; display: flex; align-items: center; gap: 5px;
+            transition: all 0.2s; white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(225,48,108,0.3);
+        }
+        .btn-ig:hover { transform: translateY(-1px); box-shadow: 0 5px 16px rgba(225,48,108,0.45); }
+
+        .btn-copy-card {
+            background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border);
+            border-radius: 8px; padding: 8px 10px; font-size: 0.82rem; cursor: pointer;
+            transition: all 0.2s; display: flex; align-items: center; gap: 4px;
+        }
+        .btn-copy-card:hover { color: #fff; border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.1); }
+
         .btn-resend {
             background: transparent; color: var(--text-muted); border: 1px solid var(--border);
             border-radius: 10px; padding: 8px 16px; font-size: 0.8rem; font-weight: 500;
@@ -115,49 +251,84 @@
             gap: 5px; transition: all 0.2s; white-space: nowrap;
         }
         .btn-resend:hover { border-color: var(--primary); color: var(--primary); background: rgba(37,211,102,0.06); }
+        .btn-resend.is-ig:hover { border-color: #e1306c; color: #f472b6; background: rgba(225,48,108,0.08); }
+
         .btn-unmark {
             background: transparent; color: var(--text-muted); border: none;
             border-radius: 8px; padding: 7px 9px; font-size: 1rem; cursor: pointer; transition: all 0.2s;
         }
         .btn-unmark:hover { color: #e74c3c; background: rgba(231,76,60,0.1); }
+
         /* EMPTY STATE */
         .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
         .empty-state i { font-size: 2.8rem; margin-bottom: 14px; display: block; }
+
         /* MODAL */
         .modal-overlay {
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.72);
-            z-index: 500; backdrop-filter: blur(4px);
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.76);
+            z-index: 500; backdrop-filter: blur(5px);
             align-items: center; justify-content: center; padding: 20px;
         }
         .modal-overlay.show { display: flex; }
         .modal-box {
             background: var(--bg-card2); border: 1px solid var(--border);
-            border-radius: 20px; padding: 26px; max-width: 480px; width: 100%;
+            border-radius: 20px; padding: 24px; max-width: 500px; width: 100%;
             animation: modalIn 0.28s cubic-bezier(0.34,1.56,0.64,1);
         }
         @keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        .modal-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 9px; }
+        .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+        .modal-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .modal-target-info {
+            background: rgba(0,0,0,0.25); border: 1px solid var(--border);
+            border-radius: 10px; padding: 8px 12px; margin-bottom: 14px;
+            font-size: 0.82rem; display: flex; align-items: center; justify-content: space-between;
+        }
+        .target-chip { display: flex; align-items: center; gap: 7px; }
+        .target-link { color: #f472b6; text-decoration: none; margin-left: 6px; }
+        .target-link:hover { text-decoration: underline; }
         .modal-preview {
             background: #0b141a; border-radius: 12px; padding: 14px;
-            font-size: 0.83rem; line-height: 1.75; color: #d1f7d6;
-            white-space: pre-line; max-height: 320px; overflow-y: auto;
-            border: 1px solid rgba(37,211,102,0.15);
+            font-size: 0.82rem; line-height: 1.75; color: #d1f7d6;
+            white-space: pre-line; max-height: 280px; overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.08);
         }
-        .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
-        .modal-actions button { flex: 1; }
+        .modal-preview.is-ig { color: #fce7f3; border-color: rgba(225,48,108,0.2); }
+        .modal-actions { display: flex; gap: 9px; margin-top: 18px; }
+        .modal-actions button { flex: 1; justify-content: center; }
+
+        /* TOAST NOTIFICATION */
+        .toast-msg {
+            position: fixed; bottom: 26px; left: 50%;
+            transform: translateX(-50%) translateY(40px);
+            background: #1e293b; border: 1px solid rgba(255,255,255,0.18);
+            color: #f1f5f9; padding: 10px 22px; border-radius: 30px;
+            font-size: 0.85rem; font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.55);
+            z-index: 9999; display: flex; align-items: center; gap: 9px;
+            opacity: 0; pointer-events: none;
+            transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .toast-msg.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
         /* SCROLLBAR */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+        @media (max-width: 600px) {
+            .channel-tab span.tab-title { display: none; }
+            .modal-actions { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
+
 <!-- HEADER -->
 <div class="header">
     <div class="header-inner">
-        <div class="header-icon"><i class="bi bi-whatsapp"></i></div>
+        <div class="header-icon is-wa" id="header-icon"><i class="bi bi-whatsapp" id="header-icon-i"></i></div>
         <div class="header-text">
-            <h1>Dashboard Kirim WA</h1>
-            <p>Undangan Pernikahan Afidah &amp; Syaichul</p>
+            <h1 id="header-title">Dashboard Kirim Undangan</h1>
+            <p>Pernikahan Afidah &amp; Syaichul</p>
         </div>
         <div class="header-actions">
             <button class="filter-btn" onclick="resetAll()">
@@ -166,143 +337,206 @@
         </div>
     </div>
 </div>
-<!-- STATS -->
+
+<!-- CHANNEL TABS (All / WA / IG) -->
+<div class="channel-tabs-wrap">
+    <div class="channel-tabs">
+        <button class="channel-tab" id="tab-all" onclick="setChannel('all')">
+            <i class="bi bi-grid-fill"></i>
+            <span class="tab-title">Semua</span>
+            <span class="tab-badge" id="tab-badge-all">0</span>
+        </button>
+        <button class="channel-tab active-wa" id="tab-wa" onclick="setChannel('wa')">
+            <i class="bi bi-whatsapp"></i>
+            <span class="tab-title">WhatsApp</span>
+            <span class="tab-badge" id="tab-badge-wa">0</span>
+        </button>
+        <button class="channel-tab" id="tab-ig" onclick="setChannel('ig')">
+            <i class="bi bi-instagram"></i>
+            <span class="tab-title">Instagram</span>
+            <span class="tab-badge" id="tab-badge-ig">0</span>
+        </button>
+    </div>
+</div>
+
+<!-- STATS BAR -->
 <div class="stats-bar">
     <div class="stats-inner">
-        <div class="stat-item"><div class="stat-dot sent"></div><span class="stat-label">Terkirim:</span><span class="stat-value" id="stat-sent">0</span></div>
+        <div class="stat-item"><div class="stat-dot sent" id="stat-dot-sent"></div><span class="stat-label">Terkirim:</span><span class="stat-value" id="stat-sent">0</span></div>
         <div class="stat-item"><div class="stat-dot unsent"></div><span class="stat-label">Belum:</span><span class="stat-value" id="stat-unsent">0</span></div>
         <div class="stat-item"><span class="stat-label">Total:</span><span class="stat-value" id="stat-total">0</span></div>
         <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
         <span class="sent-chip" id="progress-pct">0%</span>
     </div>
 </div>
+
 <!-- TOOLBAR -->
 <div class="toolbar">
     <div class="search-box">
         <i class="bi bi-search"></i>
-        <input type="text" id="search-input" placeholder="Cari nama atau nomor..." oninput="applyFilters()">
+        <input type="text" id="search-input" placeholder="Cari nama, nomor WA, atau akun IG..." oninput="applyFilters()">
     </div>
     <button class="filter-btn active" id="filter-all" onclick="setStatusFilter('all')">Semua</button>
     <button class="filter-btn" id="filter-sent" onclick="setStatusFilter('sent')"><i class="bi bi-check2-circle"></i> Terkirim</button>
     <button class="filter-btn" id="filter-unsent" onclick="setStatusFilter('unsent')"><i class="bi bi-clock"></i> Belum</button>
 </div>
+
 <!-- CATEGORY CHIPS -->
 <div class="category-chips" id="category-chips"></div>
 <div id="result-count"></div>
+
 <!-- CONTACT LIST -->
 <div class="contact-list" id="contact-list"></div>
-<!-- MODAL -->
+
+<!-- MODAL PREVIEW -->
 <div class="modal-overlay" id="modal-preview">
     <div class="modal-box">
-        <div class="modal-title"><i class="bi bi-chat-text" style="color:var(--primary)"></i> Preview Pesan</div>
+        <div class="modal-header">
+            <div class="modal-title">
+                <i class="bi bi-chat-text" id="modal-title-icon" style="color:var(--primary)"></i>
+                <span id="modal-title-text">Preview Pesan</span>
+            </div>
+            <button class="btn-unmark" onclick="closeModal()"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div id="modal-target" class="modal-target-info"></div>
         <div class="modal-preview" id="modal-msg"></div>
         <div class="modal-actions">
-            <button class="btn-resend" onclick="closeModal()"><i class="bi bi-x"></i> Batal</button>
-            <button class="btn-send" onclick="confirmSend()"><i class="bi bi-whatsapp"></i> Buka WA</button>
+            <button class="btn-resend" onclick="copyModalMsg()"><i class="bi bi-clipboard"></i> Salin Teks</button>
+            <button class="btn-send" id="modal-btn-send" onclick="confirmSend()"><i class="bi bi-whatsapp"></i> Buka WA</button>
         </div>
     </div>
 </div>
+
+<!-- TOAST -->
+<div class="toast-msg" id="toast"><i class="bi bi-check-circle-fill" style="color:#25d366"></i> <span id="toast-text">Tersalin!</span></div>
+
 <script>
-const CONTACTS = [
-    {"no":"153","nama":"linda","kat":"KJA","jenis":"Digital","hp":"0813-3354-9790"},
-    {"no":"154","nama":"cindy","kat":"KJA","jenis":"Digital","hp":"0813-2476-4768"},
-    {"no":"148","nama":"siska smk","kat":"KJA","jenis":"Digital","hp":"0815-5567-9877"},
-    {"no":"149","nama":"Dina smk","kat":"KJA","jenis":"Digital","hp":"0819-1320-0594"},
-    {"no":"150","nama":"nur aini smk","kat":"KJA","jenis":"Digital","hp":"0852-3622-5516"},
-    {"no":"151","nama":"april smk","kat":"KJA","jenis":"Digital","hp":"0853-3134-1811"},
-    {"no":"152","nama":"tiki","kat":"KJA","jenis":"Digital","hp":"0878-6457-3881"},
-    {"no":"145","nama":"yudha","kat":"KJA","jenis":"Digital","hp":"0895-0953-6326"},
-    {"no":"146","nama":"mbak agis","kat":"KJA","jenis":"Digital","hp":"0857-4890-5259"},
-    {"no":"147","nama":"anis","kat":"KJA","jenis":"Digital","hp":"0898-3730-617"},
-    {"no":"1","nama":"salsa test yoi","kat":"KJA","jenis":"Digital","hp":"0896-4662-3514"},
-    {"no":"8","nama":"mbak mita","kat":"KJA","jenis":"Digital","hp":"0813-3651-7984"},
-    {"no":"9","nama":"mbak anita","kat":"KJA","jenis":"Digital","hp":"0813-3511-5608"},
-    {"no":"10","nama":"mbak bella","kat":"KJA","jenis":"Digital","hp":"0888-5101-556"},
-    {"no":"13","nama":"yovita","kat":"Broadway","jenis":"Digital","hp":"0813-1348-0388"},
-    {"no":"30","nama":"linda","kat":"Uinsa","jenis":"Cetak","hp":"0813-1461-8595"},
-    {"no":"31","nama":"dea","kat":"Uinsa","jenis":"Cetak","hp":"0896-1683-3715"},
-    {"no":"32","nama":"zitni","kat":"Uinsa","jenis":"Cetak","hp":"0821-3159-0719"},
-    {"no":"33","nama":"silvi","kat":"Uinsa","jenis":"Cetak","hp":"0895-3371-96858"},
-    {"no":"34","nama":"syekha","kat":"Uinsa","jenis":"Cetak","hp":"0896-7901-9503"},
-    {"no":"35","nama":"yola","kat":"Uinsa","jenis":"Cetak","hp":"0821-3920-3520"},
-    {"no":"36","nama":"hera","kat":"Uinsa","jenis":"Digital","hp":"0812-3151-1999"},
-    {"no":"37","nama":"heny","kat":"Uinsa","jenis":"Digital","hp":"0812-5988-8663"},
-    {"no":"38","nama":"rizca","kat":"Uinsa","jenis":"Digital","hp":"0813-3575-7497"},
-    {"no":"39","nama":"mbak indah","kat":"Uinsa","jenis":"Digital","hp":"0877-3424-2143"},
-    {"no":"40","nama":"azizah","kat":"Uinsa","jenis":"Digital","hp":"0858-2966-2848"},
-    {"no":"41","nama":"dita","kat":"Uinsa","jenis":"Digital","hp":"0857-3020-4465"},
-    {"no":"42","nama":"viqyh","kat":"Uinsa","jenis":"Digital","hp":"0856-0711-5458"},
-    {"no":"43","nama":"iqbal","kat":"Uinsa","jenis":"Digital","hp":"0812-4344-8686"},
-    {"no":"44","nama":"anas","kat":"Uinsa","jenis":"Digital","hp":"0812-6503-3541"},
-    {"no":"45","nama":"ika","kat":"Uinsa","jenis":"Digital","hp":"0813-4522-2677"},
-    {"no":"46","nama":"lilu","kat":"Uinsa","jenis":"Digital","hp":"0813-5761-6486"},
-    {"no":"47","nama":"yesy","kat":"Uinsa","jenis":"Digital","hp":"0857-0776-3825"},
-    {"no":"48","nama":"uut","kat":"Uinsa","jenis":"Digital","hp":"0882-3544-6027"},
-    {"no":"49","nama":"fery","kat":"Uinsa","jenis":"Digital","hp":"0877-5088-0015"},
-    {"no":"50","nama":"pasya","kat":"Uinsa","jenis":"Digital","hp":"0822-3116-9390"},
-    {"no":"51","nama":"herdin","kat":"Uinsa","jenis":"Digital","hp":"0877-7771-5610"},
-    {"no":"52","nama":"indah rohmatul","kat":"Uinsa","jenis":"Digital","hp":"0822-4441-1617"},
-    {"no":"54","nama":"nabila","kat":"Uinsa","jenis":"Digital","hp":"0858-9526-7046"},
-    {"no":"55","nama":"miftah","kat":"Uinsa","jenis":"Digital","hp":"0857-0726-4226"},
-    {"no":"56","nama":"meliana","kat":"Uinsa","jenis":"Digital","hp":"0858-5244-0602"},
-    {"no":"57","nama":"afrian","kat":"Uinsa","jenis":"Digital","hp":"0896-7620-5604"},
-    {"no":"59","nama":"dwi mega","kat":"Uinsa","jenis":"Digital","hp":"0895-2365-3779"},
-    {"no":"60","nama":"aisyah adinda","kat":"Uinsa","jenis":"Digital","hp":"0851-6276-0762"},
-    {"no":"61","nama":"dinda","kat":"Uinsa","jenis":"Digital","hp":"0896-8732-4423"},
-    {"no":"62","nama":"sindy","kat":"Uinsa","jenis":"Digital","hp":"0819-1679-9138"},
-    {"no":"63","nama":"yesika","kat":"Uinsa","jenis":"Digital","hp":"0823-3525-7452"},
-    {"no":"65","nama":"shinta jonia","kat":"Uinsa","jenis":"Digital","hp":"0815-5474-1899"},
-    {"no":"66","nama":"akmal","kat":"Uinsa","jenis":"Digital","hp":"0813-3676-7544"},
-    {"no":"67","nama":"mas ardi","kat":"IAI","jenis":"Digital","hp":"0856-5530-5365"},
-    {"no":"68","nama":"ursulah","kat":"IAI","jenis":"Digital","hp":"0852-3107-7202"},
-    {"no":"69","nama":"cindy","kat":"IAI","jenis":"Digital","hp":"0896-1697-1198"},
-    {"no":"70","nama":"adinda","kat":"IAI","jenis":"Digital","hp":"0813-3173-5401"},
-    {"no":"71","nama":"fira","kat":"IAI","jenis":"Digital","hp":"0857-2322-4483"},
-    {"no":"72","nama":"thorik","kat":"IAI","jenis":"Digital","hp":"0851-6279-9109"},
-    {"no":"73","nama":"mahen","kat":"IAI","jenis":"Digital","hp":"0896-4329-1056"},
-    {"no":"74","nama":"surya","kat":"IAI","jenis":"Digital","hp":"0857-3365-4175"},
-    {"no":"75","nama":"zhafirah","kat":"IAI","jenis":"Digital","hp":"0821-3616-0418"},
-    {"no":"76","nama":"marizta","kat":"IAI","jenis":"Digital","hp":"0812-4926-3283"},
-    {"no":"77","nama":"herman uin","kat":"IAI","jenis":"Digital","hp":"0822-2760-8109"},
-    {"no":"78","nama":"hana uin","kat":"IAI","jenis":"Digital","hp":"0895-3241-06070"},
-    {"no":"79","nama":"alza uin","kat":"IAI","jenis":"Digital","hp":"0812-3560-1825"},
-    {"no":"80","nama":"kak salma","kat":"IAI","jenis":"Digital","hp":"0856-5501-1660"},
-    {"no":"81","nama":"mas riski","kat":"IAI","jenis":"Digital","hp":"0856-5527-2573"},
-    {"no":"82","nama":"kak ulfa","kat":"IAI","jenis":"Digital","hp":"0857-3541-9418"},
-    {"no":"83","nama":"datus","kat":"SMK","jenis":"Cetak","hp":"0878-5547-4150"},
-    {"no":"85","nama":"salsa","kat":"SMK","jenis":"Digital","hp":"0818-0318-1999"},
-    {"no":"89","nama":"novinda","kat":"SMK","jenis":"Digital","hp":"0813-3675-2563"},
-    {"no":"93","nama":"liso","kat":"SMK","jenis":"Digital","hp":"0895-3858-93698"},
-    {"no":"97","nama":"fafa","kat":"SMK","jenis":"Digital","hp":"0812-5998-6161"},
-    {"no":"99","nama":"dewi","kat":"SMK","jenis":"Digital","hp":"0878-6678-0828"},
-    {"no":"107","nama":"wulan/wl","kat":"SMK","jenis":"Digital","hp":"0878-6400-2633"},
-    {"no":"109","nama":"erin","kat":"SMK","jenis":"Digital","hp":"0895-3371-85544"},
-    {"no":"111","nama":"tiwi","kat":"SMP","jenis":"Digital","hp":"0821-3173-4172"},
-    {"no":"112","nama":"elita","kat":"SMP","jenis":"Digital","hp":"0896-8726-6553"},
-    {"no":"113","nama":"fransiska","kat":"SMP","jenis":"Digital","hp":"0895-2921-5202"},
-    {"no":"114","nama":"kayun","kat":"SMP","jenis":"Digital","hp":"0853-3099-9939"},
-    {"no":"117","nama":"bagus","kat":"SMP","jenis":"Digital","hp":"0857-3316-0010"},
-    {"no":"118","nama":"agung","kat":"SMP","jenis":"Digital","hp":"0896-1083-4267"},
-    {"no":"119","nama":"wachid","kat":"SMP","jenis":"Digital","hp":"0882-2814-3537"},
-    {"no":"123","nama":"fitri","kat":"SMP","jenis":"Digital","hp":"0821-4325-6112"},
-    {"no":"125","nama":"rizal","kat":"SMP","jenis":"Digital","hp":"0858-5261-8103"},
-    {"no":"126","nama":"levi","kat":"SMP","jenis":"Digital","hp":"0858-1999-0312"},
-    {"no":"133","nama":"afan","kat":"SD","jenis":"Digital","hp":"0821-4292-7469"},
-    {"no":"136","nama":"alvian","kat":"SD","jenis":"Digital","hp":"0813-8600-5892"},
-    {"no":"138","nama":"kholifah","kat":"SD","jenis":"Digital","hp":"0877-0340-0393"},
-    {"no":"140","nama":"diva","kat":"SD","jenis":"Digital","hp":"0895-2960-7200"},
-    {"no":"141","nama":"reza","kat":"SD","jenis":"Digital","hp":"0882-0093-21356"},
-    {"no":"142","nama":"risma","kat":"SD","jenis":"Digital","hp":"0895-2960-7200"},
-    {"no":"143","nama":"arikha","kat":"SD","jenis":"Digital","hp":"0856-4528-1281"},
-    {"no":"144","nama":"tama","kat":"SD","jenis":"Digital","hp":"0818-0345-9318"}
+const WA_CONTACTS = [
+    {"no":"153","nama":"linda","kat":"KJA","jenis":"Digital","hp":"0813-3354-9790","channel":"wa"},
+    {"no":"154","nama":"cindy","kat":"KJA","jenis":"Digital","hp":"0813-2476-4768","channel":"wa"},
+    {"no":"148","nama":"siska smk","kat":"KJA","jenis":"Digital","hp":"0815-5567-9877","channel":"wa"},
+    {"no":"149","nama":"Dina smk","kat":"KJA","jenis":"Digital","hp":"0819-1320-0594","channel":"wa"},
+    {"no":"150","nama":"nur aini smk","kat":"KJA","jenis":"Digital","hp":"0852-3622-5516","channel":"wa"},
+    {"no":"151","nama":"april smk","kat":"KJA","jenis":"Digital","hp":"0853-3134-1811","channel":"wa"},
+    {"no":"152","nama":"tiki","kat":"KJA","jenis":"Digital","hp":"0878-6457-3881","channel":"wa"},
+    {"no":"145","nama":"yudha","kat":"KJA","jenis":"Digital","hp":"0895-0953-6326","channel":"wa"},
+    {"no":"146","nama":"mbak agis","kat":"KJA","jenis":"Digital","hp":"0857-4890-5259","channel":"wa"},
+    {"no":"147","nama":"anis","kat":"KJA","jenis":"Digital","hp":"0898-3730-617","channel":"wa"},
+    {"no":"1","nama":"salsa test yoi","kat":"KJA","jenis":"Digital","hp":"0896-4662-3514","channel":"wa"},
+    {"no":"8","nama":"mbak mita","kat":"KJA","jenis":"Digital","hp":"0813-3651-7984","channel":"wa"},
+    {"no":"9","nama":"mbak anita","kat":"KJA","jenis":"Digital","hp":"0813-3511-5608","channel":"wa"},
+    {"no":"10","nama":"mbak bella","kat":"KJA","jenis":"Digital","hp":"0888-5101-556","channel":"wa"},
+    {"no":"13","nama":"yovita","kat":"Broadway","jenis":"Digital","hp":"0813-1348-0388","channel":"wa"},
+    {"no":"30","nama":"linda","kat":"Uinsa","jenis":"Cetak","hp":"0813-1461-8595","channel":"wa"},
+    {"no":"31","nama":"dea","kat":"Uinsa","jenis":"Cetak","hp":"0896-1683-3715","channel":"wa"},
+    {"no":"32","nama":"zitni","kat":"Uinsa","jenis":"Cetak","hp":"0821-3159-0719","channel":"wa"},
+    {"no":"33","nama":"silvi","kat":"Uinsa","jenis":"Cetak","hp":"0895-3371-96858","channel":"wa"},
+    {"no":"34","nama":"syekha","kat":"Uinsa","jenis":"Cetak","hp":"0896-7901-9503","channel":"wa"},
+    {"no":"35","nama":"yola","kat":"Uinsa","jenis":"Cetak","hp":"0821-3920-3520","channel":"wa"},
+    {"no":"36","nama":"hera","kat":"Uinsa","jenis":"Digital","hp":"0812-3151-1999","channel":"wa"},
+    {"no":"37","nama":"heny","kat":"Uinsa","jenis":"Digital","hp":"0812-5988-8663","channel":"wa"},
+    {"no":"38","nama":"rizca","kat":"Uinsa","jenis":"Digital","hp":"0813-3575-7497","channel":"wa"},
+    {"no":"39","nama":"mbak indah","kat":"Uinsa","jenis":"Digital","hp":"0877-3424-2143","channel":"wa"},
+    {"no":"40","nama":"azizah","kat":"Uinsa","jenis":"Digital","hp":"0858-2966-2848","channel":"wa"},
+    {"no":"41","nama":"dita","kat":"Uinsa","jenis":"Digital","hp":"0857-3020-4465","channel":"wa"},
+    {"no":"42","nama":"viqyh","kat":"Uinsa","jenis":"Digital","hp":"0856-0711-5458","channel":"wa"},
+    {"no":"43","nama":"iqbal","kat":"Uinsa","jenis":"Digital","hp":"0812-4344-8686","channel":"wa"},
+    {"no":"44","nama":"anas","kat":"Uinsa","jenis":"Digital","hp":"0812-6503-3541","channel":"wa"},
+    {"no":"45","nama":"ika","kat":"Uinsa","jenis":"Digital","hp":"0813-4522-2677","channel":"wa"},
+    {"no":"46","nama":"lilu","kat":"Uinsa","jenis":"Digital","hp":"0813-5761-6486","channel":"wa"},
+    {"no":"47","nama":"yesy","kat":"Uinsa","jenis":"Digital","hp":"0857-0776-3825","channel":"wa"},
+    {"no":"48","nama":"uut","kat":"Uinsa","jenis":"Digital","hp":"0882-3544-6027","channel":"wa"},
+    {"no":"49","nama":"fery","kat":"Uinsa","jenis":"Digital","hp":"0877-5088-0015","channel":"wa"},
+    {"no":"50","nama":"pasya","kat":"Uinsa","jenis":"Digital","hp":"0822-3116-9390","channel":"wa"},
+    {"no":"51","nama":"herdin","kat":"Uinsa","jenis":"Digital","hp":"0877-7771-5610","channel":"wa"},
+    {"no":"52","nama":"indah rohmatul","kat":"Uinsa","jenis":"Digital","hp":"0822-4441-1617","channel":"wa"},
+    {"no":"54","nama":"nabila","kat":"Uinsa","jenis":"Digital","hp":"0858-9526-7046","channel":"wa"},
+    {"no":"55","nama":"miftah","kat":"Uinsa","jenis":"Digital","hp":"0857-0726-4226","channel":"wa"},
+    {"no":"56","nama":"meliana","kat":"Uinsa","jenis":"Digital","hp":"0858-5244-0602","channel":"wa"},
+    {"no":"57","nama":"afrian","kat":"Uinsa","jenis":"Digital","hp":"0896-7620-5604","channel":"wa"},
+    {"no":"59","nama":"dwi mega","kat":"Uinsa","jenis":"Digital","hp":"0895-2365-3779","channel":"wa"},
+    {"no":"60","nama":"aisyah adinda","kat":"Uinsa","jenis":"Digital","hp":"0851-6276-0762","channel":"wa"},
+    {"no":"61","nama":"dinda","kat":"Uinsa","jenis":"Digital","hp":"0896-8732-4423","channel":"wa"},
+    {"no":"62","nama":"sindy","kat":"Uinsa","jenis":"Digital","hp":"0819-1679-9138","channel":"wa"},
+    {"no":"63","nama":"yesika","kat":"Uinsa","jenis":"Digital","hp":"0823-3525-7452","channel":"wa"},
+    {"no":"65","nama":"shinta jonia","kat":"Uinsa","jenis":"Digital","hp":"0815-5474-1899","channel":"wa"},
+    {"no":"66","nama":"akmal","kat":"Uinsa","jenis":"Digital","hp":"0813-3676-7544","channel":"wa"},
+    {"no":"67","nama":"mas ardi","kat":"IAI","jenis":"Digital","hp":"0856-5530-5365","channel":"wa"},
+    {"no":"68","nama":"ursulah","kat":"IAI","jenis":"Digital","hp":"0852-3107-7202","channel":"wa"},
+    {"no":"69","nama":"cindy","kat":"IAI","jenis":"Digital","hp":"0896-1697-1198","channel":"wa"},
+    {"no":"70","nama":"adinda","kat":"IAI","jenis":"Digital","hp":"0813-3173-5401","channel":"wa"},
+    {"no":"71","nama":"fira","kat":"IAI","jenis":"Digital","hp":"0857-2322-4483","channel":"wa"},
+    {"no":"72","nama":"thorik","kat":"IAI","jenis":"Digital","hp":"0851-6279-9109","channel":"wa"},
+    {"no":"73","nama":"mahen","kat":"IAI","jenis":"Digital","hp":"0896-4329-1056","channel":"wa"},
+    {"no":"74","nama":"surya","kat":"IAI","jenis":"Digital","hp":"0857-3365-4175","channel":"wa"},
+    {"no":"75","nama":"zhafirah","kat":"IAI","jenis":"Digital","hp":"0821-3616-0418","channel":"wa"},
+    {"no":"76","nama":"marizta","kat":"IAI","jenis":"Digital","hp":"0812-4926-3283","channel":"wa"},
+    {"no":"77","nama":"herman uin","kat":"IAI","jenis":"Digital","hp":"0822-2760-8109","channel":"wa"},
+    {"no":"78","nama":"hana uin","kat":"IAI","jenis":"Digital","hp":"0895-3241-06070","channel":"wa"},
+    {"no":"79","nama":"alza uin","kat":"IAI","jenis":"Digital","hp":"0812-3560-1825","channel":"wa"},
+    {"no":"80","nama":"kak salma","kat":"IAI","jenis":"Digital","hp":"0856-5501-1660","channel":"wa"},
+    {"no":"81","nama":"mas riski","kat":"IAI","jenis":"Digital","hp":"0856-5527-2573","channel":"wa"},
+    {"no":"82","nama":"kak ulfa","kat":"IAI","jenis":"Digital","hp":"0857-3541-9418","channel":"wa"},
+    {"no":"83","nama":"datus","kat":"SMK","jenis":"Cetak","hp":"0878-5547-4150","channel":"wa"},
+    {"no":"85","nama":"salsa","kat":"SMK","jenis":"Digital","hp":"0818-0318-1999","channel":"wa"},
+    {"no":"89","nama":"novinda","kat":"SMK","jenis":"Digital","hp":"0813-3675-2563","channel":"wa"},
+    {"no":"93","nama":"liso","kat":"SMK","jenis":"Digital","hp":"0895-3858-93698","channel":"wa"},
+    {"no":"97","nama":"fafa","kat":"SMK","jenis":"Digital","hp":"0812-5998-6161","channel":"wa"},
+    {"no":"99","nama":"dewi","kat":"SMK","jenis":"Digital","hp":"0878-6678-0828","channel":"wa"},
+    {"no":"107","nama":"wulan/wl","kat":"SMK","jenis":"Digital","hp":"0878-6400-2633","channel":"wa"},
+    {"no":"109","nama":"erin","kat":"SMK","jenis":"Digital","hp":"0895-3371-85544","channel":"wa"},
+    {"no":"111","nama":"tiwi","kat":"SMP","jenis":"Digital","hp":"0821-3173-4172","channel":"wa"},
+    {"no":"112","nama":"elita","kat":"SMP","jenis":"Digital","hp":"0896-8726-6553","channel":"wa"},
+    {"no":"113","nama":"fransiska","kat":"SMP","jenis":"Digital","hp":"0895-2921-5202","channel":"wa"},
+    {"no":"114","nama":"kayun","kat":"SMP","jenis":"Digital","hp":"0853-3099-9939","channel":"wa"},
+    {"no":"117","nama":"bagus","kat":"SMP","jenis":"Digital","hp":"0857-3316-0010","channel":"wa"},
+    {"no":"118","nama":"agung","kat":"SMP","jenis":"Digital","hp":"0896-1083-4267","channel":"wa"},
+    {"no":"119","nama":"wachid","kat":"SMP","jenis":"Digital","hp":"0882-2814-3537","channel":"wa"},
+    {"no":"123","nama":"fitri","kat":"SMP","jenis":"Digital","hp":"0821-4325-6112","channel":"wa"},
+    {"no":"125","nama":"rizal","kat":"SMP","jenis":"Digital","hp":"0858-5261-8103","channel":"wa"},
+    {"no":"126","nama":"levi","kat":"SMP","jenis":"Digital","hp":"0858-1999-0312","channel":"wa"},
+    {"no":"133","nama":"afan","kat":"SD","jenis":"Digital","hp":"0821-4292-7469","channel":"wa"},
+    {"no":"136","nama":"alvian","kat":"SD","jenis":"Digital","hp":"0813-8600-5892","channel":"wa"},
+    {"no":"138","nama":"kholifah","kat":"SD","jenis":"Digital","hp":"0877-0340-0393","channel":"wa"},
+    {"no":"140","nama":"diva","kat":"SD","jenis":"Digital","hp":"0895-2960-7200","channel":"wa"},
+    {"no":"141","nama":"reza","kat":"SD","jenis":"Digital","hp":"0882-0093-21356","channel":"wa"},
+    {"no":"142","nama":"risma","kat":"SD","jenis":"Digital","hp":"0895-2960-7200","channel":"wa"},
+    {"no":"143","nama":"arikha","kat":"SD","jenis":"Digital","hp":"0856-4528-1281","channel":"wa"},
+    {"no":"144","nama":"tama","kat":"SD","jenis":"Digital","hp":"0818-0345-9318","channel":"wa"}
 ];
 
-const LS_KEY = 'wa_sent_afidah_syaichul';
+const IG_CONTACTS = [
+    {"no":"53","nama":"khusnul","kat":"Uinsa","jenis":"Digital","ig":"_khusnulk_","channel":"ig"},
+    {"no":"58","nama":"mega aisyah","kat":"Uinsa","jenis":"Digital","ig":"megaaisha","channel":"ig"},
+    {"no":"64","nama":"ela","kat":"Uinsa","jenis":"Digital","ig":"lalaalistiann","channel":"ig"},
+    {"no":"86","nama":"naning","kat":"SMK","jenis":"Digital","ig":"dnanning_","channel":"ig"},
+    {"no":"100","nama":"aulia siti","kat":"SMK","jenis":"Digital","ig":"auliasm_","channel":"ig"},
+    {"no":"101","nama":"mbak ocha","kat":"SMK","jenis":"Cetak","ig":"ocha.jpg","channel":"ig"},
+    {"no":"102","nama":"laras","kat":"SMK","jenis":"Digital","ig":"larasmeip7","channel":"ig"},
+    {"no":"103","nama":"putri risna","kat":"SMK","jenis":"Digital","ig":"putririsnaaa","channel":"ig"},
+    {"no":"104","nama":"sofi","kat":"SMK","jenis":"Digital","ig":"sofikomalasr","channel":"ig"},
+    {"no":"105","nama":"mita/miftah","kat":"SMK","jenis":"Digital","ig":"mitajeh","channel":"ig"},
+    {"no":"106","nama":"arfia","kat":"SMK","jenis":"Digital","ig":"arfiadeby","channel":"ig"},
+    {"no":"107","nama":"wulan","kat":"SMK","jenis":"Digital","ig":"wulanhid11","channel":"ig"},
+    {"no":"108","nama":"siska","kat":"SMK","jenis":"Digital","ig":"saski.siska","channel":"ig"},
+    {"no":"122","nama":"fina","kat":"SMP","jenis":"Digital","ig":"rifdhatul17","channel":"ig"}
+];
+
+const LS_WA_KEY = 'wa_sent_afidah_syaichul';
+const LS_IG_KEY = 'ig_sent_afidah_syaichul';
 const COLORS = ['#25d366','#128c7e','#3498db','#9b59b6','#e67e22','#e74c3c','#1abc9c','#f39c12'];
-let sentSet = new Set(JSON.parse(localStorage.getItem(LS_KEY)||'[]'));
-let curFilter = 'all';
+
+let waSentSet = new Set(JSON.parse(localStorage.getItem(LS_WA_KEY) || '[]'));
+let igSentSet = new Set(JSON.parse(localStorage.getItem(LS_IG_KEY) || '[]'));
+
+let curChannel = 'wa'; // 'all' | 'wa' | 'ig'
+let curFilter = 'all';  // 'all' | 'sent' | 'unsent'
 let curCat = '';
 let pendingContact = null;
+
+function isSent(c) {
+    return c.channel === 'ig' ? igSentSet.has(c.no) : waSentSet.has(c.no);
+}
 
 function buildMsg(nama) {
     return `Yth. Bapak/Ibu/Saudara/i\n${nama}\nDi Tempat\n-----------\nDengan segala kerendahan hati, kami mengundang Bapak/Ibu/Saudara/i dan teman-teman untuk menghadiri acara,\n===========\nPernikahan  *Afidah & Syaichul*\n===========\n\nLink undangan bisa diakses lengkap di:\nhttps://inv.ringvitation.my.id/afidah-syaichul/?untuk=${encodeURIComponent(nama)}\n\nMerupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir di acara kami\nMohon maaf perihal undangan hanya di bagikan melalui pesan ini\nTerima kasih banyak atas perhatiannya\n *Afidah & Syaichul*`;
@@ -314,82 +548,123 @@ function toWA(hp) {
     return n;
 }
 
+function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+    }
+    fallbackCopy(text);
+    return Promise.resolve();
+}
+
+function fallbackCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.top = '-9999px';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    ta.remove();
+}
+
+let toastTimer = null;
+function showToast(text, iconClass) {
+    const toast = document.getElementById('toast');
+    const toastText = document.getElementById('toast-text');
+    toastText.textContent = text;
+    if (iconClass) {
+        toast.querySelector('i').className = iconClass;
+    } else {
+        toast.querySelector('i').className = 'bi bi-check-circle-fill';
+        toast.querySelector('i').style.color = '#25d366';
+    }
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2800);
+}
+
+function getChannelContacts() {
+    if (curChannel === 'wa') return WA_CONTACTS;
+    if (curChannel === 'ig') return IG_CONTACTS;
+    return [...WA_CONTACTS, ...IG_CONTACTS];
+}
+
 function getCategories() {
-    return [...new Set(CONTACTS.map(c => c.kat))].sort();
+    const contacts = getChannelContacts();
+    return [...new Set(contacts.map(c => c.kat))].sort();
+}
+
+function setChannel(ch) {
+    curChannel = ch;
+    
+    // Update tabs UI
+    document.getElementById('tab-all').className = 'channel-tab' + (ch === 'all' ? ' active-all' : '');
+    document.getElementById('tab-wa').className = 'channel-tab' + (ch === 'wa' ? ' active-wa' : '');
+    document.getElementById('tab-ig').className = 'channel-tab' + (ch === 'ig' ? ' active-ig' : '');
+
+    // Header styling
+    const hIcon = document.getElementById('header-icon');
+    const hIconI = document.getElementById('header-icon-i');
+    const hTitle = document.getElementById('header-title');
+    const sInput = document.getElementById('search-input');
+    const fill = document.getElementById('progress-fill');
+    const pctChip = document.getElementById('progress-pct');
+    const sDot = document.getElementById('stat-dot-sent');
+
+    hIcon.classList.remove('is-wa', 'is-ig', 'is-all');
+    fill.classList.remove('is-ig');
+    pctChip.classList.remove('is-ig');
+
+    if (ch === 'ig') {
+        hIcon.classList.add('is-ig');
+        hIconI.className = 'bi bi-instagram';
+        hTitle.textContent = 'Dashboard Kirim Instagram';
+        sInput.placeholder = 'Cari nama, akun IG (@...), atau kategori...';
+        fill.classList.add('is-ig');
+        pctChip.classList.add('is-ig');
+        sDot.style.background = '#e1306c';
+    } else if (ch === 'wa') {
+        hIcon.classList.add('is-wa');
+        hIconI.className = 'bi bi-whatsapp';
+        hTitle.textContent = 'Dashboard Kirim WhatsApp';
+        sInput.placeholder = 'Cari nama, nomor WA, atau kategori...';
+        sDot.style.background = 'var(--primary)';
+    } else {
+        hIcon.classList.add('is-all');
+        hIconI.className = 'bi bi-send-check';
+        hTitle.textContent = 'Dashboard Kirim Undangan (WA & IG)';
+        sInput.placeholder = 'Cari nama, nomor WA, akun IG, atau kategori...';
+        sDot.style.background = '#3498db';
+    }
+
+    // Reset category filter if not found in new channel
+    const cats = getCategories();
+    if (curCat && !cats.includes(curCat)) {
+        curCat = '';
+    }
+
+    renderChips();
+    renderList();
 }
 
 function renderChips() {
     const el = document.getElementById('category-chips');
-    let html = `<div class="chip ${curCat===''?'active':''}" onclick="setCat('')">Semua</div>`;
-    getCategories().forEach(cat => {
+    const cats = getCategories();
+    let html = `<div class="chip ${curCat===''?'active':''}" onclick="setCat('')">Semua Kategori</div>`;
+    cats.forEach(cat => {
         html += `<div class="chip ${curCat===cat?'active':''}" onclick="setCat('${cat}')">${cat}</div>`;
     });
     el.innerHTML = html;
 }
 
-function getFiltered() {
-    const q = document.getElementById('search-input').value.toLowerCase();
-    return CONTACTS.filter(c => {
-        const sent = sentSet.has(c.no);
-        const mStatus = curFilter==='all'||(curFilter==='sent'&&sent)||(curFilter==='unsent'&&!sent);
-        const mCat = !curCat || c.kat===curCat;
-        const mQ = !q || c.nama.toLowerCase().includes(q) || c.hp.includes(q);
-        return mStatus && mCat && mQ;
-    });
-}
-
-function renderList() {
-    const list = document.getElementById('contact-list');
-    const filtered = getFiltered();
-    document.getElementById('result-count').textContent = filtered.length < CONTACTS.length
-        ? `Menampilkan ${filtered.length} dari ${CONTACTS.length} kontak`
-        : `${CONTACTS.length} kontak dengan nomor WA`;
-
-    if (!filtered.length) {
-        list.innerHTML = '<div class="empty-state"><i class="bi bi-person-x"></i><p>Tidak ada kontak yang sesuai filter</p></div>';
-        updateStats(); return;
-    }
-
-    list.innerHTML = '';
-    filtered.forEach(c => {
-        const sent = sentSet.has(c.no);
-        const col = COLORS[parseInt(c.no) % COLORS.length];
-        const init = c.nama.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
-        const div = document.createElement('div');
-        div.className = 'contact-card' + (sent?' is-sent':'');
-        div.innerHTML = `
-            <div class="contact-avatar" style="background:${col}22;color:${col};border:1.5px solid ${col}55">${init}</div>
-            <div class="contact-info">
-                <div class="contact-name">${c.nama}</div>
-                <div class="contact-meta">
-                    <span class="contact-phone"><i class="bi bi-telephone" style="font-size:.7rem;margin-right:2px"></i>${c.hp}</span>
-                    <span class="contact-badge badge-kat">${c.kat}</span>
-                    <span class="contact-badge ${c.jenis==='Digital'?'badge-digital':'badge-cetak'}">${c.jenis}</span>
-                </div>
-                ${sent?'<div class="contact-sent-label"><i class="bi bi-check2-all"></i> Sudah terkirim</div>':''}
-            </div>
-            <div class="contact-actions">
-                ${sent
-                    ? `<button class="btn-resend" onclick="preview('${c.no}')"><i class="bi bi-arrow-repeat"></i> Kirim Ulang</button>
-                       <button class="btn-unmark" onclick="markUnsent('${c.no}')" title="Tandai belum terkirim"><i class="bi bi-x-circle"></i></button>`
-                    : `<button class="btn-send" onclick="preview('${c.no}')"><i class="bi bi-whatsapp"></i> Kirim</button>`
-                }
-            </div>
-        `;
-        list.appendChild(div);
-    });
-    updateStats();
-}
-
-function updateStats() {
-    const total = CONTACTS.length;
-    const sent = sentSet.size;
-    const pct = Math.round(sent/total*100);
-    document.getElementById('stat-total').textContent = total;
-    document.getElementById('stat-sent').textContent = sent;
-    document.getElementById('stat-unsent').textContent = total-sent;
-    document.getElementById('progress-fill').style.width = pct+'%';
-    document.getElementById('progress-pct').textContent = pct+'%';
+function setCat(cat) {
+    curCat = cat;
+    renderChips();
+    renderList();
 }
 
 function setStatusFilter(f) {
@@ -399,32 +674,234 @@ function setStatusFilter(f) {
     renderList();
 }
 
-function setCat(cat) {
-    curCat = cat; renderChips(); renderList();
-}
-
 function applyFilters() { renderList(); }
 
-function preview(no) {
-    const c = CONTACTS.find(x => x.no===no);
+function getFiltered() {
+    const q = document.getElementById('search-input').value.toLowerCase().trim();
+    const list = getChannelContacts();
+    return list.filter(c => {
+        const sent = isSent(c);
+        const mStatus = curFilter === 'all' || (curFilter === 'sent' && sent) || (curFilter === 'unsent' && !sent);
+        const mCat = !curCat || c.kat === curCat;
+        
+        let mQ = true;
+        if (q) {
+            const matchName = c.nama.toLowerCase().includes(q);
+            const matchKat = c.kat.toLowerCase().includes(q);
+            const matchContact = c.channel === 'ig'
+                ? (c.ig.toLowerCase().includes(q) || ('@' + c.ig.toLowerCase()).includes(q))
+                : c.hp.includes(q);
+            mQ = matchName || matchKat || matchContact;
+        }
+        return mStatus && mCat && mQ;
+    });
+}
+
+function renderList() {
+    const list = document.getElementById('contact-list');
+    const filtered = getFiltered();
+    const allInChannel = getChannelContacts();
+
+    let channelText = 'kontak';
+    if (curChannel === 'wa') channelText = 'kontak WhatsApp';
+    else if (curChannel === 'ig') channelText = 'kontak Instagram';
+    else channelText = 'kontak (WA & IG)';
+
+    document.getElementById('result-count').textContent = filtered.length < allInChannel.length
+        ? `Menampilkan ${filtered.length} dari ${allInChannel.length} ${channelText}`
+        : `${allInChannel.length} ${channelText}`;
+
+    if (!filtered.length) {
+        list.innerHTML = '<div class="empty-state"><i class="bi bi-person-x"></i><p>Tidak ada kontak yang sesuai filter</p></div>';
+        updateStats();
+        return;
+    }
+
+    list.innerHTML = '';
+    filtered.forEach(c => {
+        const sent = isSent(c);
+        const isIG = c.channel === 'ig';
+        const col = isIG ? '#e1306c' : COLORS[parseInt(c.no) % COLORS.length];
+        const init = c.nama.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+        const div = document.createElement('div');
+        div.className = `contact-card ${isIG ? 'card-ig' : 'card-wa'}` + (sent ? ' is-sent' : '');
+
+        const avatarStyle = isIG
+            ? `background:linear-gradient(135deg, #833ab422, #fd1d1d22);color:#e1306c;border:1.5px solid rgba(225,48,108,0.4)`
+            : `background:${col}22;color:${col};border:1.5px solid ${col}55`;
+
+        const contactInfoHtml = isIG
+            ? `<a href="https://instagram.com/${c.ig}" target="_blank" class="contact-ig-link" title="Buka profil @${c.ig}"><i class="bi bi-instagram"></i> @${c.ig}</a>`
+            : `<span class="contact-phone"><i class="bi bi-whatsapp" style="color:var(--primary);font-size:.75rem"></i>${c.hp}</span>`;
+
+        const channelBadge = isIG
+            ? `<span class="contact-badge badge-channel-ig"><i class="bi bi-instagram"></i> IG</span>`
+            : `<span class="contact-badge badge-channel-wa"><i class="bi bi-whatsapp"></i> WA</span>`;
+
+        div.innerHTML = `
+            <div class="contact-avatar" style="${avatarStyle}">
+                ${init}
+                <span class="avatar-badge ${isIG ? 'badge-ig-icon' : 'badge-wa-icon'}">
+                    <i class="bi ${isIG ? 'bi-instagram' : 'bi-whatsapp'}"></i>
+                </span>
+            </div>
+            <div class="contact-info">
+                <div class="contact-name">${c.nama}</div>
+                <div class="contact-meta">
+                    ${contactInfoHtml}
+                    <span class="contact-badge badge-kat">${c.kat}</span>
+                    <span class="contact-badge ${c.jenis === 'Digital' ? 'badge-digital' : 'badge-cetak'}">${c.jenis}</span>
+                    ${channelBadge}
+                </div>
+                ${sent
+                    ? `<div class="contact-sent-label" style="color:${isIG ? '#f472b6' : 'var(--primary)'}">
+                         <i class="bi bi-check2-all"></i> Terkirim via ${isIG ? 'Instagram' : 'WhatsApp'}
+                       </div>`
+                    : ''}
+            </div>
+            <div class="contact-actions">
+                <button class="btn-copy-card" onclick="copyContactMsg('${c.channel}', '${c.no}')" title="Salin pesan undangan">
+                    <i class="bi bi-clipboard"></i>
+                </button>
+                ${sent
+                    ? `<button class="btn-resend ${isIG ? 'is-ig' : ''}" onclick="preview('${c.channel}', '${c.no}')">
+                         <i class="bi bi-arrow-repeat"></i> Kirim Ulang
+                       </button>
+                       <button class="btn-unmark" onclick="markUnsent('${c.channel}', '${c.no}')" title="Tandai belum terkirim">
+                         <i class="bi bi-x-circle"></i>
+                       </button>`
+                    : isIG
+                        ? `<button class="btn-ig" onclick="preview('${c.channel}', '${c.no}')">
+                             <i class="bi bi-instagram"></i> Kirim IG
+                           </button>`
+                        : `<button class="btn-send" onclick="preview('${c.channel}', '${c.no}')">
+                             <i class="bi bi-whatsapp"></i> Kirim WA
+                           </button>`
+                }
+            </div>
+        `;
+        list.appendChild(div);
+    });
+    updateStats();
+}
+
+function updateStats() {
+    const list = getChannelContacts();
+    const total = list.length;
+    const sent = list.filter(c => isSent(c)).length;
+    const pct = total ? Math.round(sent / total * 100) : 0;
+
+    document.getElementById('stat-total').textContent = total;
+    document.getElementById('stat-sent').textContent = sent;
+    document.getElementById('stat-unsent').textContent = total - sent;
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-pct').textContent = pct + '%';
+
+    // Update tab badges
+    const waSent = WA_CONTACTS.filter(c => waSentSet.has(c.no)).length;
+    const igSent = IG_CONTACTS.filter(c => igSentSet.has(c.no)).length;
+    const allTotal = WA_CONTACTS.length + IG_CONTACTS.length;
+    const allSent = waSent + igSent;
+
+    document.getElementById('tab-badge-all').textContent = `${allSent}/${allTotal}`;
+    document.getElementById('tab-badge-wa').textContent = `${waSent}/${WA_CONTACTS.length}`;
+    document.getElementById('tab-badge-ig').textContent = `${igSent}/${IG_CONTACTS.length}`;
+}
+
+function preview(channel, no) {
+    const list = channel === 'ig' ? IG_CONTACTS : WA_CONTACTS;
+    const c = list.find(x => x.no === no);
     if (!c) return;
     pendingContact = c;
-    document.getElementById('modal-msg').textContent = buildMsg(c.nama);
+
+    const isIG = c.channel === 'ig';
+    const titleIcon = document.getElementById('modal-title-icon');
+    const titleText = document.getElementById('modal-title-text');
+    const targetBox = document.getElementById('modal-target');
+    const msgBox = document.getElementById('modal-msg');
+    const sendBtn = document.getElementById('modal-btn-send');
+
+    if (isIG) {
+        titleIcon.className = 'bi bi-instagram';
+        titleIcon.style.color = '#e1306c';
+        titleText.textContent = 'Preview Pesan Instagram';
+        targetBox.innerHTML = `
+            <div class="target-chip">
+                <i class="bi bi-instagram" style="color:#e1306c"></i>
+                <span>Tujuan: <strong>@${c.ig}</strong> (${c.nama})</span>
+            </div>
+            <a href="https://instagram.com/${c.ig}" target="_blank" class="target-link" title="Buka profil Instagram">
+                <i class="bi bi-box-arrow-up-right"></i> Profil
+            </a>
+        `;
+        msgBox.className = 'modal-preview is-ig';
+        sendBtn.className = 'btn-ig';
+        sendBtn.innerHTML = '<i class="bi bi-instagram"></i> Salin &amp; Buka DM';
+    } else {
+        titleIcon.className = 'bi bi-whatsapp';
+        titleIcon.style.color = 'var(--primary)';
+        titleText.textContent = 'Preview Pesan WhatsApp';
+        targetBox.innerHTML = `
+            <div class="target-chip">
+                <i class="bi bi-whatsapp" style="color:var(--primary)"></i>
+                <span>Tujuan: <strong>${c.hp}</strong> (${c.nama})</span>
+            </div>
+            <span class="contact-badge badge-kat">${c.kat}</span>
+        `;
+        msgBox.className = 'modal-preview';
+        sendBtn.className = 'btn-send';
+        sendBtn.innerHTML = '<i class="bi bi-whatsapp"></i> Buka WA';
+    }
+
+    msgBox.textContent = buildMsg(c.nama);
     document.getElementById('modal-preview').classList.add('show');
 }
 
 function confirmSend() {
     if (!pendingContact) return;
     const c = pendingContact;
-    window.open('https://wa.me/'+toWA(c.hp)+'?text='+encodeURIComponent(buildMsg(c.nama)), '_blank');
-    sentSet.add(c.no);
-    localStorage.setItem(LS_KEY, JSON.stringify([...sentSet]));
-    closeModal(); renderList();
+    const msg = buildMsg(c.nama);
+
+    if (c.channel === 'ig') {
+        copyText(msg);
+        showToast('📋 Pesan disalin! Membuka Instagram DM...');
+        // Open Instagram DM URL
+        const cleanHandle = c.ig.replace(/^@/, '');
+        window.open('https://ig.me/m/' + cleanHandle, '_blank');
+        igSentSet.add(c.no);
+        localStorage.setItem(LS_IG_KEY, JSON.stringify([...igSentSet]));
+    } else {
+        window.open('https://wa.me/' + toWA(c.hp) + '?text=' + encodeURIComponent(msg), '_blank');
+        waSentSet.add(c.no);
+        localStorage.setItem(LS_WA_KEY, JSON.stringify([...waSentSet]));
+    }
+
+    closeModal();
+    renderList();
 }
 
-function markUnsent(no) {
-    sentSet.delete(no);
-    localStorage.setItem(LS_KEY, JSON.stringify([...sentSet]));
+function copyContactMsg(channel, no) {
+    const list = channel === 'ig' ? IG_CONTACTS : WA_CONTACTS;
+    const c = list.find(x => x.no === no);
+    if (!c) return;
+    copyText(buildMsg(c.nama));
+    showToast(`📋 Undangan untuk ${c.nama} disalin!`);
+}
+
+function copyModalMsg() {
+    if (!pendingContact) return;
+    copyText(buildMsg(pendingContact.nama));
+    showToast('📋 Teks undangan berhasil disalin!');
+}
+
+function markUnsent(channel, no) {
+    if (channel === 'ig') {
+        igSentSet.delete(no);
+        localStorage.setItem(LS_IG_KEY, JSON.stringify([...igSentSet]));
+    } else {
+        waSentSet.delete(no);
+        localStorage.setItem(LS_WA_KEY, JSON.stringify([...waSentSet]));
+    }
     renderList();
 }
 
@@ -434,12 +911,28 @@ function closeModal() {
 }
 
 function resetAll() {
-    if (!confirm('Reset semua status kirim?')) return;
-    sentSet.clear(); localStorage.removeItem(LS_KEY);
-    renderChips(); renderList();
+    let target = 'semua saluran';
+    if (curChannel === 'wa') target = 'WhatsApp';
+    if (curChannel === 'ig') target = 'Instagram';
+
+    if (!confirm(`Reset status kirim untuk ${target}?`)) return;
+
+    if (curChannel === 'wa' || curChannel === 'all') {
+        waSentSet.clear();
+        localStorage.removeItem(LS_WA_KEY);
+    }
+    if (curChannel === 'ig' || curChannel === 'all') {
+        igSentSet.clear();
+        localStorage.removeItem(LS_IG_KEY);
+    }
+    showToast('Status berhasil direset');
+    renderChips();
+    renderList();
 }
 
-document.getElementById('modal-preview').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
+document.getElementById('modal-preview').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeModal();
+});
 
 // INIT
 renderChips();
